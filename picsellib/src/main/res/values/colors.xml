@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_primary">#f45d64</color>
+    <color name="color_primary_dark">#c34a51</color>
+
+    <color name="placeholder">#666666</color>
+    <color name="background">#3d4049</color>
+    <color name="white">#ffffff</color>
+
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+
+</resources>

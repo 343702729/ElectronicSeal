@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <attr name="IPicker_CropImageStyle" format="reference" />
+
+    <declare-styleable name="IPicker_CropImageView">
+        <attr name="ipicker_highlightColor" format="reference|color" />
+        <attr name="ipicker_showThirds" format="boolean" />
+        <attr name="ipicker_showCircle" format="boolean" />
+        <attr name="ipicker_showHandles">
+            <enum name="changing" value="0" />
+            <enum name="always" value="1" />
+            <enum name="never" value="2" />
+        </attr>
+    </declare-styleable>
+
+</resources>

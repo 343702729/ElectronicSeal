@@ -1,71 +1,83 @@
 package com.nfc.electronicseal;
 
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.RadioGroup;
 
-public class MainActivity extends AppCompatActivity {
-    private NfcAdapter mNfcAdapter;
-    private PendingIntent pi;
-    private IntentFilter tagDetected;
+import com.nfc.electronicseal.activity.SealActivity;
+import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.fragment.OperateFragment;
+import com.nfc.electronicseal.fragment.SearchFragment;
+import com.nfc.electronicseal.fragment.UserFragment;
+import com.nfc.electronicseal.util.NFCUtil;
+import com.nfc.electronicseal.util.TLog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+public class MainActivity extends BaseActivity {
+    @BindView(R.id.radiogroup)
+    RadioGroup radioGroup;
+
+    List<Fragment> fragments;
+    private Fragment preFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        pi = PendingIntent.getActivity(this, 0, new Intent(this, getClass())
-                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-
+    public int layoutView() {
+        return R.layout.activity_main;
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        // 当前app正在前端界面运行，这个时候有intent发送过来，那么系统就会调用onNewIntent回调方法，将intent传送过来
-        // 我们只需要在这里检验这个intent是否是NFC相关的intent，如果是，就调用处理方法
-        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
-            processIntent(intent);
+    public void initview() {
+        super.initview();
+        fragments = new ArrayList<Fragment>();
+        fragments.add(new OperateFragment());
+        fragments.add(new SearchFragment());
+        fragments.add(new UserFragment());
+        changefragment(0);
+    }
+
+    @Override
+    public void initListener() {
+        super.initListener();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.operate_tab:
+                        changefragment(0);
+                        break;
+                    case R.id.search_tab:
+                        changefragment(1);
+                        break;
+                    case R.id.user_tab:
+                        changefragment(2);
+                        break;
+                }
+            }
+        });
+    }
+
+    protected void changefragment(int index) {
+        // TODO Auto-generated method stub
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        Fragment fragment = fragments.get(index);
+        if (preFragment != null) {
+            transaction.hide(preFragment);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mNfcAdapter.enableForegroundDispatch(this, pi, null, null);
-    }
-
-    /**
-     * Parses the NDEF Message from the intent and prints to the TextView
-     */
-    private void processIntent(Intent intent) {
-        //取出封装在intent中的TAG
-        Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        String CardId =ByteArrayToHexString(tagFromIntent.getId());
-        Log.i("NFCCL", "The cardId is:" + CardId);
-    }
-
-    private String ByteArrayToHexString(byte[] inarray) {
-        int i, j, in;
-        String[] hex = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A",
-                "B", "C", "D", "E", "F" };
-        String out = "";
-
-
-        for (j = 0; j < inarray.length; ++j) {
-            in = (int) inarray[j] & 0xff;
-            i = (in >> 4) & 0x0f;
-            out += hex[i];
-            i = in & 0x0f;
-            out += hex[i];
+        if (fragment.isAdded()) {
+            transaction.show(fragment);
+        } else {
+            transaction.add(R.id.framelayout, fragment);
         }
-        return out;
+        transaction.commit();
+        preFragment = fragment;
     }
-
 
 }
