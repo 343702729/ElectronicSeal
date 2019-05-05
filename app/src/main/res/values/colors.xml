@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="appBg">#F8F8F8</color>
+
+    <color name="black">#000000</color>
+    <color name="textItemGray">#9F9F9F</color>
+    <color name="textGray">#8C8C8C</color>
+    <color name="darkLight">#666666</color>
+    <color name="lineGray">#EEEEEE</color>
+    <color name="red">#F05246</color>
+    <color name="red_bg">#E6635A</color>
 </resources>

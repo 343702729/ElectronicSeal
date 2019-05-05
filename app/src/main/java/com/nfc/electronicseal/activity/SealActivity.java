@@ -10,6 +10,9 @@ import com.nfc.electronicseal.util.TLog;
 
 import butterknife.OnClick;
 
+/**
+ * 施封
+ */
 public class SealActivity extends BaseActivity {
 
     @Override

@@ -3,6 +3,10 @@
     package="com.nfc.electronicseal">
 
     <uses-permission android:name="android.permission.NFC" />
+    <!-- 访问手机当前状态, 需要某些信息用于网络定位 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".activity.base.BaseApplication"
@@ -12,11 +16,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Anim_fade">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -25,7 +38,10 @@
 
         </activity>
 
+
         <activity android:name=".activity.SealActivity" android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.ExceptionActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
