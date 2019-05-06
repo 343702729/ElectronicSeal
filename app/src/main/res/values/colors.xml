@@ -9,6 +9,7 @@
     <color name="black">#000000</color>
     <color name="textItemGray">#9F9F9F</color>
     <color name="textGray">#8C8C8C</color>
+    <color name="grayDark">#333333</color>
     <color name="darkLight">#666666</color>
     <color name="lineGray">#EEEEEE</color>
     <color name="red">#F05246</color>

@@ -13,21 +13,29 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="50dp">
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:text="操作"
                 android:textColor="@color/black"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:gravity="center_vertical"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/pic_gg"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,17 +47,19 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="90dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/item_sf_ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:gravity="center">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_sf"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -66,10 +76,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:gravity="center">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_xj"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,17 +98,19 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="90dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/item_cf_ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:gravity="center">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_cf"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,10 +127,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:gravity="center">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_yc"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -143,6 +159,6 @@
             android:textSize="13sp"
             android:gravity="center"
             android:layout_gravity="bottom|center_horizontal"
-            android:text="Copyright@安徽省亿利智能科技有限公司合作单位 安徽省信息工程学院"/>
+            android:text="Copyright©安徽省亿利智能科技有限公司合作单位 安徽信息工程学院"/>
     </FrameLayout>
 </LinearLayout>

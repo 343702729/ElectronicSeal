@@ -5,34 +5,40 @@
     android:background="@color/appBg"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="我的"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:gravity="center_vertical"/>
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:background="@color/white"
         android:orientation="vertical">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:text="我的"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:gravity="center_vertical"/>
-        </FrameLayout>
+
 
         <!-- 个人信息 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="138dp"
             android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:paddingBottom="20dp"
             android:orientation="horizontal"
-            android:background="@drawable/frame_item_bg">
+            android:background="@mipmap/pic_userinfo_bg">
             <ImageView
                 android:id="@+id/user_head_iv"
                 android:layout_width="80dp"
@@ -72,57 +78,72 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@mipmap/icon_right_bg"/>
             </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="使用说明书"
-                android:textColor="@color/darkLight"
-                android:textSize="14sp"/>
-            <FrameLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:src="@mipmap/icon_right"/>
-            </FrameLayout>
-        </LinearLayout>
+                    android:text="使用说明书"
+                    android:textColor="@color/darkLight"
+                    android:textSize="15sp"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:src="@mipmap/icon_right"/>
+                </FrameLayout>
+            </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/lineGray"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="常见问题"
-                android:textColor="@color/darkLight"
-                android:textSize="14sp"/>
-            <FrameLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
+                android:layout_height="1dp"
+                android:background="@color/lineGray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:src="@mipmap/icon_right"/>
-            </FrameLayout>
+                    android:text="常见问题"
+                    android:textColor="@color/darkLight"
+                    android:textSize="15sp"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:src="@mipmap/icon_right"/>
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
+
 
     </LinearLayout>
 
@@ -140,7 +161,7 @@
             android:layout_height="wrap_content"
             android:text="设置"
             android:textColor="@color/darkLight"
-            android:textSize="14sp"/>
+            android:textSize="15sp"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
