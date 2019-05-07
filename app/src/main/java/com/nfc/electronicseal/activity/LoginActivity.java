@@ -19,5 +19,6 @@ public class LoginActivity extends BaseActivity {
     public void loginBtnClick(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

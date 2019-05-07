@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+//        keystore {
+//            storeFile file('/Users/cl/Documents/workspace/Git/Web/Merchant_Manage_New/Merchant_Manage_New_Android/MerchantManage/app/keystore.keystore')
+//            storePassword '123456'
+//            keyAlias 'keystore'
+//            keyPassword '123456'
+//        }
+        debug {
+            keyAlias 'keystore'
+            keyPassword '123456'
+            storeFile file('E:/Code/Android/NFC/ElectronicSeal/keystore.keystore')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.nfc.electronicseal"
@@ -14,6 +28,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -35,6 +55,7 @@ dependencies {
     implementation 'com.trello:rxlifecycle:0.6.1'
     implementation 'com.trello:rxlifecycle-components:0.6.1'
     implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation files('libs/BaiduLBS_Android.jar')
 
     implementation project(':picsellib')
 }

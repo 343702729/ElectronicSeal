@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.util.BDLocationUtil;
 import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
 
@@ -14,6 +15,7 @@ import butterknife.OnClick;
  * 施封
  */
 public class SealActivity extends BaseActivity {
+    private BDLocationUtil bdLocationUtil;
 
     @Override
     public int layoutView() {
@@ -24,6 +26,7 @@ public class SealActivity extends BaseActivity {
     public void initData() {
         super.initData();
         new NFCUtil(this);
+        bdLocationUtil = new BDLocationUtil(this);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class SealActivity extends BaseActivity {
 
     }
 
-     @OnClick({R.id.open_btn, R.id.close_btn})
+     @OnClick({R.id.open_btn, R.id.close_btn, R.id.pic_sel_btn, R.id.location_start_btn, R.id.location_end_btn})
      public void itemBtnClick(View view){
          switch (view.getId()){
             case R.id.open_btn:
@@ -72,6 +75,12 @@ public class SealActivity extends BaseActivity {
                 break;
              case R.id.pic_sel_btn:
 
+                 break;
+             case R.id.location_start_btn:
+                 bdLocationUtil.startLocation();
+                 break;
+             case R.id.location_end_btn:
+                 bdLocationUtil.stopLocation();
                  break;
          }
      }
