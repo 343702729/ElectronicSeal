@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBg"
+    android:orientation="vertical">
+    <include layout="@layout/item_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/item_title_info"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="收货人信息"
+                android:textColor="@color/grayDarkX"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <!-- 姓名 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="姓名" />
+
+                    <EditText
+                        style="@style/info_item_et"
+                        android:hint="可不填" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/appBg" />
+                <!-- 手机号 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="手机号" />
+
+                    <EditText
+                        style="@style/info_item_et"
+                        android:hint="可不填" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/appBg" />
+                <!-- 收货地址 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="收货地址" />
+
+                    <EditText
+                        style="@style/info_item_et"
+                        android:hint="可不填" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="施封信息"
+                android:textColor="@color/grayDarkX"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <!-- 集装箱号 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="集装箱号" />
+
+                    <EditText
+                        style="@style/info_item_et"
+                        android:hint="可不填" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/appBg" />
+                <!-- 承运人 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="承运人" />
+
+                    <EditText
+                        style="@style/info_item_et"
+                        android:hint="可不填" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/appBg" />
+                <!-- 地理位置 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="地理位置" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <EditText
+                            style="@style/info_item_et"
+                            android:hint="请输入地理位置"
+                            android:layout_marginRight="16dp"/>
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical|right"
+                            android:background="@null"
+                            android:src="@mipmap/icon_location" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/appBg" />
+                <!-- 施封描述 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="施封描述" />
+
+                    <EditText
+                        style="@style/info_item_et"
+                        android:hint="可不填" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/appBg" />
+                <!-- 上传照片 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="上传照片" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/frame_button_sure"
+                android:text="提交信息"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

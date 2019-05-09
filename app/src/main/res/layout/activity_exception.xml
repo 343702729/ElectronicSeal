@@ -10,6 +10,18 @@
         android:layout_height="wrap_content"
         android:text="Add Pic"/>
 
+    <Button
+        android:id="@+id/location_start_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="location Start"/>
+
+    <Button
+        android:id="@+id/location_end_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="location End"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_photos"
         android:layout_width="match_parent"

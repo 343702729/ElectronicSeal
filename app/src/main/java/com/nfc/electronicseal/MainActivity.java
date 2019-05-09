@@ -1,30 +1,22 @@
 package com.nfc.electronicseal;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.nfc.electronicseal.activity.SealActivity;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.fragment.OperateFragment;
 import com.nfc.electronicseal.fragment.SearchFragment;
 import com.nfc.electronicseal.fragment.UserFragment;
-import com.nfc.electronicseal.util.NFCUtil;
-import com.nfc.electronicseal.util.TLog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.radiogroup)

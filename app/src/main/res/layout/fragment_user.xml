@@ -29,6 +29,7 @@
 
         <!-- 个人信息 -->
         <LinearLayout
+            android:id="@+id/user_info_ll"
             android:layout_width="match_parent"
             android:layout_height="138dp"
             android:gravity="center_vertical"
@@ -148,6 +149,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/setting_ll"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"

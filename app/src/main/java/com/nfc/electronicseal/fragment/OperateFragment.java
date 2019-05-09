@@ -6,8 +6,10 @@ import android.view.View;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.ExceptionActivity;
-import com.nfc.electronicseal.activity.SealActivity;
+import com.nfc.electronicseal.activity.inspect.InspectSearchActivity;
+import com.nfc.electronicseal.activity.seal.SealSearchActivity;
 import com.nfc.electronicseal.activity.base.BaseFragment;
+import com.nfc.electronicseal.activity.unseal.UnSealSearchActivity;
 import com.nfc.electronicseal.util.UiUtils;
 
 import butterknife.OnClick;
@@ -25,14 +27,16 @@ public class OperateFragment extends BaseFragment{
         Intent intent;
         switch (view.getId()){
             case R.id.item_sf_ll:       //施封
-                intent = new Intent(UiUtils.getContext(), SealActivity.class);
+                intent = new Intent(UiUtils.getContext(), SealSearchActivity.class);
                 startActivity(intent);
                 break;
             case R.id.item_xj_ll:       //巡检
-
+                intent = new Intent(UiUtils.getContext(), InspectSearchActivity.class);
+                startActivity(intent);
                 break;
             case R.id.item_cf_ll:       //拆封
-
+                intent = new Intent(UiUtils.getContext(), UnSealSearchActivity.class);
+                startActivity(intent);
                 break;
             case R.id.item_yc_ll:       //异常
                 intent = new Intent(UiUtils.getContext(), ExceptionActivity.class);

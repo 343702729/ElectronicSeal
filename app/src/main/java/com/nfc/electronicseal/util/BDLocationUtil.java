@@ -18,6 +18,7 @@ public class BDLocationUtil {
     }
 
     public void startLocation(){
+        mLocationClient.registerLocationListener(myListener);//注册监听函数
         mLocationClient.start();//开始定位
     }
 
@@ -120,7 +121,7 @@ public class BDLocationUtil {
         mOption.setIsNeedAltitude(false);
         mLocationClient.setLocOption(mOption);//设置定位参数
 
-        mLocationClient.registerLocationListener(myListener);//注册监听函数
+
     }
 
     private BDLocationListener myListener = new BDLocationListener() {

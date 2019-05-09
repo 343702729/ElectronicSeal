@@ -8,10 +8,15 @@
 
     <color name="black">#000000</color>
     <color name="textItemGray">#9F9F9F</color>
+    <color name="grayLight">#CCCCCC</color>
     <color name="textGray">#8C8C8C</color>
     <color name="grayDark">#333333</color>
+    <color name="grayDarkX">#999999</color>
     <color name="darkLight">#666666</color>
     <color name="lineGray">#EEEEEE</color>
     <color name="red">#F05246</color>
     <color name="red_bg">#E6635A</color>
+    <color name="redDark">#E84539</color>
+    <color name="yellow_light">#F3992F</color>
+    <color name="green_light">#40C182</color>
 </resources>

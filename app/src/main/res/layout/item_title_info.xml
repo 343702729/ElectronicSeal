@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- 封条信息 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+        <!-- 读取状态 -->
+        <LinearLayout style="@style/item_line_ll_s">
+
+            <TextView
+                style="@style/info_title_tv"
+                android:text="读取状态" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="未使用"
+                android:textColor="@color/yellow_light"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <!-- 芯片号UID -->
+        <LinearLayout style="@style/item_line_ll_s">
+
+            <TextView
+                style="@style/info_title_tv"
+                android:text="芯片号UID" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="UID998700"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <!-- 电子封箱ID -->
+        <LinearLayout style="@style/item_line_ll_s">
+
+            <TextView
+                style="@style/info_title_tv"
+                android:text="电子封箱ID" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="WAD080922"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <!-- 箱封制造企业号 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                style="@style/info_title_tv"
+                android:text="箱封制造企业号" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="right"
+                android:text="安徽省亿利智能科技有限公司"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重新读取NFC"
+            android:textColor="@color/redDark"
+            android:textSize="15sp" />
+    </LinearLayout>
+</LinearLayout>
