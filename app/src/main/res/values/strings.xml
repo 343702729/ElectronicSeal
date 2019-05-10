@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">ElectronicSeal</string>
+    <string name="instruction">·电子封签具有良好的防撬功能，结构紧凑、材料优良，施封后，封线和封条为一体化结构，破坏和不能恢复。 \n·施封后，封线在不破坏封体的情况下不易被拉出，抗拉力≥150N。 \n·施封后，封头不能从封体无损拔出。 \n·采用自锁式结构，两级卡槽，分层控制。 \n·航空钢丝绳直径：1.7mm 标准绳长20cm \n·锁头尺寸：30.3*27.4*9.1mm \n·采用进口PC聚碳酸酯、塑钢、ABS树脂等材料，主体防火等级达到V0级，整体防火不低于V2级，外壳坚硬防撬并有一定韧性。 \n·具有良好的防腐能力，在高温、潮湿日照、灰尘盐雾等极限环境中，封印的外观不发生明显的变化。 \n·封条在110℃及以下温度不会融化 \n·自锁件采用金属材料制成，具有良好防腐和抗拉能力，抗拉力≥150N；在高温、潮湿、日照、灰尘、盐雾等极限环境中，能保持封线正常的拉力不受影响。 \n·封线截断后，前端不分叉，封线剪断后，不能绞合或粘合。</string>
+
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+
 </resources>

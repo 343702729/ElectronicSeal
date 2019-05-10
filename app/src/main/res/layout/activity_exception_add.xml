@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBg"
+    android:orientation="vertical">
+    <include layout="@layout/item_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:paddingLeft="20dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电子封箱号ID"
+                        android:textSize="16sp"
+                        android:textColor="@color/darkLight"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:hint="请输入标签上的电子封箱号ID"
+                        android:textSize="16sp"
+                        android:textColor="@color/grayDark"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/appBg"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="异常类型"
+                        android:textSize="16sp"
+                        android:textColor="@color/darkLight"/>
+                    <Button
+                        android:id="@+id/type1_btn"
+                        android:layout_width="72dp"
+                        android:layout_height="28dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@mipmap/pic_type_bg"
+                        android:text="机械故障"
+                        android:textSize="14sp"
+                        android:textColor="@color/grayLight"/>
+
+                    <Button
+                        android:id="@+id/type2_btn"
+                        android:layout_width="72dp"
+                        android:layout_height="28dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@mipmap/pic_type_bg"
+                        android:text="芯片故障"
+                        android:textSize="14sp"
+                        android:textColor="@color/grayLight"/>
+
+                    <Button
+                        android:id="@+id/type3_btn"
+                        android:layout_width="72dp"
+                        android:layout_height="28dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@mipmap/pic_type_bg"
+                        android:text="其他"
+                        android:textSize="14sp"
+                        android:textColor="@color/grayLight"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/appBg"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="详情描述"
+                        android:textSize="16sp"
+                        android:textColor="@color/darkLight"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@null"
+                        android:hint="请详细描述异常原因，方便管理员及时处理"
+                        android:textSize="16sp"
+                        android:textColor="@color/grayDark"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/appBg"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="上传照片"
+                        android:textSize="16sp"
+                        android:textColor="@color/darkLight"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/white"
+                android:text="提交信息"
+                android:textSize="16sp"
+                android:background="@drawable/frame_button_sure"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

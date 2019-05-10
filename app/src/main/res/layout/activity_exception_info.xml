@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBg"
+    android:orientation="vertical">
+    <include layout="@layout/item_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@color/white">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="电子箱封"
+                    android:textSize="16sp"
+                    android:textColor="@color/grayDark"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:text="已完成"
+                    android:textSize="14sp"
+                    android:textColor="@color/green_light"/>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:paddingBottom="10dp"
+                android:orientation="vertical">
+                <!-- 时间 -->
+                <LinearLayout style="@style/item_line_ll_s">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:text="时间" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="2019-02-28 12:24:56"
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!-- 操作员 -->
+                <LinearLayout style="@style/item_line_ll_s">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:text="操作员" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="张无忌"
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!-- 申报地点 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:text="申报地点" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="right"
+                        android:text="安徽省黄山市屯溪区黄山汽运总站递交发动机卡死了"
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingTop="5dp"
+                android:background="@color/white"
+                android:paddingBottom="10dp"
+                android:orientation="vertical">
+                <!-- 异常状态 -->
+                <LinearLayout style="@style/item_line_ll_s">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:text="异常状态" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="机械异常"
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- 异常描述 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_marginTop="10dp"
+                        android:text="异常状态" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="封条读卡数据读取不出来测试几遍没有反应，发现外观有破损痕迹，芯片被折断；"
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- 图片 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                style="@style/info_title_tv"
+                android:layout_marginTop="10dp"
+                android:text="处理反馈" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="暂无反馈"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

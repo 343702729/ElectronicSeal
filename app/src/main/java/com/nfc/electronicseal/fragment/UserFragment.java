@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseFragment;
+import com.nfc.electronicseal.activity.my.InstructionActivity;
 import com.nfc.electronicseal.activity.my.SettingActivity;
 import com.nfc.electronicseal.activity.my.UserInfoActivity;
 import com.nfc.electronicseal.wiget.GlideCircleTransform;
@@ -40,7 +41,7 @@ public class UserFragment extends BaseFragment {
         super.initData();
     }
 
-    @OnClick({R.id.setting_ll, R.id.user_info_ll})
+    @OnClick({R.id.setting_ll, R.id.user_info_ll, R.id.user_instruction_ll})
     public void lineItemClick(View view){
         Intent intent;
         switch (view.getId()){
@@ -50,6 +51,10 @@ public class UserFragment extends BaseFragment {
                 break;
             case R.id.user_info_ll:
                 intent = new Intent(getContext(), UserInfoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.user_instruction_ll:
+                intent = new Intent(getContext(), InstructionActivity.class);
                 startActivity(intent);
                 break;
         }

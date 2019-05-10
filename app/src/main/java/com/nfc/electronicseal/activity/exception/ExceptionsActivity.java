@@ -1,16 +1,15 @@
-package com.nfc.electronicseal.fragment;
+package com.nfc.electronicseal.activity.exception;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.liuguangqiang.ipicker.adapters.BaseAdapter;
 import com.nfc.electronicseal.R;
-import com.nfc.electronicseal.activity.base.BaseFragment;
+import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.activity.search.SealInfoActivity;
 import com.nfc.electronicseal.adapter.SealItemAdapter;
+import com.nfc.electronicseal.fragment.SearchFragment;
 import com.nfc.electronicseal.node.SealItemNode;
 import com.nfc.electronicseal.wiget.pullableview.PullToRefreshLayout;
 import com.nfc.electronicseal.wiget.pullableview.PullableListView;
@@ -21,10 +20,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-@SuppressLint("ValidFragment")
-public class SearchFragment extends BaseFragment {
+public class ExceptionsActivity extends BaseActivity {
     @BindView(R.id.item_status1_tv)
     TextView status1TV;
+    @BindView(R.id.title_tv)
+    TextView titleTV;
     @BindView(R.id.item_status1_v)
     View status1V;
     @BindView(R.id.item_status2_tv)
@@ -35,10 +35,6 @@ public class SearchFragment extends BaseFragment {
     TextView status3TV;
     @BindView(R.id.item_status3_v)
     View status3V;
-    @BindView(R.id.item_status4_tv)
-    TextView status4TV;
-    @BindView(R.id.item_status4_v)
-    View status4V;
     @BindView(R.id.refreshview)
     PullToRefreshLayout pullRL;
     @BindView(R.id.listview)
@@ -51,12 +47,14 @@ public class SearchFragment extends BaseFragment {
 
     @Override
     public int layoutView() {
-        return R.layout.fragment_search;
+        return R.layout.activity_exceptions;
     }
 
     @Override
-    public void initview(View view) {
-        super.initview(view);
+    public void initview() {
+        super.initview();
+        titleTV.setText("异常信息");
+
         pullRL.isPullDown(false);
         pullRL.isPullUp(false);
         pullRefreshListener = new PullRefreshListener();
@@ -64,12 +62,23 @@ public class SearchFragment extends BaseFragment {
         sealItemNodes.add(new SealItemNode());
         sealItemNodes.add(new SealItemNode());
         sealItemNodes.add(new SealItemNode());
-        sealItemAdapter = new SealItemAdapter(getContext(), sealItemNodes);
+        sealItemAdapter = new SealItemAdapter(this, sealItemNodes);
         listView.setAdapter(sealItemAdapter);
         listView.setOnItemClickListener(sealItemClick);
     }
 
-    @OnClick({R.id.item_status1_tv, R.id.item_status2_tv, R.id.item_status3_tv, R.id.item_status4_tv})
+    @OnClick(R.id.back_ib)
+    public void backBtnClick(View view){
+        finish();
+    }
+
+    @OnClick(R.id.add_iv)
+    public void addBtnClick(View view){
+        Intent intent = new Intent(this, ExceptionAddActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick({R.id.item_status1_tv, R.id.item_status2_tv, R.id.item_status3_tv})
     public void itemStatusClick(View view){
 
         switch (view.getId()){
@@ -91,12 +100,6 @@ public class SearchFragment extends BaseFragment {
                 itemIndex = 3;
                 setStatusItemV(3);
                 break;
-            case R.id.item_status4_tv:
-                if(itemIndex==4)
-                    return;
-                itemIndex = 4;
-                setStatusItemV(4);
-                break;
         }
     }
 
@@ -104,11 +107,9 @@ public class SearchFragment extends BaseFragment {
         status1TV.setTextColor(getResources().getColor(R.color.grayDarkX));
         status2TV.setTextColor(getResources().getColor(R.color.grayDarkX));
         status3TV.setTextColor(getResources().getColor(R.color.grayDarkX));
-        status4TV.setTextColor(getResources().getColor(R.color.grayDarkX));
         status1V.setVisibility(View.INVISIBLE);
         status2V.setVisibility(View.INVISIBLE);
         status3V.setVisibility(View.INVISIBLE);
-        status4V.setVisibility(View.INVISIBLE);
         switch (index){
             case 1:
                 status1TV.setTextColor(getResources().getColor(R.color.redDark));
@@ -122,17 +123,13 @@ public class SearchFragment extends BaseFragment {
                 status3TV.setTextColor(getResources().getColor(R.color.redDark));
                 status3V.setVisibility(View.VISIBLE);
                 break;
-            case 4:
-                status4TV.setTextColor(getResources().getColor(R.color.redDark));
-                status4V.setVisibility(View.VISIBLE);
-                break;
         }
     }
 
     private AdapterView.OnItemClickListener sealItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(getContext(), SealInfoActivity.class);
+            Intent intent = new Intent(ExceptionsActivity.this, ExceptionInfoActivity.class);
             startActivity(intent);
         }
     };

@@ -6,44 +6,17 @@
     android:orientation="vertical">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@color/white">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/frame_search_bg"
-            android:layout_marginRight="70dp"
-            android:paddingLeft="10dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/icon_search"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:background="@null"
-                android:hint="请输入电子箱封号进行搜索"
-                android:textSize="14sp"
-                android:textColorHint="@color/grayLight"
-                android:textColor="@color/darkLight"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:gravity="center"
-            android:text="搜索"
-            android:textColor="@color/grayDark"
-            android:textSize="16sp"/>
+        android:layout_height="wrap_content">
+        <include layout="@layout/item_title"/>
+        <ImageButton
+            android:id="@+id/add_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/icon_add"
+            android:background="@null"
+            android:layout_gravity="right|center_vertical"/>
     </FrameLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -78,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="已完成"
+                android:text="待处理"
                 android:textSize="16sp"
                 android:textColor="@color/grayDarkX"/>
             <View
@@ -98,31 +71,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="已施封"
+                android:text="已处理"
                 android:textSize="16sp"
                 android:textColor="@color/grayDarkX"/>
             <View
                 android:id="@+id/item_status3_v"
-                android:layout_width="20dp"
-                android:layout_height="2dp"
-                android:visibility="invisible"
-                android:layout_gravity="bottom|center_horizontal"
-                android:background="@color/redDark"/>
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/item_status4_tv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="巡检中"
-                android:textSize="16sp"
-                android:textColor="@color/grayDarkX"/>
-            <View
-                android:id="@+id/item_status4_v"
                 android:layout_width="20dp"
                 android:layout_height="2dp"
                 android:visibility="invisible"

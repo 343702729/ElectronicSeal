@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.ExceptionActivity;
+import com.nfc.electronicseal.activity.exception.ExceptionsActivity;
 import com.nfc.electronicseal.activity.inspect.InspectSearchActivity;
 import com.nfc.electronicseal.activity.seal.SealSearchActivity;
 import com.nfc.electronicseal.activity.base.BaseFragment;
@@ -39,7 +40,7 @@ public class OperateFragment extends BaseFragment{
                 startActivity(intent);
                 break;
             case R.id.item_yc_ll:       //异常
-                intent = new Intent(UiUtils.getContext(), ExceptionActivity.class);
+                intent = new Intent(UiUtils.getContext(), ExceptionsActivity.class);
                 startActivity(intent);
                 break;
         }
