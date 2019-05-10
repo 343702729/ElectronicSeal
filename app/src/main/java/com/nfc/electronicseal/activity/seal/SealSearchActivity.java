@@ -3,8 +3,10 @@ package com.nfc.electronicseal.activity.seal;
 import android.content.Intent;
 import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.util.BDLocationUtil;
@@ -22,6 +24,8 @@ public class SealSearchActivity extends BaseActivity {
     TextView titleTV;
     @BindView(R.id.instructions_tv)
     TextView instructionsTV;
+    @BindView(R.id.animation_iv)
+    ImageView animationIV;
 
     private BDLocationUtil bdLocationUtil;
 
@@ -35,6 +39,7 @@ public class SealSearchActivity extends BaseActivity {
         super.initview();
         titleTV.setText("施封管理");
         initInstructionsTV();
+        Glide.with(this).load(R.mipmap.animation).asGif().into(animationIV);
     }
 
     @Override
