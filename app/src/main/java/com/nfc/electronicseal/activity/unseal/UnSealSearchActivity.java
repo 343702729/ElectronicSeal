@@ -77,9 +77,12 @@ public class UnSealSearchActivity extends BaseActivity{
     public void itemBtnClick(View view){
         switch (view.getId()){
             case R.id.open_nfc_btn:
+                Intent intent1 = new Intent(this, UnSealOperateActivity.class);
+//                intent1.putExtra("NFCID", nfcId);
+                startActivity(intent1);
                 //开启前台调度系统
-                NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
-                        NFCUtil.mIntentFilter, NFCUtil.mTechList);
+//                NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
+//                        NFCUtil.mIntentFilter, NFCUtil.mTechList);
                 TLog.log("Come into open NFC");
 
 
