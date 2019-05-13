@@ -3,11 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/pic_splash_logo"
-        android:layout_marginBottom="100dp"
-        android:layout_gravity="center"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/pic_splash"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -17,6 +15,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginBottom="30dp"
+        android:visibility="gone"
         android:text="Copyright©安徽省亿利智能科技有限公司合作单位 安徽信息工程学院"
         android:textSize="13sp"
         android:textColor="@color/textItemGray"/>
