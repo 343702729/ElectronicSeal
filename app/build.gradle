@@ -11,14 +11,14 @@ android {
         debug {
             keyAlias 'keystore'
             keyPassword '123456'
-            storeFile file('E:/Code/Android/NFC/ElectronicSeal/keystore.keystore')
+            storeFile file('D:/Git/Android/ElectronicSeal/keystore.keystore')
             storePassword '123456'
         }
     }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.nfc.electronicseal"
-        minSdkVersion 21
+        minSdkVersion 18
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"

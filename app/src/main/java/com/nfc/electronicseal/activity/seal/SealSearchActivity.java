@@ -78,11 +78,10 @@ public class SealSearchActivity extends BaseActivity {
             String nfcId = NFCUtil.readNFCId(intent);
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId);
-//            String str = NFCUtil.rendFromTag(intent);
 
-            Intent intent1 = new Intent(this, SealOperateActivity.class);
-            intent1.putExtra("NFCID", nfcId);
-            startActivity(intent1);
+//            Intent intent1 = new Intent(this, SealOperateActivity.class);
+//            intent1.putExtra("NFCID", nfcId);
+//            startActivity(intent1);
 
             //关闭前台调度系统
             NFCUtil.mNfcAdapter.disableForegroundDispatch(this);
