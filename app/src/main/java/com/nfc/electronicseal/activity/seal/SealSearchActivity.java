@@ -66,7 +66,7 @@ public class SealSearchActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         //关闭前台调度系统
-//        NFCUtil.mNfcAdapter.disableForegroundDispatch(this);
+        NFCUtil.mNfcAdapter.disableForegroundDispatch(this);
     }
 
     @Override
@@ -77,17 +77,14 @@ public class SealSearchActivity extends BaseActivity {
         try {
             String nfcId = NFCUtil.readNFCId(intent);
             String str = NFCUtil.readNFCFromTag(intent);
-            TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId);
+            TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
 
-            NFCUtil.writeNFCToTag("测试NFC123456", intent);
+            String writeStr = "sealId:12345678912345;taxNumber:123456789123456789;containerNo:12345678911";
+            NFCUtil.writeNFCToTag(writeStr, intent);
 
             Intent intent1 = new Intent(this, SealOperateActivity.class);
             intent1.putExtra("NFCID", nfcId);
             startActivity(intent1);
-
-            //关闭前台调度系统
-            NFCUtil.mNfcAdapter.disableForegroundDispatch(this);
-            TLog.log("Come into close NFC");
 
         }catch (Exception e){
             e.printStackTrace();
