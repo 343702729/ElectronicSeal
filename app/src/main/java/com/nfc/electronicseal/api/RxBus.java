@@ -112,12 +112,10 @@ public class RxBus {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void post(@NonNull Object tag, @NonNull Object content) {
-//        LogUtils.logd("post"+ "eventName: " + tag);
         List<Subject> subjectList = subjectMapper.get(tag);
         if (!isEmpty(subjectList)) {
             for (Subject subject : subjectList) {
                 subject.onNext(content);
-//                LogUtils.logd("onEvent"+ "eventName: " + tag);
             }
         }
     }
