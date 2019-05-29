@@ -119,9 +119,9 @@
             </LinearLayout>
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/lineGray"/>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lineGray"/>
 
             <LinearLayout
                 android:id="@+id/user_problems_ll"
@@ -145,6 +145,48 @@
                         android:src="@mipmap/icon_right"/>
                 </FrameLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray"/>
+
+            <LinearLayout
+                android:id="@+id/user_version_ll"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="版本更新"
+                    android:textColor="@color/darkLight"
+                    android:textSize="15sp"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|right"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/version_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/darkLight"
+                            android:textSize="15sp"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
+                            android:src="@mipmap/icon_right"/>
+                    </LinearLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
 

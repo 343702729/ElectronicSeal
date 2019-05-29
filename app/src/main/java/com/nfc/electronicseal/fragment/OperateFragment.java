@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 
 import com.nfc.electronicseal.R;
-import com.nfc.electronicseal.activity.ExceptionActivity;
 import com.nfc.electronicseal.activity.exception.ExceptionsActivity;
 import com.nfc.electronicseal.activity.inspect.InspectSearchActivity;
 import com.nfc.electronicseal.activity.seal.SealSearchActivity;

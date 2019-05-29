@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.activity.seal.SealOperateActivity;
+import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
 
@@ -41,6 +42,8 @@ public class UnSealSearchActivity extends BaseActivity{
     public void initData() {
         super.initData();
         new NFCUtil(this);
+        if(!NFCUtil.isSupportNFC)
+            AppToast.showShortText(this, "该手机不支持NFC");
     }
 
     @OnClick(R.id.back_ib)
@@ -77,12 +80,14 @@ public class UnSealSearchActivity extends BaseActivity{
     public void itemBtnClick(View view){
         switch (view.getId()){
             case R.id.open_nfc_btn:
-                Intent intent1 = new Intent(this, UnSealOperateActivity.class);
+//                Intent intent1 = new Intent(this, UnSealOperateActivity.class);
 //                intent1.putExtra("NFCID", nfcId);
-                startActivity(intent1);
+//                startActivity(intent1);
                 //开启前台调度系统
-//                NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
-//                        NFCUtil.mIntentFilter, NFCUtil.mTechList);
+                if(NFCUtil.isSupportNFC){
+                    NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
+                            NFCUtil.mIntentFilter, NFCUtil.mTechList);
+                }
                 TLog.log("Come into open NFC");
 
 

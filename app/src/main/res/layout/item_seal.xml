@@ -14,15 +14,29 @@
             android:layout_height="50dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="70dp"
-                android:singleLine="true"
-                android:text="电子箱封"
-                android:textSize="16sp"
-                android:textColor="@color/grayDark"/>
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="电子箱封ID:"
+                    android:textSize="16sp"
+                    android:textColor="@color/grayDark"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="000012sdsd"
+                    android:textSize="16sp"
+                    android:textColor="@color/grayDark"/>
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nfc.electronicseal.R;
@@ -13,6 +14,7 @@ import com.nfc.electronicseal.activity.my.InstructionActivity;
 import com.nfc.electronicseal.activity.my.ProblemsActivity;
 import com.nfc.electronicseal.activity.my.SettingActivity;
 import com.nfc.electronicseal.activity.my.UserInfoActivity;
+import com.nfc.electronicseal.util.AppInfo;
 import com.nfc.electronicseal.wiget.GlideCircleTransform;
 
 import butterknife.BindView;
@@ -22,6 +24,8 @@ import butterknife.OnClick;
 public class UserFragment extends BaseFragment {
     @BindView(R.id.user_head_iv)
     ImageView headIV;
+    @BindView(R.id.version_tv)
+    TextView versionTV;
 
     @Override
     public int layoutView() {
@@ -35,6 +39,7 @@ public class UserFragment extends BaseFragment {
                 //圆形
                 .transform(new GlideCircleTransform(getContext()))
                 .into(headIV);
+        versionTV.setText("V" + AppInfo.appVersion);
     }
 
     @Override

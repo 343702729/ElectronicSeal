@@ -23,6 +23,7 @@ public class NFCUtil {
     public static IntentFilter[] mIntentFilter = null;
     public static PendingIntent mPendingIntent = null;
     public static String[][] mTechList = null;
+    public static boolean isSupportNFC = false;
 
     /**
      * 构造函数，用于初始化nfc
@@ -38,6 +39,7 @@ public class NFCUtil {
     public static NfcAdapter NfcCheck(Activity activity) {
         NfcAdapter mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
         if (mNfcAdapter == null) {
+            isSupportNFC = false;
             return null;
         } else {
             if (!mNfcAdapter.isEnabled()) {
@@ -45,6 +47,7 @@ public class NFCUtil {
                 activity.startActivity(setNfc);
             }
         }
+        isSupportNFC = true;
         return mNfcAdapter;
     }
 
@@ -52,6 +55,8 @@ public class NFCUtil {
      * 初始化nfc设置
      */
     public static void NfcInit(Activity activity) {
+        if(!isSupportNFC)
+            return;
         mPendingIntent = PendingIntent.getActivity(activity, 0, new Intent(activity, activity.getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         IntentFilter filter = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         IntentFilter filter2 = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
@@ -68,6 +73,8 @@ public class NFCUtil {
      * 读取NFC的数据
      */
     public static String readNFCFromTag(Intent intent) throws UnsupportedEncodingException {
+        if(!isSupportNFC)
+            return "";
         Parcelable[] rawArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         if (rawArray != null) {
             NdefMessage mNdefMsg = (NdefMessage) rawArray[0];
@@ -85,6 +92,8 @@ public class NFCUtil {
      * 往nfc写入数据
      */
     public static void writeNFCToTag(String data, Intent intent) throws IOException, FormatException {
+        if(!isSupportNFC)
+            return;
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         Ndef ndef = Ndef.get(tag);
         ndef.connect();
@@ -99,6 +108,8 @@ public class NFCUtil {
      * 读取nfcID
      */
     public static String readNFCId(Intent intent) throws UnsupportedEncodingException {
+        if(!isSupportNFC)
+            return "";
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String id = ByteArrayToHexString(tag.getId());
         Ndef ndef = Ndef.get(tag);

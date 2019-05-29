@@ -3,6 +3,7 @@ package com.nfc.electronicseal.activity.base;
 import android.app.Application;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.nfc.electronicseal.util.AppInfo;
 
 public class BaseApplication extends Application {
 
@@ -15,7 +16,7 @@ public class BaseApplication extends Application {
 		SDKInitializer.initialize(this);
 //		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
 //		JPushInterface.init(this);
-//		AppInfo.init(this);
+		AppInfo.init(this);
 	}
 
 	public static BaseApplication getInstance() {

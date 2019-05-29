@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.BDLocationUtil;
 import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
@@ -46,6 +47,8 @@ public class SealSearchActivity extends BaseActivity {
     public void initData() {
         super.initData();
         new NFCUtil(this);
+        if(!NFCUtil.isSupportNFC)
+            AppToast.showShortText(this, "该手机不支持NFC");
         bdLocationUtil = new BDLocationUtil(this);
     }
 
@@ -66,7 +69,8 @@ public class SealSearchActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         //关闭前台调度系统
-        NFCUtil.mNfcAdapter.disableForegroundDispatch(this);
+        if(NFCUtil.isSupportNFC)
+            NFCUtil.mNfcAdapter.disableForegroundDispatch(this);
     }
 
     @Override
@@ -79,7 +83,7 @@ public class SealSearchActivity extends BaseActivity {
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
 
-            String writeStr = "sealId:12345678912345;taxNumber:123456789123456789;containerNo:12345678911";
+            String writeStr = "sealId:241520190519JD;taxNumber:91341003MA2TJA5342;containerNo:1234562789";
             NFCUtil.writeNFCToTag(writeStr, intent);
 
             Intent intent1 = new Intent(this, SealOperateActivity.class);
@@ -100,8 +104,11 @@ public class SealSearchActivity extends BaseActivity {
 //                startActivity(intent1);
 
                  //开启前台调度系统
-                 NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
-                 NFCUtil.mIntentFilter, NFCUtil.mTechList);
+                if(NFCUtil.isSupportNFC){
+                    NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
+                            NFCUtil.mIntentFilter, NFCUtil.mTechList);
+                }
+
 //                 TLog.log("Come into open NFC");
 
 
