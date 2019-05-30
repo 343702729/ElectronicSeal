@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="transparent">#00000000</color>
+    <color name="dialg_outside_bg">#B0000000</color>
 
     <color name="appBg">#F8F8F8</color>
 
@@ -20,4 +21,5 @@
     <color name="redDark">#E84539</color>
     <color name="yellow_light">#F3992F</color>
     <color name="green_light">#40C182</color>
+
 </resources>

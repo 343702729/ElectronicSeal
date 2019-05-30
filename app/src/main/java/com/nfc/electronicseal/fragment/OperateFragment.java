@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.nfc.electronicseal.R;
+import com.nfc.electronicseal.activity.CustomerActivity;
 import com.nfc.electronicseal.activity.exception.ExceptionsActivity;
 import com.nfc.electronicseal.activity.inspect.InspectSearchActivity;
 import com.nfc.electronicseal.activity.seal.SealSearchActivity;
@@ -43,6 +44,12 @@ public class OperateFragment extends BaseFragment{
                 startActivity(intent);
                 break;
         }
+    }
+
+    @OnClick(R.id.customer_iv)
+    public void customerBtnClick(View view){
+        Intent intent = new Intent(UiUtils.getContext(), CustomerActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.liuguangqiang.ipicker.adapters.BaseAdapter;
@@ -12,6 +13,7 @@ import com.nfc.electronicseal.activity.base.BaseFragment;
 import com.nfc.electronicseal.activity.search.SealInfoActivity;
 import com.nfc.electronicseal.adapter.SealItemAdapter;
 import com.nfc.electronicseal.node.SealItemNode;
+import com.nfc.electronicseal.util.TLog;
 import com.nfc.electronicseal.wiget.pullableview.PullToRefreshLayout;
 import com.nfc.electronicseal.wiget.pullableview.PullableListView;
 
@@ -23,6 +25,8 @@ import butterknife.OnClick;
 
 @SuppressLint("ValidFragment")
 public class SearchFragment extends BaseFragment {
+    @BindView(R.id.search_et)
+    EditText searchET;
     @BindView(R.id.item_status1_tv)
     TextView status1TV;
     @BindView(R.id.item_status1_v)
@@ -67,6 +71,16 @@ public class SearchFragment extends BaseFragment {
         sealItemAdapter = new SealItemAdapter(getContext(), sealItemNodes);
         listView.setAdapter(sealItemAdapter);
         listView.setOnItemClickListener(sealItemClick);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        TLog.log("Come into onHiddenChanged:" + hidden);
+        if(hidden){
+            searchET.clearFocus();
+            searchET.setCursorVisible(false);
+        }
     }
 
     @OnClick({R.id.item_status1_tv, R.id.item_status2_tv, R.id.item_status3_tv, R.id.item_status4_tv})

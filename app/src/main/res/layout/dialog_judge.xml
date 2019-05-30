@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/dialg_outside_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="160dp"
+        android:background="@drawable/frame_white_bg"
+        android:clickable="false"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/judge_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_horizontal|bottom"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="17sp"/>
+            <TextView
+                android:id="@+id/judge_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/darkLight"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/appBg"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/cancel_btn"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:background="@drawable/frame_button_cancel"
+                android:text="取消"
+                android:textSize="14sp"
+                android:textColor="@color/redDark"/>
+            <Button
+                android:id="@+id/sure_btn"
+                android:layout_width="65dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/frame_button_sure"
+                android:text="确定"
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
