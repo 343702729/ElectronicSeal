@@ -197,6 +197,7 @@ public class IPickerActivity extends AppCompatActivity implements BaseAdapter.On
     }
 
     private void requestCamera() {
+        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         PermissionHelper.getInstance().requestPermission(this, Manifest.permission.CAMERA);
     }
 
