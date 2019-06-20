@@ -12,6 +12,7 @@ import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.fragment.OperateFragment;
 import com.nfc.electronicseal.fragment.SearchFragment;
 import com.nfc.electronicseal.fragment.UserFragment;
+import com.nfc.electronicseal.util.NFCUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,19 @@ public class MainActivity extends BaseActivity {
         fragments.add(new SearchFragment());
         fragments.add(new UserFragment());
         changefragment(0);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        new NFCUtil(this);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     @Override

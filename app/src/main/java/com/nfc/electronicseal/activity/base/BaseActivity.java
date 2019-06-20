@@ -8,6 +8,7 @@ import com.nfc.electronicseal.api.RxBus;
 import com.nfc.electronicseal.api.util.RxHelper;
 import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.data.Constant;
+import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -87,5 +88,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 	public void onDestroy() {
 		super.onDestroy();
 		unbinder.unbind();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+//		if(NFCUtil.isSupportNFC){
+//			NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
+//					NFCUtil.mIntentFilter, NFCUtil.mTechList);
+//		}
 	}
 }
