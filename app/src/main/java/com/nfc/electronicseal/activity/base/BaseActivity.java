@@ -47,6 +47,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 	 */
 	public void initData() {
 		// TODO Auto-generated method stub
+
 		RxBus.getInstance().register(Constant.EVENT_RXBUS_GOTO_LOGIN)
 				.compose(new RxHelper<Object>(null).io_main2(this))
 				.subscribe(new RxSubscriber<Object>() {
@@ -93,9 +94,13 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		if(NFCUtil.isSupportNFC){
-//			NFCUtil.mNfcAdapter.enableForegroundDispatch(this, NFCUtil.mPendingIntent,
-//					NFCUtil.mIntentFilter, NFCUtil.mTechList);
-//		}
+		new NFCUtil(this);
+		NFCUtil.enableForeground(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		NFCUtil.disableForeground(this);
 	}
 }

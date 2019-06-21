@@ -166,4 +166,17 @@ public class NFCUtil {
         return ndefRecord;
     }
 
+    public static void enableForeground(Activity activity){
+        if(mNfcAdapter==null)
+            return;
+        mNfcAdapter.enableForegroundDispatch(activity, NFCUtil.mPendingIntent,
+                NFCUtil.mIntentFilter, NFCUtil.mTechList);
+    }
+
+    public static void disableForeground(Activity activity){
+        if(mNfcAdapter==null)
+            return;
+        mNfcAdapter.disableForegroundDispatch(activity);
+    }
+
 }

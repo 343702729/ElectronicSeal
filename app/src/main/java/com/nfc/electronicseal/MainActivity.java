@@ -46,14 +46,19 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
-        new NFCUtil(this);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+//        NFCUtil.enableForeground(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        NFCUtil.disableForeground(this);
     }
 
     @Override

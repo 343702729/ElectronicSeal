@@ -35,74 +35,74 @@
         android:supportsRtl="true"
         android:theme="@style/Anim_fade">
 
-        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="*/*" />
-            </intent-filter>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.nfc.action.TAG_DISCOVERED" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--<data android:mimeType="*/*" />-->
+            <!--</intent-filter>-->
 
         </activity>
 
 
-        <activity android:name=".activity.seal.SealSearchActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.seal.SealSearchActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name=".activity.seal.SealOperateActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.seal.SealOperateActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name=".activity.unseal.UnSealSearchActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.unseal.UnSealSearchActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name=".activity.unseal.UnSealOperateActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.unseal.UnSealOperateActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name=".activity.inspect.InspectSearchActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.inspect.InspectSearchActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name=".activity.inspect.InspectOperateActivity" android:screenOrientation="portrait">
+        <activity android:name=".activity.inspect.InspectOperateActivity" android:screenOrientation="portrait" android:launchMode="singleInstance">
 
         </activity>
 
-        <activity android:name=".activity.ExceptionActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ExceptionActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.my.SettingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.SettingActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.my.PasswordUpdateActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.PasswordUpdateActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.my.UserInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.UserInfoActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.my.InstructionActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.InstructionActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.search.SealInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.search.SealInfoActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.exception.ExceptionsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.exception.ExceptionsActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.exception.ExceptionAddActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.exception.ExceptionAddActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.exception.ExceptionInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.exception.ExceptionInfoActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.my.ProblemsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.ProblemsActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.my.ProblemInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.ProblemInfoActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
-        <activity android:name=".activity.CustomerActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.CustomerActivity" android:screenOrientation="portrait" android:launchMode="singleInstance"></activity>
 
         <!-- 百度定位 RK1qh7g9DOD9Rh1ZHSjLXgbRinxToxzO -->
         <meta-data
