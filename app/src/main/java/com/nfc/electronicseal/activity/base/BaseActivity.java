@@ -47,7 +47,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 	 */
 	public void initData() {
 		// TODO Auto-generated method stub
-
 		RxBus.getInstance().register(Constant.EVENT_RXBUS_GOTO_LOGIN)
 				.compose(new RxHelper<Object>(null).io_main2(this))
 				.subscribe(new RxSubscriber<Object>() {
