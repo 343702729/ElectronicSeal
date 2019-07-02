@@ -83,8 +83,8 @@ public class SealSearchActivity extends BaseActivity {
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
 
-            String writeStr = "sealId:241520190519JD;taxNumber:91341003MA2TJA5342;containerNo:1234562789";
-            NFCUtil.writeNFCToTag(writeStr, intent);
+//            String writeStr = "sealId:241520190519JD;taxNumber:91341003MA2TJA5342;containerNo:1234562789";
+//            NFCUtil.writeNFCToTag(writeStr, intent);
 
             Intent intent1 = new Intent(this, SealOperateActivity.class);
             intent1.putExtra("NFCID", nfcId);

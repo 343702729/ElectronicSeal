@@ -112,9 +112,9 @@ public class NFCUtil {
             return "";
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String id = ByteArrayToHexString(tag.getId());
-        Ndef ndef = Ndef.get(tag);
-        String str = ndef.getType() + "\nmaxsize:" + ndef.getMaxSize() + "bytes\n\n";
-        TLog.log(str);
+//        Ndef ndef = Ndef.get(tag);
+//        String str = ndef.getType() + "\nmaxsize:" + ndef.getMaxSize() + "bytes\n\n";
+//        TLog.log(str);
         return id;
     }
 
