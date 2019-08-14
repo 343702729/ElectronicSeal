@@ -1,13 +1,16 @@
 package com.nfc.electronicseal.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.node.SealItemNode;
+import com.nfc.electronicseal.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,13 @@ public class SealItemAdapter extends BaseAdapter {
         if(nodes!=null)
             this.nodes = nodes;
         layoutInflater = LayoutInflater.from(context);
+    }
+
+    public void updateViews(List<SealItemNode> nodes){
+        if(nodes==null)
+            nodes = new ArrayList<>();
+        this.nodes = nodes;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -46,14 +56,40 @@ public class SealItemAdapter extends BaseAdapter {
         if(view==null){
             viewHolder = new ViewHolder();
             view = layoutInflater.inflate(R.layout.item_seal, null);
+            viewHolder.sealIdTV = view.findViewById(R.id.box_seal_id_tv);
+            viewHolder.sealStatusTV = view.findViewById(R.id.box_seal_status_tv);
+            viewHolder.sealTimeTV = view.findViewById(R.id.box_seal_time_tv);
+            viewHolder.sealPersonTV = view.findViewById(R.id.box_seal_person_tv);
+            viewHolder.sealAddrTV = view.findViewById(R.id.box_seal_addr_tv);
             view.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)view.getTag();
         }
+        viewHolder.sealIdTV.setText(node.getSealId());
+
+        if(node.getDealStatus()==1){
+            viewHolder.sealStatusTV.setText("已处理");
+            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.green_light));
+        }else {
+            viewHolder.sealStatusTV.setText("待处理");
+            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.redDark));
+        }
+
+        if(node.getUpdateTime()!=null)
+            viewHolder.sealTimeTV.setText(DateUtil.timeStamp2Date(node.getUpdateTime()));
+        else
+            viewHolder.sealTimeTV.setText("");
+
+        viewHolder.sealPersonTV.setText(node.getSealOperName());
+        viewHolder.sealAddrTV.setText(node.getSealLoca());
         return view;
     }
 
     class ViewHolder {
-
+        TextView sealIdTV;
+        TextView sealStatusTV;
+        TextView sealTimeTV;
+        TextView sealPersonTV;
+        TextView sealAddrTV;
     }
 }

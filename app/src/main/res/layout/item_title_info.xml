@@ -42,7 +42,9 @@
                 android:textSize="16sp" />
         </LinearLayout>
         <!-- 电子封箱ID -->
-        <LinearLayout style="@style/item_line_ll_s">
+        <LinearLayout
+            android:id="@+id/box_id_ll"
+            style="@style/item_line_ll_s">
 
             <TextView
                 style="@style/info_title_tv"
@@ -58,6 +60,7 @@
         </LinearLayout>
         <!-- 箱封制造企业号 -->
         <LinearLayout
+            android:id="@+id/box_maker_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

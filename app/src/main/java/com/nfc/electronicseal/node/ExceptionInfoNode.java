@@ -1,6 +1,6 @@
 package com.nfc.electronicseal.node;
 
-public class SealItemNode {
+public class ExceptionInfoNode {
     private int id;
     private String chipId;
     private Long createTime;

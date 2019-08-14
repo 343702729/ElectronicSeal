@@ -1,7 +1,9 @@
 package com.nfc.electronicseal.api.util;
 
+import com.nfc.electronicseal.activity.base.BaseFragment;
 import com.nfc.electronicseal.dialog.DialogHelper;
 import com.trello.rxlifecycle.ActivityEvent;
+import com.trello.rxlifecycle.FragmentEvent;
 import com.trello.rxlifecycle.RxLifecycle;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -66,8 +68,8 @@ public class RxHelper<T> {
             }
         };
     }
-    /**
-    public Observable.Transformer<T, T> io_toay_main(final BaseFragment context) {
+
+    public Observable.Transformer<T, T> io_main_fragment(final BaseFragment context) {
         return new Observable.Transformer<T, T>() {
             @Override
             public Observable<T> call(Observable<T> tObservable) {
@@ -86,6 +88,5 @@ public class RxHelper<T> {
             }
         };
     }
-     */
 
 }

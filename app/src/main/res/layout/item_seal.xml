@@ -28,20 +28,22 @@
                     android:textSize="16sp"
                     android:textColor="@color/grayDark"/>
                 <TextView
+                    android:id="@+id/box_seal_id_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="000012sdsd"
+                    android:text=""
                     android:textSize="16sp"
                     android:textColor="@color/grayDark"/>
             </LinearLayout>
 
             <TextView
+                android:id="@+id/box_seal_status_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:text="已完成"
+                android:text=""
                 android:textSize="14sp"
                 android:textColor="@color/green_light"/>
         </FrameLayout>
@@ -72,10 +74,11 @@
                         android:textSize="16sp"
                         android:textColor="@color/darkLight"/>
                     <TextView
+                        android:id="@+id/box_seal_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="2019-02-28 12:24:56"
+                        android:text=""
                         android:textSize="16sp"
                         android:textColor="@color/grayDark"/>
                 </LinearLayout>
@@ -92,10 +95,11 @@
                         android:textSize="16sp"
                         android:textColor="@color/darkLight"/>
                     <TextView
+                        android:id="@+id/box_seal_person_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="张无忌"
+                        android:text=""
                         android:textSize="16sp"
                         android:textColor="@color/grayDark"/>
                 </LinearLayout>
@@ -112,10 +116,11 @@
                         android:textSize="16sp"
                         android:textColor="@color/darkLight"/>
                     <TextView
+                        android:id="@+id/box_seal_addr_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="安徽省黄山市屯溪区"
+                        android:text=""
                         android:textSize="16sp"
                         android:textColor="@color/grayDark"/>
                 </LinearLayout>

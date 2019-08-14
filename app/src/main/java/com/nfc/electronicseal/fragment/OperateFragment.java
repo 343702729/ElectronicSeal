@@ -2,6 +2,7 @@ package com.nfc.electronicseal.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.nfc.electronicseal.R;
@@ -11,16 +12,32 @@ import com.nfc.electronicseal.activity.inspect.InspectSearchActivity;
 import com.nfc.electronicseal.activity.seal.SealSearchActivity;
 import com.nfc.electronicseal.activity.base.BaseFragment;
 import com.nfc.electronicseal.activity.unseal.UnSealSearchActivity;
+import com.nfc.electronicseal.api.APIRetrofitUtil;
+import com.nfc.electronicseal.api.util.RxHelper;
+import com.nfc.electronicseal.api.util.RxSubscriber;
+import com.nfc.electronicseal.data.UserInfo;
+import com.nfc.electronicseal.node.MenuNode;
+import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.util.UiUtils;
+
+import java.util.List;
 
 import butterknife.OnClick;
 
 @SuppressLint("ValidFragment")
 public class OperateFragment extends BaseFragment{
 
+    private boolean isSF = false, isXJ = false, isCF = false, isYC = false;
+
     @Override
     public int layoutView() {
         return R.layout.fragment_operate;
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        getMenusData();
     }
 
     @OnClick({R.id.item_sf_ll, R.id.item_xj_ll, R.id.item_cf_ll, R.id.item_yc_ll})
@@ -28,18 +45,30 @@ public class OperateFragment extends BaseFragment{
         Intent intent;
         switch (view.getId()){
             case R.id.item_sf_ll:       //施封
+                if(!isSF){
+                    return;
+                }
                 intent = new Intent(UiUtils.getContext(), SealSearchActivity.class);
                 startActivity(intent);
                 break;
             case R.id.item_xj_ll:       //巡检
+                if(!isXJ){
+                    return;
+                }
                 intent = new Intent(UiUtils.getContext(), InspectSearchActivity.class);
                 startActivity(intent);
                 break;
             case R.id.item_cf_ll:       //拆封
+                if(!isCF){
+                    return;
+                }
                 intent = new Intent(UiUtils.getContext(), UnSealSearchActivity.class);
                 startActivity(intent);
                 break;
             case R.id.item_yc_ll:       //异常
+                if(!isYC){
+                    return;
+                }
                 intent = new Intent(UiUtils.getContext(), ExceptionsActivity.class);
                 startActivity(intent);
                 break;
@@ -52,4 +81,32 @@ public class OperateFragment extends BaseFragment{
         startActivity(intent);
     }
 
+    private void getMenusData(){
+        APIRetrofitUtil.getInstance().getMenusData(UserInfo.getInstance().getToken())
+                .compose(new RxHelper<MenusResponse>("").io_main_fragment(this))
+                .subscribe(new RxSubscriber<MenusResponse>() {
+                    @Override
+                    public void _onNext(MenusResponse response) {
+                        if(response!=null&&response.isSuccess()&&response.getData()!=null){
+                            List<MenuNode> nodes = response.getData();
+                            for (MenuNode node:nodes){
+                                if(!TextUtils.isEmpty(node.getAuthUrl())&&node.getAuthUrl().contains("shifeng")){
+                                    isSF = true;
+                                }else if(!TextUtils.isEmpty(node.getAuthUrl())&&node.getAuthUrl().contains("xunjian")){
+                                    isXJ = true;
+                                }else if(!TextUtils.isEmpty(node.getAuthUrl())&&node.getAuthUrl().contains("chaifeng")){
+                                    isCF = true;
+                                }else if(!TextUtils.isEmpty(node.getAuthUrl())&&node.getAuthUrl().contains("yichang")){
+                                    isYC = true;
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
+    }
 }

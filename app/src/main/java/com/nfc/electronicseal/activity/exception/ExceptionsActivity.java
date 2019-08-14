@@ -7,10 +7,14 @@ import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
-import com.nfc.electronicseal.activity.search.SealInfoActivity;
 import com.nfc.electronicseal.adapter.SealItemAdapter;
-import com.nfc.electronicseal.fragment.SearchFragment;
+import com.nfc.electronicseal.api.APIRetrofitUtil;
+import com.nfc.electronicseal.api.util.RxHelper;
+import com.nfc.electronicseal.api.util.RxSubscriber;
+import com.nfc.electronicseal.bean.ExceptionItemsBean;
+import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.node.SealItemNode;
+import com.nfc.electronicseal.response.ExceptionItemsResponse;
 import com.nfc.electronicseal.wiget.pullableview.PullToRefreshLayout;
 import com.nfc.electronicseal.wiget.pullableview.PullableListView;
 
@@ -45,6 +49,9 @@ public class ExceptionsActivity extends BaseActivity {
     private List<SealItemNode> sealItemNodes = new ArrayList<>();
     private int itemIndex = 1;
 
+    private int pageIndex = 0;
+    private int pageSize = 10;
+
     @Override
     public int layoutView() {
         return R.layout.activity_exceptions;
@@ -59,12 +66,15 @@ public class ExceptionsActivity extends BaseActivity {
         pullRL.isPullUp(false);
         pullRefreshListener = new PullRefreshListener();
         pullRL.setOnRefreshListener(pullRefreshListener);
-        sealItemNodes.add(new SealItemNode());
-        sealItemNodes.add(new SealItemNode());
-        sealItemNodes.add(new SealItemNode());
         sealItemAdapter = new SealItemAdapter(this, sealItemNodes);
         listView.setAdapter(sealItemAdapter);
         listView.setOnItemClickListener(sealItemClick);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        getProblemItemsData();
     }
 
     @OnClick(R.id.back_ib)
@@ -129,7 +139,9 @@ public class ExceptionsActivity extends BaseActivity {
     private AdapterView.OnItemClickListener sealItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            SealItemNode node = sealItemNodes.get(position);
             Intent intent = new Intent(ExceptionsActivity.this, ExceptionInfoActivity.class);
+            intent.putExtra("Id", node.getId());
             startActivity(intent);
         }
     };
@@ -140,11 +152,58 @@ public class ExceptionsActivity extends BaseActivity {
         @Override
         public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
             refreshLayout = pullToRefreshLayout;
+            pageIndex = 0;
+            getProblemItemsData();
         }
 
         @Override
         public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
             loadLayout = pullToRefreshLayout;
+            pageIndex++;
+            getProblemItemsData();
         }
+
+        public void closeRefreshLoad(){
+            if(refreshLayout!=null)
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            if(loadLayout!=null)
+                loadLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+        }
+    }
+
+    private void getProblemItemsData(){
+        ExceptionItemsBean bean = new ExceptionItemsBean(pageIndex, pageSize);
+        APIRetrofitUtil.getInstance().getExceptionItemsData(UserInfo.getInstance().getToken(), bean)
+                .compose(new RxHelper<ExceptionItemsResponse>("加载数据中...").io_main(this))
+                .subscribe(new RxSubscriber<ExceptionItemsResponse>() {
+                    @Override
+                    public void _onNext(ExceptionItemsResponse response) {
+                        if(response!=null&&response.isSuccess()&&response.getData()!=null){
+                            if(pullRefreshListener!=null)
+                                pullRefreshListener.closeRefreshLoad();
+                            if(pageIndex==0)
+                                sealItemNodes = response.getData();
+                            else
+                                sealItemNodes.addAll(response.getData());
+                            if(sealItemAdapter!=null)
+                                sealItemAdapter.updateViews(sealItemNodes);
+
+                            if(response.getTotal()>0)
+                                pullRL.isPullDown(true);
+                            else
+                                pullRL.isPullDown(false);
+
+                            if(response.getTotal()<pageSize*(pageIndex+1))
+                                pullRL.isPullUp(false);
+                            else
+                                pullRL.isPullUp(true);
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
     }
 }
