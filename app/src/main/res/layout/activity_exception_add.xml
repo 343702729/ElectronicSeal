@@ -34,6 +34,7 @@
                         android:textSize="16sp"
                         android:textColor="@color/darkLight"/>
                     <EditText
+                        android:id="@+id/seal_id_et"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15dp"
@@ -110,6 +111,7 @@
                         android:textSize="16sp"
                         android:textColor="@color/darkLight"/>
                     <EditText
+                        android:id="@+id/expt_desc_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -295,7 +297,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/login_btn"
+                android:id="@+id/submit_btn"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="20dp"

@@ -30,10 +30,11 @@
                     android:textColor="@color/grayDark"/>
 
                 <TextView
+                    android:id="@+id/box_status_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:text="已完成"
+                    android:text=""
                     android:textSize="14sp"
                     android:textColor="@color/green_light"/>
             </FrameLayout>
@@ -53,10 +54,11 @@
                         android:text="时间" />
 
                     <TextView
+                        android:id="@+id/box_seal_time_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="2019-02-28 12:24:56"
+                        android:text=""
                         android:textColor="@color/grayDark"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -68,10 +70,11 @@
                         android:text="操作员" />
 
                     <TextView
+                        android:id="@+id/box_seal_person_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="张无忌"
+                        android:text=""
                         android:textColor="@color/grayDark"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -89,11 +92,12 @@
                         android:text="申报地点" />
 
                     <TextView
+                        android:id="@+id/box_seal_addr_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:gravity="right"
-                        android:text="安徽省黄山市屯溪区黄山汽运总站递交发动机卡死了"
+                        android:text=""
                         android:textColor="@color/grayDark"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -115,6 +119,7 @@
                         android:text="异常状态" />
 
                     <TextView
+                        android:id="@+id/expt_type_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -134,23 +139,31 @@
                     <TextView
                         style="@style/info_title_tv"
                         android:layout_marginTop="10dp"
-                        android:text="异常状态" />
+                        android:text="异常描述" />
 
                     <TextView
+                        android:id="@+id/expt_desc_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="封条读卡数据读取不出来测试几遍没有反应，发现外观有破损痕迹，芯片被折断；"
+                        android:text=""
                         android:textColor="@color/grayDark"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <!-- 图片 -->
-                <LinearLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp">
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:id="@+id/expt_pics_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:paddingLeft="20dp"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </ScrollView>
 
             </LinearLayout>
 
@@ -163,11 +176,32 @@
             android:background="@color/white"
             android:paddingBottom="10dp"
             android:orientation="vertical">
+            <!-- 异常状态 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/info_title_tv"
+                    android:text="处理人" />
+
+                <TextView
+                    android:id="@+id/expt_person_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="无"
+                    android:textColor="@color/grayDark"
+                    android:textSize="16sp" />
+            </LinearLayout>
             <TextView
                 style="@style/info_title_tv"
                 android:layout_marginTop="10dp"
                 android:text="处理反馈" />
             <TextView
+                android:id="@+id/expt_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

@@ -1,14 +1,21 @@
 package com.nfc.electronicseal.api;
 
 import com.nfc.electronicseal.api.util.RetrofitServiceUtil;
+import com.nfc.electronicseal.bean.ExceptionAddBean;
 import com.nfc.electronicseal.bean.ExceptionInfoBean;
 import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
+import com.nfc.electronicseal.bean.PasswordUpdateBean;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
+import com.nfc.electronicseal.response.ImageResponse;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
+import com.nfc.electronicseal.response.Response;
 
+import java.util.List;
+
+import okhttp3.MultipartBody;
 import rx.Observable;
 
 public class APIRetrofitUtil extends RetrofitServiceUtil {
@@ -63,4 +70,43 @@ public class APIRetrofitUtil extends RetrofitServiceUtil {
         return getAPIService().getExceptionInfoData(authorization, bean);
     }
 
+    /**
+     * 异常申报
+     * @param authorization
+     * @param bean
+     * @return
+     */
+    public Observable<Response> exceptionAddDo(String authorization, ExceptionAddBean bean){
+        return getAPIService().exceptionAddDo(authorization, bean);
+    }
+
+    /**
+     * 修改密码
+     * @param authorization
+     * @param bean
+     * @return
+     */
+    public Observable<Response> passwordUpdateDo(String authorization, PasswordUpdateBean bean){
+        return getAPIService().passwordUpdateDo(authorization, bean);
+    }
+
+    /**
+     * 异常图片上传接口
+     * @param authorization
+     * @param part
+     * @return
+     */
+    public Observable<ImageResponse> uploadImageException(String authorization, MultipartBody.Part part){
+        return getAPIService().uploadImageException(authorization, part);
+    }
+
+    /**
+     * 异常图片上传接口
+     * @param authorization
+     * @param part
+     * @return
+     */
+    public Observable<ImageResponse> uploadImageUserHead(String authorization, MultipartBody.Part part){
+        return getAPIService().uploadImageException(authorization, part);
+    }
 }

@@ -1,15 +1,27 @@
 package com.nfc.electronicseal.activity.exception;
 
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
-import com.nfc.electronicseal.activity.ExceptionActivity;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.api.APIRetrofitUtil;
+import com.nfc.electronicseal.api.util.PicUploadUtil;
+import com.nfc.electronicseal.api.util.RxHelper;
+import com.nfc.electronicseal.api.util.RxSubscriber;
+import com.nfc.electronicseal.base.BaseInfoUpdate;
+import com.nfc.electronicseal.bean.ExceptionAddBean;
+import com.nfc.electronicseal.data.Constants;
+import com.nfc.electronicseal.data.UserInfo;
+import com.nfc.electronicseal.response.Response;
+import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.TLog;
 
 import java.util.List;
@@ -38,6 +50,10 @@ public class ExceptionAddActivity extends BaseActivity {
     ImageView picDelete2IV;
     @BindView(R.id.pic3_delete_iv)
     ImageView picDelete3IV;
+    @BindView(R.id.seal_id_et)
+    EditText sealIdET;
+    @BindView(R.id.expt_desc_et)
+    EditText exptDescET;
 
     private int typeIndex = 0;
 
@@ -83,6 +99,10 @@ public class ExceptionAddActivity extends BaseActivity {
 
     @OnClick({R.id.pic1_add_iv, R.id.pic2_add_iv, R.id.pic3_add_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
     public void picAddOrDeleteClick(View view){
+//        if(typeIndex==0){
+//            AppToast.showShortText(this, "请选择异常类型");
+//            return;
+//        }
         switch (view.getId()){
             case R.id.pic1_add_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(1, picShow1IV));
@@ -109,6 +129,28 @@ public class ExceptionAddActivity extends BaseActivity {
                 picDelete3IV.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    @OnClick(R.id.submit_btn)
+    public void submitBtnClick(View view){
+        String sealId = sealIdET.getText().toString();
+        if(TextUtils.isEmpty(sealId)){
+            AppToast.showShortText(this, "请输入电子封箱号ID");
+            return;
+        }
+
+        if(typeIndex==0){
+            AppToast.showShortText(this, "请选择异常类型");
+            return;
+        }
+
+        String desc = exptDescET.getText().toString();
+        if(TextUtils.isEmpty(desc)){
+            AppToast.showShortText(this, "请输入详情描述");
+            return;
+        }
+
+        exceptionAddDo(sealId, desc, "http://123.206.216.158/group1/M00/00/3A/ChCeCl1UxwaAc8GSAAMuWFXE_14657.jpg,http://123.206.216.158/group1/M00/00/3A/ChCeCl1UxwaAc8GSAAMuWFXE_14657.jpg,http://123.206.216.158/group1/M00/00/3A/ChCeCl1UxwaAc8GSAAMuWFXE_14657.jpg");
     }
 
     private void setTypeSel(int index){
@@ -150,6 +192,8 @@ public class ExceptionAddActivity extends BaseActivity {
             String  selecPic = paths.get(0);
             TLog.log("The pic path is:" + selecPic);
             Glide.with(ExceptionAddActivity.this).load(selecPic).into(imageView);
+            PicUploadUtil picUploadUtil = new PicUploadUtil();
+            picUploadUtil.uploadExceptionDo(UserInfo.getInstance().getToken(), typeIndex,ExceptionAddActivity.this, selecPic, new PicItemSelInfo(index));
             switch (index){
                 case 1:
                     picDelete1IV.setVisibility(View.VISIBLE);
@@ -163,5 +207,42 @@ public class ExceptionAddActivity extends BaseActivity {
             }
 //            showIV.setImageBitmap(PictureUtil.getimage(selecPic));
         }
+    }
+
+    private class PicItemSelInfo implements BaseInfoUpdate{
+        private int index;
+
+        public PicItemSelInfo(int index){
+            this.index = index;
+        }
+
+        @Override
+        public void update(Object object) {
+
+        }
+    }
+
+    private void exceptionAddDo(String sealId, String sealDestr, String sealPic){
+        ExceptionAddBean bean = new ExceptionAddBean(sealId, typeIndex, sealDestr, sealPic);
+        APIRetrofitUtil.getInstance().exceptionAddDo(UserInfo.getInstance().getToken(), bean)
+                .compose(new RxHelper<Response>("数据提交...").io_main(this))
+                .subscribe(new RxSubscriber<Response>() {
+                    @Override
+                    public void _onNext(Response response) {
+                        if(response!=null&&response.isSuccess()){
+                            AppToast.showShortText(ExceptionAddActivity.this, "提交成功");
+                            Intent intent = new Intent();
+                            setResult(Constants.RESULT_CODE, intent);
+                            finish();
+                        }else {
+                            AppToast.showShortText(ExceptionAddActivity.this, response.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
     }
 }

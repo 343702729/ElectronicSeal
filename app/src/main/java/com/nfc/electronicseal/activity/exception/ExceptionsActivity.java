@@ -7,13 +7,14 @@ import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
-import com.nfc.electronicseal.adapter.SealItemAdapter;
+import com.nfc.electronicseal.adapter.ExceptionItemAdapter;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.RxHelper;
 import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
+import com.nfc.electronicseal.data.Constants;
 import com.nfc.electronicseal.data.UserInfo;
-import com.nfc.electronicseal.node.SealItemNode;
+import com.nfc.electronicseal.node.ExceptionItemNode;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
 import com.nfc.electronicseal.wiget.pullableview.PullToRefreshLayout;
 import com.nfc.electronicseal.wiget.pullableview.PullableListView;
@@ -45,8 +46,8 @@ public class ExceptionsActivity extends BaseActivity {
     PullableListView listView;
 
     private PullRefreshListener pullRefreshListener;
-    private SealItemAdapter sealItemAdapter;
-    private List<SealItemNode> sealItemNodes = new ArrayList<>();
+    private ExceptionItemAdapter sealItemAdapter;
+    private List<ExceptionItemNode> sealItemNodes = new ArrayList<>();
     private int itemIndex = 1;
 
     private int pageIndex = 0;
@@ -66,7 +67,7 @@ public class ExceptionsActivity extends BaseActivity {
         pullRL.isPullUp(false);
         pullRefreshListener = new PullRefreshListener();
         pullRL.setOnRefreshListener(pullRefreshListener);
-        sealItemAdapter = new SealItemAdapter(this, sealItemNodes);
+        sealItemAdapter = new ExceptionItemAdapter(this, sealItemNodes);
         listView.setAdapter(sealItemAdapter);
         listView.setOnItemClickListener(sealItemClick);
     }
@@ -85,7 +86,7 @@ public class ExceptionsActivity extends BaseActivity {
     @OnClick(R.id.add_iv)
     public void addBtnClick(View view){
         Intent intent = new Intent(this, ExceptionAddActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, Constants.REQUEST_CODE);
     }
 
     @OnClick({R.id.item_status1_tv, R.id.item_status2_tv, R.id.item_status3_tv})
@@ -139,7 +140,7 @@ public class ExceptionsActivity extends BaseActivity {
     private AdapterView.OnItemClickListener sealItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            SealItemNode node = sealItemNodes.get(position);
+            ExceptionItemNode node = sealItemNodes.get(position);
             Intent intent = new Intent(ExceptionsActivity.this, ExceptionInfoActivity.class);
             intent.putExtra("Id", node.getId());
             startActivity(intent);
@@ -205,5 +206,14 @@ public class ExceptionsActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode== Constants.REQUEST_CODE&&resultCode== Constants.RESULT_CODE){
+            pageIndex = 0;
+            getProblemItemsData();
+        }
     }
 }

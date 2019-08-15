@@ -14,9 +14,11 @@ import com.nfc.electronicseal.activity.my.InstructionActivity;
 import com.nfc.electronicseal.activity.my.ProblemsActivity;
 import com.nfc.electronicseal.activity.my.SettingActivity;
 import com.nfc.electronicseal.activity.my.UserInfoActivity;
+import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.util.AppInfo;
 import com.nfc.electronicseal.wiget.GlideCircleTransform;
 
+import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -26,6 +28,10 @@ public class UserFragment extends BaseFragment {
     ImageView headIV;
     @BindView(R.id.version_tv)
     TextView versionTV;
+    @BindView(R.id.name_tv)
+    TextView nameTV;
+    @BindView(R.id.tel_tv)
+    TextView telTV;
 
     @Override
     public int layoutView() {
@@ -35,11 +41,14 @@ public class UserFragment extends BaseFragment {
     @Override
     public void initview(View view) {
         super.initview(view);
-        Glide.with(this).load(R.mipmap.test_icon_user)
+        Glide.with(this).load(UserInfo.getInstance().getUserNode().getEmployeeImage())
                 //圆形
                 .transform(new GlideCircleTransform(getContext()))
                 .into(headIV);
         versionTV.setText("V" + AppInfo.appVersion);
+
+        nameTV.setText(UserInfo.getInstance().getUserNode().getName());
+        telTV.setText(UserInfo.getInstance().getUserNode().getTelephone());
     }
 
     @Override

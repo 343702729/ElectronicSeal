@@ -32,8 +32,10 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.liuguangqiang.ipicker.crop.Crop;
 import com.liuguangqiang.ipicker.crop.CropImageView;
@@ -79,6 +81,8 @@ public class CropImageActivity extends MonitoredActivity {
     private RotateBitmap rotateBitmap;
     private CropImageView imageView;
     private HighlightView cropView;
+    private TextView sureTV;
+    private TextView cancelTV;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -93,7 +97,7 @@ public class CropImageActivity extends MonitoredActivity {
         }
         startCrop();
 
-        initToolbar();
+//        initToolbar();
     }
 
     @Override
@@ -135,6 +139,20 @@ public class CropImageActivity extends MonitoredActivity {
     private void setupViews() {
         setContentView(R.layout.activity_ipicker_crop);
 
+        cancelTV = (TextView)findViewById(R.id.cancel_tv);
+        cancelTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        sureTV = (TextView) findViewById(R.id.sure_tv);
+        sureTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSaveClicked();
+            }
+        });
         imageView = (CropImageView) findViewById(R.id.ipicker_crop_image);
         imageView.context = this;
         imageView.setRecycler(new ImageViewTouchBase.Recycler() {

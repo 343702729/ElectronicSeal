@@ -1,4 +1,6 @@
 package com.nfc.electronicseal.response;
 
-public class ExceptionInfoResponse extends Response {
+import com.nfc.electronicseal.node.ExceptionInfoNode;
+
+public class ExceptionInfoResponse extends Response<ExceptionInfoNode> {
 }

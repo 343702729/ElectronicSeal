@@ -8,7 +8,7 @@ import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.LoginActivity;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.api.RxBus;
-import com.nfc.electronicseal.data.Constant;
+import com.nfc.electronicseal.data.Constants;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,7 +43,7 @@ public class SettingActivity extends BaseActivity {
     public void logoutClick(View view){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        RxBus.getInstance().post(Constant.EVENT_RXBUS_GOTO_LOGIN,1);
+        RxBus.getInstance().post(Constants.EVENT_RXBUS_GOTO_LOGIN,1);
 //        finish();
     }
 }

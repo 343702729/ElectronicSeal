@@ -7,7 +7,7 @@ import com.nfc.electronicseal.activity.LoginActivity;
 import com.nfc.electronicseal.api.RxBus;
 import com.nfc.electronicseal.api.util.RxHelper;
 import com.nfc.electronicseal.api.util.RxSubscriber;
-import com.nfc.electronicseal.data.Constant;
+import com.nfc.electronicseal.data.Constants;
 import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -47,7 +47,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 	 */
 	public void initData() {
 		// TODO Auto-generated method stub
-		RxBus.getInstance().register(Constant.EVENT_RXBUS_GOTO_LOGIN)
+		RxBus.getInstance().register(Constants.EVENT_RXBUS_GOTO_LOGIN)
 				.compose(new RxHelper<Object>(null).io_main2(this))
 				.subscribe(new RxSubscriber<Object>() {
 					@Override

@@ -1,18 +1,27 @@
 package com.nfc.electronicseal.api;
 
+import com.nfc.electronicseal.bean.ExceptionAddBean;
 import com.nfc.electronicseal.bean.ExceptionInfoBean;
 import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
+import com.nfc.electronicseal.bean.PasswordUpdateBean;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
+import com.nfc.electronicseal.response.ImageResponse;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
+import com.nfc.electronicseal.response.Response;
 
+import java.util.List;
+
+import okhttp3.MultipartBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import rx.Observable;
 
 public interface APIService {
@@ -32,4 +41,19 @@ public interface APIService {
     @POST("nfc-feign/app/nfcAbnormalApi/getAbnormalDetailInfo")
     Observable<ExceptionInfoResponse> getExceptionInfoData(@Header("Authorization") String authorization, @Body ExceptionInfoBean bean);
 
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcAbnormalApi/abnormalDeclare")
+    Observable<Response> exceptionAddDo(@Header("Authorization") String authorization, @Body ExceptionAddBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/employeeApi/updatePwd")
+    Observable<Response> passwordUpdateDo(@Header("Authorization") String authorization, @Body PasswordUpdateBean bean);
+
+    @Multipart
+    @POST("nfc-feign/app/fileUploadApi/uploadAbnormalImage")
+    Observable<ImageResponse> uploadImageException(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
+
+    @Multipart
+    @POST("nfc-feign/app/fileUploadApi/uploadEmployeeImage")
+    Observable<ImageResponse> uploadImageUserHead(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
 }
