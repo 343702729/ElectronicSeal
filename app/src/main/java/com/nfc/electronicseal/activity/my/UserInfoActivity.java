@@ -71,6 +71,10 @@ public class UserInfoActivity extends BaseActivity {
             if(paths==null&&paths.size()<=0)
                 return;
             final String selecPic = paths.get(0);
+            Glide.with(UserInfoActivity.this).load(selecPic)
+                    //圆形
+                    .transform(new GlideCircleTransform(UserInfoActivity.this))
+                    .into(headIV);
             PicUploadUtil picUploadUtil = new PicUploadUtil();
             picUploadUtil.uploadUserHeadDo(UserInfo.getInstance().getToken(), UserInfoActivity.this, selecPic, new BaseInfoUpdate() {
                 @Override
