@@ -99,10 +99,6 @@ public class ExceptionAddActivity extends BaseActivity {
 
     @OnClick({R.id.pic1_add_iv, R.id.pic2_add_iv, R.id.pic3_add_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
     public void picAddOrDeleteClick(View view){
-//        if(typeIndex==0){
-//            AppToast.showShortText(this, "请选择异常类型");
-//            return;
-//        }
         switch (view.getId()){
             case R.id.pic1_add_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(1, picShow1IV));

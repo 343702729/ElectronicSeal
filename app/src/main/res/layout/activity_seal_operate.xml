@@ -41,8 +41,9 @@
                         android:text="姓名" />
 
                     <EditText
+                        android:id="@+id/receiver_name_et"
                         style="@style/info_item_et"
-                        android:hint="可不填" />
+                        android:hint="必填" />
                 </LinearLayout>
 
                 <View
@@ -59,8 +60,10 @@
                         android:text="手机号" />
 
                     <EditText
+                        android:id="@+id/receiver_tel_et"
                         style="@style/info_item_et"
-                        android:hint="可不填" />
+                        android:inputType="phone"
+                        android:hint="必填" />
                 </LinearLayout>
 
                 <View
@@ -77,8 +80,9 @@
                         android:text="收货地址" />
 
                     <EditText
+                        android:id="@+id/receiver_addr_et"
                         style="@style/info_item_et"
-                        android:hint="可不填" />
+                        android:hint="必填" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -98,6 +102,25 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical">
+                <!-- 电子封箱号 -->
+                <LinearLayout style="@style/item_line_ll">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:layout_width="80dp"
+                        android:text="电子封箱号" />
+
+                    <EditText
+                        android:id="@+id/seal_elc_id_et"
+                        style="@style/info_item_et"
+                        android:hint="必填" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/appBg" />
                 <!-- 集装箱号 -->
                 <LinearLayout style="@style/item_line_ll">
 
@@ -107,8 +130,9 @@
                         android:text="集装箱号" />
 
                     <EditText
+                        android:id="@+id/seal_box_no_et"
                         style="@style/info_item_et"
-                        android:hint="可不填" />
+                        android:hint="必填" />
                 </LinearLayout>
 
                 <View
@@ -125,8 +149,9 @@
                         android:text="承运人" />
 
                     <EditText
+                        android:id="@+id/seal_carrier_et"
                         style="@style/info_item_et"
-                        android:hint="可不填" />
+                        android:hint="必填" />
                 </LinearLayout>
 
                 <View
@@ -147,11 +172,14 @@
                         android:layout_height="match_parent">
 
                         <EditText
+                            android:id="@+id/location_tv"
                             style="@style/info_item_et"
-                            android:hint="请输入地理位置"
+                            android:hint="必填"
+                            android:enabled="false"
                             android:layout_marginRight="16dp"/>
 
                         <ImageButton
+                            android:id="@+id/location_ib"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|right"
@@ -175,8 +203,9 @@
                         android:text="施封描述" />
 
                     <EditText
+                        android:id="@+id/seal_desc_et"
                         style="@style/info_item_et"
-                        android:hint="可不填" />
+                        android:hint="必填" />
                 </LinearLayout>
 
                 <View
@@ -192,12 +221,10 @@
                         android:layout_width="80dp"
                         android:text="上传照片" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="horizontal">
-
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/item_pics_sel"/>
                 </LinearLayout>
 
             </LinearLayout>

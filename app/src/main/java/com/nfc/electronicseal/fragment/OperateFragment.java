@@ -83,7 +83,7 @@ public class OperateFragment extends BaseFragment{
 
     private void getMenusData(){
         APIRetrofitUtil.getInstance().getMenusData(UserInfo.getInstance().getToken())
-                .compose(new RxHelper<MenusResponse>("").io_main_fragment(this))
+                .compose(new RxHelper<MenusResponse>("").io_no_main_fragment(this))
                 .subscribe(new RxSubscriber<MenusResponse>() {
                     @Override
                     public void _onNext(MenusResponse response) {

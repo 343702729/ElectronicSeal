@@ -1,16 +1,24 @@
 package com.nfc.electronicseal.api;
 
+import com.nfc.electronicseal.bean.ChipCheckBean;
 import com.nfc.electronicseal.bean.ExceptionAddBean;
 import com.nfc.electronicseal.bean.ExceptionInfoBean;
+import com.nfc.electronicseal.bean.HeadImgUpdateBean;
 import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
 import com.nfc.electronicseal.bean.PasswordUpdateBean;
+import com.nfc.electronicseal.bean.SealBean;
+import com.nfc.electronicseal.bean.SealInfoBean;
+import com.nfc.electronicseal.bean.SearchRecordBean;
+import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
 import com.nfc.electronicseal.response.ImageResponse;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.response.Response;
+import com.nfc.electronicseal.response.SealInfoResponse;
+import com.nfc.electronicseal.response.SealItemResponse;
 
 import java.util.List;
 
@@ -49,9 +57,33 @@ public interface APIService {
     @POST("nfc-feign/app/employeeApi/updatePwd")
     Observable<Response> passwordUpdateDo(@Header("Authorization") String authorization, @Body PasswordUpdateBean bean);
 
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/employeeApi/updateEmployeeInfo")
+    Observable<Response> userHeadImgUpdateDo(@Header("Authorization") String authorization, @Body HeadImgUpdateBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcChipCheckApi/nfcChipCheck")
+    Observable<ChipCheckResponse> chipCheckDo(@Header("Authorization") String authorization, @Body ChipCheckBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcSealApi/sealElectronic")
+    Observable<Response> sealSubmitDo(@Header("Authorization") String authorization, @Body SealBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcEleRecordApi/getEleRecordList")
+    Observable<SealItemResponse> getSearchRecordsData(@Header("Authorization") String authorization, @Body SearchRecordBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcEleRecordApi/getEleRecordDetailInfo")
+    Observable<SealInfoResponse> getSealInfoData(@Header("Authorization") String authorization, @Body SealInfoBean bean);
+
     @Multipart
     @POST("nfc-feign/app/fileUploadApi/uploadAbnormalImage")
     Observable<ImageResponse> uploadImageException(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
+
+    @Multipart
+    @POST("nfc-feign/app/fileUploadApi/uploadSealImage ")
+    Observable<ImageResponse> uploadImageSeal(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
 
     @Multipart
     @POST("nfc-feign/app/fileUploadApi/uploadEmployeeImage")

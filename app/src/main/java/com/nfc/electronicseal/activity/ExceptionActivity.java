@@ -34,7 +34,7 @@ public class ExceptionActivity extends BaseActivity{
     public void initview() {
         super.initview();
 //        initPicSelect();
-        bdLocationUtil = new BDLocationUtil(this);
+        bdLocationUtil = new BDLocationUtil(this, null);
     }
 
     /**

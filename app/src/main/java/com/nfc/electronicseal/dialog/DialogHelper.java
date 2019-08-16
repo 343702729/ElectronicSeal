@@ -93,16 +93,19 @@ public class DialogHelper {
 
         if (null == progressDlg) {
             if (ctx == null) return;
-            progressDlg = new ProgressDialog(ctx);
-            //设置进度条样式
-            progressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            //提示的消息
-            progressDlg.setMessage(strMessage);
-            progressDlg.setIndeterminate(false);
-            progressDlg.setCancelable(true);
-            progressDlg.setCanceledOnTouchOutside(false);
-            progressDlg.show();
+        }else {
+            stopProgressDlg();
         }
+        progressDlg = new ProgressDialog(ctx);
+        //设置进度条样式
+        progressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //提示的消息
+        progressDlg.setMessage(strMessage);
+        progressDlg.setIndeterminate(false);
+        progressDlg.setCancelable(true);
+        progressDlg.setCanceledOnTouchOutside(false);
+        progressDlg.show();
+
     }
 
     public static void showProgressDlg(Context ctx) {

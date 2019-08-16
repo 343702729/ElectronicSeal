@@ -3,23 +3,22 @@ package com.nfc.electronicseal.node;
 public class SealItemNode {
     private int id;
     private String chipId;
-    private Long createTime;
+    private Long sealDate;
     private String sealLoca;
     private int sealOper;
     private String sealPic;
-    private int sealStatus;
-    private String sealDestr;
-    private int dealStatus;
-    private Long updateTime;
-    private String dealResult;
-    private int dealPerson;
-    private String instId;
-    private String containerNo;
-    private String sealId;
-    private int exceptionType;
     private String lngLat;
+    private int sealStatus;
+    private String userName;
+    private String userPhone;
+    private String userAddress;
+    private String descs;
+    private String carrier;
+    private String sealId;
+    private String taxNumber;
+    private String containerNo;
+    private String instId;
     private String sealOperName;
-    private String dealPersonName;
     private String code;
 
     public int getId() {
@@ -38,12 +37,12 @@ public class SealItemNode {
         this.chipId = chipId;
     }
 
-    public Long getCreateTime() {
-        return createTime;
+    public Long getSealDate() {
+        return sealDate;
     }
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
+    public void setSealDate(Long sealDate) {
+        this.sealDate = sealDate;
     }
 
     public String getSealLoca() {
@@ -70,6 +69,14 @@ public class SealItemNode {
         this.sealPic = sealPic;
     }
 
+    public String getLngLat() {
+        return lngLat;
+    }
+
+    public void setLngLat(String lngLat) {
+        this.lngLat = lngLat;
+    }
+
     public int getSealStatus() {
         return sealStatus;
     }
@@ -78,60 +85,44 @@ public class SealItemNode {
         this.sealStatus = sealStatus;
     }
 
-    public String getSealDestr() {
-        return sealDestr;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setSealDestr(String sealDestr) {
-        this.sealDestr = sealDestr;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public int getDealStatus() {
-        return dealStatus;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setDealStatus(int dealStatus) {
-        this.dealStatus = dealStatus;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
-    public Long getUpdateTime() {
-        return updateTime;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
-    public String getDealResult() {
-        return dealResult;
+    public String getDescs() {
+        return descs;
     }
 
-    public void setDealResult(String dealResult) {
-        this.dealResult = dealResult;
+    public void setDescs(String descs) {
+        this.descs = descs;
     }
 
-    public int getDealPerson() {
-        return dealPerson;
+    public String getCarrier() {
+        return carrier;
     }
 
-    public void setDealPerson(int dealPerson) {
-        this.dealPerson = dealPerson;
-    }
-
-    public String getInstId() {
-        return instId;
-    }
-
-    public void setInstId(String instId) {
-        this.instId = instId;
-    }
-
-    public String getContainerNo() {
-        return containerNo;
-    }
-
-    public void setContainerNo(String containerNo) {
-        this.containerNo = containerNo;
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
     }
 
     public String getSealId() {
@@ -142,20 +133,28 @@ public class SealItemNode {
         this.sealId = sealId;
     }
 
-    public int getExceptionType() {
-        return exceptionType;
+    public String getTaxNumber() {
+        return taxNumber;
     }
 
-    public void setExceptionType(int exceptionType) {
-        this.exceptionType = exceptionType;
+    public void setTaxNumber(String taxNumber) {
+        this.taxNumber = taxNumber;
     }
 
-    public String getLngLat() {
-        return lngLat;
+    public String getContainerNo() {
+        return containerNo;
     }
 
-    public void setLngLat(String lngLat) {
-        this.lngLat = lngLat;
+    public void setContainerNo(String containerNo) {
+        this.containerNo = containerNo;
+    }
+
+    public String getInstId() {
+        return instId;
+    }
+
+    public void setInstId(String instId) {
+        this.instId = instId;
     }
 
     public String getSealOperName() {
@@ -164,14 +163,6 @@ public class SealItemNode {
 
     public void setSealOperName(String sealOperName) {
         this.sealOperName = sealOperName;
-    }
-
-    public String getDealPersonName() {
-        return dealPersonName;
-    }
-
-    public void setDealPersonName(String dealPersonName) {
-        this.dealPersonName = dealPersonName;
     }
 
     public String getCode() {

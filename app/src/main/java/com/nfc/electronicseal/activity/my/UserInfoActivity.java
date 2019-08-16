@@ -1,6 +1,7 @@
 package com.nfc.electronicseal.activity.my;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,12 +9,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.liuguangqiang.ipicker.IPicker;
+import com.liuguangqiang.ipicker.crop.CropUtil;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.activity.base.BaseApplication;
 import com.nfc.electronicseal.activity.exception.ExceptionAddActivity;
+import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.PicUploadUtil;
+import com.nfc.electronicseal.api.util.RxHelper;
+import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.base.BaseInfoUpdate;
+import com.nfc.electronicseal.bean.HeadImgUpdateBean;
 import com.nfc.electronicseal.data.UserInfo;
+import com.nfc.electronicseal.response.Response;
+import com.nfc.electronicseal.util.AppToast;
+import com.nfc.electronicseal.util.TLog;
 import com.nfc.electronicseal.wiget.GlideCircleTransform;
 
 import java.io.File;
@@ -71,17 +81,51 @@ public class UserInfoActivity extends BaseActivity {
             if(paths==null&&paths.size()<=0)
                 return;
             final String selecPic = paths.get(0);
-            Glide.with(UserInfoActivity.this).load(selecPic)
-                    //圆形
-                    .transform(new GlideCircleTransform(UserInfoActivity.this))
-                    .into(headIV);
+
+            Uri uri = Uri.parse(selecPic);
+            File file = CropUtil.getFromMediaUri(UserInfoActivity.this, getContentResolver(), uri);
+            if(file==null||!file.exists()) {
+                TLog.log("The file is null");
+                return;
+            }
+
             PicUploadUtil picUploadUtil = new PicUploadUtil();
-            picUploadUtil.uploadUserHeadDo(UserInfo.getInstance().getToken(), UserInfoActivity.this, selecPic, new BaseInfoUpdate() {
+            picUploadUtil.uploadUserHeadDo(UserInfo.getInstance().getToken(), UserInfoActivity.this, file, new BaseInfoUpdate() {
                 @Override
                 public void update(Object object) {
-                    Glide.with(UserInfoActivity.this).load(selecPic).into(headIV);
+                    if(object==null)
+                        return;
+                    updateHeadImgInfo((String)object, selecPic);
+
                 }
             });
         }
     }
+
+    private void updateHeadImgInfo(final String headImg, final String localPic){
+        HeadImgUpdateBean bean = new HeadImgUpdateBean(headImg);
+        APIRetrofitUtil.getInstance().userHeadImgUpdateDo(UserInfo.getInstance().getToken(), bean)
+                .compose(new RxHelper<Response>("数据提交...").io_main(UserInfoActivity.this))
+                .subscribe(new RxSubscriber<Response>() {
+                    @Override
+                    public void _onNext(Response response) {
+                        if(response!=null&&response.isSuccess()){
+                            UserInfo.getInstance().getUserNode().setEmployeeImage(headImg);
+                            Glide.with(UserInfoActivity.this).load(localPic)
+                                    //圆形
+                                    .transform(new GlideCircleTransform(UserInfoActivity.this))
+                                    .into(headIV);
+                            UserInfo.getInstance().getHeadImgUpdate().update(headImg);
+                        }else {
+                            AppToast.showShortText(UserInfoActivity.this, response.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
+    }
+
 }

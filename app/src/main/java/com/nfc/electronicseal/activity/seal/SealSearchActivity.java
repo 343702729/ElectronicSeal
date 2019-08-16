@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.util.AppToast;
-import com.nfc.electronicseal.util.BDLocationUtil;
 import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
 
@@ -27,8 +26,6 @@ public class SealSearchActivity extends BaseActivity {
     TextView instructionsTV;
     @BindView(R.id.animation_iv)
     ImageView animationIV;
-
-    private BDLocationUtil bdLocationUtil;
 
     @Override
     public int layoutView() {
@@ -49,7 +46,6 @@ public class SealSearchActivity extends BaseActivity {
         new NFCUtil(this);
         if(!NFCUtil.isSupportNFC)
             AppToast.showShortText(this, "该手机不支持NFC");
-        bdLocationUtil = new BDLocationUtil(this);
     }
 
     @OnClick(R.id.back_ib)
@@ -89,7 +85,7 @@ public class SealSearchActivity extends BaseActivity {
             Intent intent1 = new Intent(this, SealOperateActivity.class);
             intent1.putExtra("NFCID", nfcId);
             startActivity(intent1);
-
+            finish();
         }catch (Exception e){
             e.printStackTrace();
         }

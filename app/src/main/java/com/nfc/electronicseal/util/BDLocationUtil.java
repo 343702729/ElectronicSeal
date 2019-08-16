@@ -7,13 +7,16 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
+import com.nfc.electronicseal.base.BaseInfoUpdate;
 
 public class BDLocationUtil {
     private Context context;
     private LocationClient mLocationClient;
+    private BaseInfoUpdate infoUpdate;
 
-    public BDLocationUtil(Context context){
+    public BDLocationUtil(Context context, BaseInfoUpdate infoUpdate){
         this.context = context;
+        this.infoUpdate = infoUpdate;
         onCreate();
     }
 
@@ -216,6 +219,9 @@ public class BDLocationUtil {
                 } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
                     //无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机;
                 }
+
+                if(infoUpdate!=null)
+                    infoUpdate.update(location);
             }
         }
 

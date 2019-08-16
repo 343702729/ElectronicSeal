@@ -67,16 +67,16 @@ public class SealItemAdapter extends BaseAdapter {
         }
         viewHolder.sealIdTV.setText(node.getSealId());
 
-        if(node.getDealStatus()==1){
-            viewHolder.sealStatusTV.setText("已处理");
-            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.green_light));
-        }else {
-            viewHolder.sealStatusTV.setText("待处理");
-            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.redDark));
-        }
-
-        if(node.getUpdateTime()!=null)
-            viewHolder.sealTimeTV.setText(DateUtil.timeStamp2Date(node.getUpdateTime()));
+//        if(node.getDealStatus()==1){
+//            viewHolder.sealStatusTV.setText("已处理");
+//            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.green_light));
+//        }else {
+//            viewHolder.sealStatusTV.setText("待处理");
+//            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.redDark));
+//        }
+//
+        if(node.getSealDate()!=null)
+            viewHolder.sealTimeTV.setText(DateUtil.timeStamp2Date(node.getSealDate()));
         else
             viewHolder.sealTimeTV.setText("");
 

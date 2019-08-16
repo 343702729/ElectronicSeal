@@ -27,6 +27,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="电子箱封"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     android:textColor="@color/grayDark"/>
 
                 <TextView
@@ -53,10 +54,11 @@
                         android:text="芯片号UID" />
 
                     <TextView
+                        android:id="@+id/chip_id_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="UID998700"
+                        android:text=""
                         android:textColor="@color/grayDark"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -68,10 +70,11 @@
                         android:text="电子封箱ID" />
 
                     <TextView
+                        android:id="@+id/seal_id_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:text="WAD080922"
+                        android:text=""
                         android:textColor="@color/grayDark"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -89,11 +92,76 @@
                         android:text="箱封制造企业号" />
 
                     <TextView
+                        android:id="@+id/tax_num_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:gravity="right"
-                        android:text="安徽省亿利智能科技有限公司"
+                        android:text=""
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:paddingBottom="10dp"
+                android:orientation="vertical">
+                <!-- 施封时间 -->
+                <LinearLayout style="@style/item_line_ll_s">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:text="施封时间" />
+
+                    <TextView
+                        android:id="@+id/seal_time_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text=""
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!-- 施封员 -->
+                <LinearLayout style="@style/item_line_ll_s">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:text="施封员" />
+
+                    <TextView
+                        android:id="@+id/seal_person_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text=""
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!-- 施封地点 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        style="@style/info_title_tv"
+                        android:text="施封地点" />
+
+                    <TextView
+                        android:id="@+id/seal_addr_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="right"
+                        android:text=""
                         android:textColor="@color/grayDark"
                         android:textSize="16sp" />
                 </LinearLayout>

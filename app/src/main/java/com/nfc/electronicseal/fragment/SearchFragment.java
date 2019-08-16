@@ -7,12 +7,17 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.liuguangqiang.ipicker.adapters.BaseAdapter;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseFragment;
 import com.nfc.electronicseal.activity.search.SealInfoActivity;
 import com.nfc.electronicseal.adapter.SealItemAdapter;
+import com.nfc.electronicseal.api.APIRetrofitUtil;
+import com.nfc.electronicseal.api.util.RxHelper;
+import com.nfc.electronicseal.api.util.RxSubscriber;
+import com.nfc.electronicseal.bean.SearchRecordBean;
+import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.node.SealItemNode;
+import com.nfc.electronicseal.response.SealItemResponse;
 import com.nfc.electronicseal.util.TLog;
 import com.nfc.electronicseal.wiget.pullableview.PullToRefreshLayout;
 import com.nfc.electronicseal.wiget.pullableview.PullableListView;
@@ -51,6 +56,9 @@ public class SearchFragment extends BaseFragment {
     private PullRefreshListener pullRefreshListener;
     private SealItemAdapter sealItemAdapter;
     private List<SealItemNode> sealItemNodes = new ArrayList<>();
+    private int pageIndex = 0;
+    private int pageSize = 10;
+
     private int itemIndex = 1;
 
     @Override
@@ -65,12 +73,15 @@ public class SearchFragment extends BaseFragment {
         pullRL.isPullUp(false);
         pullRefreshListener = new PullRefreshListener();
         pullRL.setOnRefreshListener(pullRefreshListener);
-        sealItemNodes.add(new SealItemNode());
-        sealItemNodes.add(new SealItemNode());
-        sealItemNodes.add(new SealItemNode());
         sealItemAdapter = new SealItemAdapter(getContext(), sealItemNodes);
         listView.setAdapter(sealItemAdapter);
         listView.setOnItemClickListener(sealItemClick);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        getRecordsData();
     }
 
     @Override
@@ -146,7 +157,9 @@ public class SearchFragment extends BaseFragment {
     private AdapterView.OnItemClickListener sealItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            SealItemNode node = sealItemNodes.get(position);
             Intent intent = new Intent(getContext(), SealInfoActivity.class);
+            intent.putExtra("Id", node.getId());
             startActivity(intent);
         }
     };
@@ -157,11 +170,58 @@ public class SearchFragment extends BaseFragment {
         @Override
         public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
             refreshLayout = pullToRefreshLayout;
+            pageIndex = 0;
+            getRecordsData();
         }
 
         @Override
         public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
             loadLayout = pullToRefreshLayout;
+            pageIndex++;
+            getRecordsData();
         }
+
+        public void closeRefreshLoad(){
+            if(refreshLayout!=null)
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            if(loadLayout!=null)
+                loadLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+        }
+    }
+
+    private void getRecordsData(){
+        SearchRecordBean bean = new SearchRecordBean(pageIndex, pageSize, 3);
+        APIRetrofitUtil.getInstance().getSearchRecordsData(UserInfo.getInstance().getToken(), bean)
+                .compose(new RxHelper<SealItemResponse>("加载数据中...").io_main_fragment(this))
+                .subscribe(new RxSubscriber<SealItemResponse>() {
+                    @Override
+                    public void _onNext(SealItemResponse response) {
+                        if(response!=null&&response.isSuccess()&&response.getData()!=null){
+                            if(pullRefreshListener!=null)
+                                pullRefreshListener.closeRefreshLoad();
+                            if(pageIndex==0)
+                                sealItemNodes = response.getData();
+                            else
+                                sealItemNodes.addAll(response.getData());
+                            if(sealItemAdapter!=null)
+                                sealItemAdapter.updateViews(sealItemNodes);
+
+                            if(response.getTotal()>0)
+                                pullRL.isPullDown(true);
+                            else
+                                pullRL.isPullDown(false);
+
+                            if(response.getTotal()<pageSize*(pageIndex+1))
+                                pullRL.isPullUp(false);
+                            else
+                                pullRL.isPullUp(true);
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
     }
 }

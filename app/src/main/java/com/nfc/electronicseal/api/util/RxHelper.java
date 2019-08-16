@@ -69,7 +69,7 @@ public class RxHelper<T> {
         };
     }
 
-    public Observable.Transformer<T, T> io_main_fragment(final BaseFragment context) {
+    public Observable.Transformer<T, T> io_no_main_fragment(final BaseFragment context) {
         return new Observable.Transformer<T, T>() {
             @Override
             public Observable<T> call(Observable<T> tObservable) {
@@ -79,6 +79,26 @@ public class RxHelper<T> {
                             @Override
                             public void call() {
 
+                            }
+                        })
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(RxLifecycle.bindUntilEvent(context.lifecycle(), FragmentEvent.DESTROY));
+                return observable;
+            }
+        };
+    }
+
+    public Observable.Transformer<T, T> io_main_fragment(final BaseFragment context) {
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> tObservable) {
+                Observable<T> observable = (Observable<T>) tObservable
+                        .subscribeOn(Schedulers.io())
+                        .doOnSubscribe(new Action0() {
+                            @Override
+                            public void call() {
+                                DialogHelper.showProgressDlg(context.getContext(), mMessage);
                             }
                         })
                         .subscribeOn(AndroidSchedulers.mainThread())

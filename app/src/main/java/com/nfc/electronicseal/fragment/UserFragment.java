@@ -1,6 +1,7 @@
 package com.nfc.electronicseal.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.nfc.electronicseal.activity.my.InstructionActivity;
 import com.nfc.electronicseal.activity.my.ProblemsActivity;
 import com.nfc.electronicseal.activity.my.SettingActivity;
 import com.nfc.electronicseal.activity.my.UserInfoActivity;
+import com.nfc.electronicseal.base.BaseInfoUpdate;
 import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.util.AppInfo;
 import com.nfc.electronicseal.wiget.GlideCircleTransform;
@@ -33,6 +35,8 @@ public class UserFragment extends BaseFragment {
     @BindView(R.id.tel_tv)
     TextView telTV;
 
+    private Context context;
+
     @Override
     public int layoutView() {
         return R.layout.fragment_user;
@@ -41,6 +45,7 @@ public class UserFragment extends BaseFragment {
     @Override
     public void initview(View view) {
         super.initview(view);
+        context = getActivity();
         Glide.with(this).load(UserInfo.getInstance().getUserNode().getEmployeeImage())
                 //圆形
                 .transform(new GlideCircleTransform(getContext()))
@@ -49,6 +54,8 @@ public class UserFragment extends BaseFragment {
 
         nameTV.setText(UserInfo.getInstance().getUserNode().getName());
         telTV.setText(UserInfo.getInstance().getUserNode().getTelephone());
+
+        UserInfo.getInstance().setHeadImgUpdate(new UserHeadImgUpdate());
     }
 
     @Override
@@ -76,6 +83,16 @@ public class UserFragment extends BaseFragment {
                 intent = new Intent(getContext(), ProblemsActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+
+    private class UserHeadImgUpdate implements BaseInfoUpdate{
+        @Override
+        public void update(Object object) {
+            Glide.with(context).load(UserInfo.getInstance().getUserNode().getEmployeeImage())
+                    //圆形
+                    .transform(new GlideCircleTransform(getContext()))
+                    .into(headIV);
         }
     }
 
