@@ -4,12 +4,15 @@ import com.nfc.electronicseal.bean.ChipCheckBean;
 import com.nfc.electronicseal.bean.ExceptionAddBean;
 import com.nfc.electronicseal.bean.ExceptionInfoBean;
 import com.nfc.electronicseal.bean.HeadImgUpdateBean;
+import com.nfc.electronicseal.bean.InspectBean;
 import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
 import com.nfc.electronicseal.bean.PasswordUpdateBean;
 import com.nfc.electronicseal.bean.SealBean;
+import com.nfc.electronicseal.bean.SealDetailBean;
 import com.nfc.electronicseal.bean.SealInfoBean;
 import com.nfc.electronicseal.bean.SearchRecordBean;
+import com.nfc.electronicseal.bean.UnSealBean;
 import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
@@ -17,10 +20,9 @@ import com.nfc.electronicseal.response.ImageResponse;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.response.Response;
+import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
 import com.nfc.electronicseal.response.SealItemResponse;
-
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.http.Body;
@@ -77,13 +79,35 @@ public interface APIService {
     @POST("nfc-feign/app/nfcEleRecordApi/getEleRecordDetailInfo")
     Observable<SealInfoResponse> getSealInfoData(@Header("Authorization") String authorization, @Body SealInfoBean bean);
 
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcSealApi/getSealDetailInfo")
+    Observable<SealDetailResponse> getSealDetailData(@Header("Authorization") String authorization, @Body SealDetailBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcInspectApi/inspectElectronic")
+    Observable<Response> inspectSubmitDo(@Header("Authorization") String authorization, @Body InspectBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/nfcUnSealApi/unSealElectronic")
+    Observable<Response> unsealSubmitDo(@Header("Authorization") String authorization, @Body UnSealBean bean);
+
+    /*************************************************分割线*****************************************************/
+
     @Multipart
     @POST("nfc-feign/app/fileUploadApi/uploadAbnormalImage")
     Observable<ImageResponse> uploadImageException(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
 
     @Multipart
-    @POST("nfc-feign/app/fileUploadApi/uploadSealImage ")
+    @POST("nfc-feign/app/fileUploadApi/uploadSealImage")
     Observable<ImageResponse> uploadImageSeal(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
+
+    @Multipart
+    @POST("nfc-feign/app/fileUploadApi/uploadInspectImage")
+    Observable<ImageResponse> uploadImageInspect(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
+
+    @Multipart
+    @POST("nfc-feign/app/fileUploadApi/uploadUnSealImage")
+    Observable<ImageResponse> uploadImageUnseal(@Header("Authorization") String authorization, @Part MultipartBody.Part part);
 
     @Multipart
     @POST("nfc-feign/app/fileUploadApi/uploadEmployeeImage")

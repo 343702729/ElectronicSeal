@@ -70,6 +70,10 @@ public class SealOperateActivity extends BaseActivity {
     EditText sealCarrierET;
     @BindView(R.id.seal_desc_et)
     EditText sealDescET;
+    @BindView(R.id.chip_id_tv)
+    TextView chipIdTV;
+    @BindView(R.id.item_status_tv)
+    TextView itemStatusTV;
 
     private BDLocationUtil bdLocationUtil;
 
@@ -89,10 +93,14 @@ public class SealOperateActivity extends BaseActivity {
     public void initview() {
         super.initview();
         titleTV.setText("施封管理");
+        new NFCUtil(this);
         initDatas();
         boxIdLL.setVisibility(View.GONE);
         boxMakerLL.setVisibility(View.GONE);
         bdLocationUtil = new BDLocationUtil(this, new LocationInfoCall());
+        chipIdTV.setText(nfcId);
+        itemStatusTV.setText("未使用");
+        itemStatusTV.setTextColor(getResources().getColor(R.color.yellow_light));
     }
 
     private void initDatas(){
@@ -249,27 +257,28 @@ public class SealOperateActivity extends BaseActivity {
         }
 
         //承运人
-        String carrier = sealCarrierET.getText().toString();
-        if(TextUtils.isEmpty(carrier)){
-            AppToast.showShortText(this, "承运人不能为空");
-            return;
-        }
+//        String carrier = sealCarrierET.getText().toString();
+//        if(TextUtils.isEmpty(carrier)){
+//            AppToast.showShortText(this, "承运人不能为空");
+//            return;
+//        }
 
         //地理位置
         if(latitude==0|| longitude == 0){
             AppToast.showShortText(this, "地理位置不能为空");
-        }
-
-        //施封描述
-        String desc = sealDescET.getText().toString();
-        if(TextUtils.isEmpty(desc)){
-            AppToast.showShortText(this, "施封描述不能为空");
             return;
         }
 
+        //施封描述
+//        String desc = sealDescET.getText().toString();
+//        if(TextUtils.isEmpty(desc)){
+//            AppToast.showShortText(this, "施封描述不能为空");
+//            return;
+//        }
+
         //pic1Url, pic2Url, pic3Url
         if(TextUtils.isEmpty(pic1Url)||TextUtils.isEmpty(pic2Url)||TextUtils.isEmpty(pic3Url)){
-            AppToast.showShortText(this, "请上传照片");
+            AppToast.showShortText(this, "请上传施封照片");
             return;
         }
 
@@ -283,7 +292,7 @@ public class SealOperateActivity extends BaseActivity {
                         if(response!=null&&response.isSuccess()&&response.getData()!=null){
                             String taxNumber = response.getData().getTaxNumber();
                             isWrite = true;
-                            writeContent = "SEALID:" + elcId + "TAXNUMBER:" + taxNumber + "CONTAINERNO:" + boxNo + "SEALSTATUS:" + 1;
+                            writeContent = "SEALID:" + elcId + "," + "TAXNUMBER:" + taxNumber + "," + "CONTAINERNO:" + boxNo + "," + "SEALSTATUS:" + 1;
 
                         }else {
                             AppToast.showShortText(SealOperateActivity.this, response.getMessage());
@@ -298,7 +307,8 @@ public class SealOperateActivity extends BaseActivity {
                     @Override
                     public void onCompleted() {
                         super.onCompleted();
-                        DialogHelper.showProgressDlg(SealOperateActivity.this, "请靠近芯片写入...");
+                        if(isWrite)
+                            DialogHelper.showProgressDlg(SealOperateActivity.this, "请靠近芯片写入...");
                     }
                 });
 
@@ -309,7 +319,12 @@ public class SealOperateActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         try{
-
+            String nfcSId = NFCUtil.readNFCId(intent);
+            if(!nfcId.equals(nfcSId)){
+                DialogHelper.stopProgressDlg();
+                AppToast.showShortText(this, "芯片不对");
+                return;
+            }
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("Come into seal nfc:" + str);
             if(isWrite){
@@ -321,6 +336,7 @@ public class SealOperateActivity extends BaseActivity {
             }
 
         }catch (Exception e){
+            e.printStackTrace();
 
         }
     }

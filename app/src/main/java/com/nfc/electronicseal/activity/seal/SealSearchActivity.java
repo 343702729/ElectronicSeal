@@ -2,6 +2,7 @@ package com.nfc.electronicseal.activity.seal;
 
 import android.content.Intent;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.activity.unseal.UnSealSearchActivity;
 import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
@@ -77,7 +79,13 @@ public class SealSearchActivity extends BaseActivity {
         try {
             String nfcId = NFCUtil.readNFCId(intent);
             String str = NFCUtil.readNFCFromTag(intent);
+            if(!TextUtils.isEmpty(str))
+                str = str.trim();
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
+            if(!TextUtils.isEmpty(str)&&!"zh".equals(str)){
+                AppToast.showShortText(SealSearchActivity.this, "该芯片不符合当前操作");
+                return;
+            }
 
 //            String writeStr = "sealId:241520190519JD;taxNumber:91341003MA2TJA5342;containerNo:1234562789";
 //            NFCUtil.writeNFCToTag(writeStr, intent);

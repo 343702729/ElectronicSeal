@@ -31,10 +31,11 @@
                     android:textColor="@color/grayDark"/>
 
                 <TextView
+                    android:id="@+id/status_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:text="已完成"
+                    android:text=""
                     android:textSize="14sp"
                     android:textColor="@color/green_light"/>
             </FrameLayout>
@@ -114,6 +115,7 @@
                 <LinearLayout style="@style/item_line_ll_s">
 
                     <TextView
+                        android:id="@+id/title_seal_time_tv"
                         style="@style/info_title_tv"
                         android:text="施封时间" />
 
@@ -130,11 +132,29 @@
                 <LinearLayout style="@style/item_line_ll_s">
 
                     <TextView
+                        android:id="@+id/title_seal_person_tv"
                         style="@style/info_title_tv"
                         android:text="施封员" />
 
                     <TextView
                         android:id="@+id/seal_person_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text=""
+                        android:textColor="@color/grayDark"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!-- 巡检描述 -->
+                <LinearLayout style="@style/item_line_ll_s">
+
+                    <TextView
+                        android:id="@+id/title_seal_desc_tv"
+                        style="@style/info_title_tv"
+                        android:text="巡检描述" />
+
+                    <TextView
+                        android:id="@+id/seal_desc_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -152,6 +172,7 @@
                     android:paddingRight="20dp">
 
                     <TextView
+                        android:id="@+id/title_seal_addr_tv"
                         style="@style/info_title_tv"
                         android:text="施封地点" />
 
@@ -166,6 +187,23 @@
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <!-- 图片 -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/seal_pics_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/white"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingBottom="15dp"
+                    android:orientation="horizontal">
+                </LinearLayout>
+            </HorizontalScrollView>
 
         </LinearLayout>
     </ScrollView>

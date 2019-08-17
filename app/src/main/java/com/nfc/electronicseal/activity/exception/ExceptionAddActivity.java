@@ -8,10 +8,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
 import com.bumptech.glide.Glide;
 import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.activity.seal.SealOperateActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.PicUploadUtil;
 import com.nfc.electronicseal.api.util.RxHelper;
@@ -22,8 +24,10 @@ import com.nfc.electronicseal.data.Constants;
 import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.util.AppToast;
+import com.nfc.electronicseal.util.BDLocationUtil;
 import com.nfc.electronicseal.util.TLog;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,8 +58,15 @@ public class ExceptionAddActivity extends BaseActivity {
     EditText sealIdET;
     @BindView(R.id.expt_desc_et)
     EditText exptDescET;
+    @BindView(R.id.location_tv)
+    TextView locationTV;
+
+    private BDLocationUtil bdLocationUtil;
 
     private int typeIndex = 0;
+    private String pic1Url, pic2Url, pic3Url;
+    private String sealLoca;
+    private double latitude = 0, longitude = 0;
 
     @Override
     public int layoutView() {
@@ -66,6 +77,7 @@ public class ExceptionAddActivity extends BaseActivity {
     public void initview() {
         super.initview();
         titleTV.setText("新增异常申报");
+        bdLocationUtil = new BDLocationUtil(this, new LocationInfoCall());
     }
 
     @OnClick(R.id.back_ib)
@@ -95,6 +107,11 @@ public class ExceptionAddActivity extends BaseActivity {
                 setTypeSel(3);
                 break;
         }
+    }
+
+    @OnClick(R.id.location_ib)
+    public void locationBtnClick(View view){
+        bdLocationUtil.startLocation();
     }
 
     @OnClick({R.id.pic1_add_iv, R.id.pic2_add_iv, R.id.pic3_add_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
@@ -140,13 +157,20 @@ public class ExceptionAddActivity extends BaseActivity {
             return;
         }
 
+        //地理位置
+        if(latitude==0|| longitude == 0){
+            AppToast.showShortText(this, "地理位置不能为空");
+            return;
+        }
+
         String desc = exptDescET.getText().toString();
         if(TextUtils.isEmpty(desc)){
             AppToast.showShortText(this, "请输入详情描述");
             return;
         }
-
-        exceptionAddDo(sealId, desc, "http://123.206.216.158/group1/M00/00/3A/ChCeCl1UxwaAc8GSAAMuWFXE_14657.jpg,http://123.206.216.158/group1/M00/00/3A/ChCeCl1UxwaAc8GSAAMuWFXE_14657.jpg,http://123.206.216.158/group1/M00/00/3A/ChCeCl1UxwaAc8GSAAMuWFXE_14657.jpg");
+        String lnglat = longitude + "," + latitude;
+        String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
+        exceptionAddDo(sealId, desc, sealPic, lnglat, sealLoca);
     }
 
     private void setTypeSel(int index){
@@ -172,6 +196,24 @@ public class ExceptionAddActivity extends BaseActivity {
         }
     }
 
+    private class LocationInfoCall implements BaseInfoUpdate{
+        @Override
+        public void update(Object object) {
+            if(object==null)
+                return;
+            BDLocation location = (BDLocation)object;
+            //纬度
+            latitude = location.getLatitude();
+            //经度
+            longitude = location.getLongitude();
+            sealLoca = location.getAddrStr();
+            TLog.log("The seal loca:" + sealLoca);
+            DecimalFormat df = new DecimalFormat("#.000000");
+            locationTV.setText(df.format(latitude) + "," + df.format(longitude));
+            bdLocationUtil.stopLocation();
+        }
+    }
+
     private class PicItemSelectListener implements IPicker.OnSelectedListener {
         private int index;
         private ImageView imageView;
@@ -189,37 +231,32 @@ public class ExceptionAddActivity extends BaseActivity {
             TLog.log("The pic path is:" + selecPic);
             Glide.with(ExceptionAddActivity.this).load(selecPic).into(imageView);
             PicUploadUtil picUploadUtil = new PicUploadUtil();
-            picUploadUtil.uploadExceptionDo(UserInfo.getInstance().getToken(), typeIndex,ExceptionAddActivity.this, selecPic, new PicItemSelInfo(index));
-            switch (index){
-                case 1:
-                    picDelete1IV.setVisibility(View.VISIBLE);
-                    break;
-                case 2:
-                    picDelete2IV.setVisibility(View.VISIBLE);
-                    break;
-                case 3:
-                    picDelete3IV.setVisibility(View.VISIBLE);
-                    break;
-            }
+            picUploadUtil.uploadExceptionDo(UserInfo.getInstance().getToken(), typeIndex, ExceptionAddActivity.this, selecPic, new BaseInfoUpdate() {
+                @Override
+                public void update(Object object) {
+                    switch (index){
+                        case 1:
+                            pic1Url = (String)object;
+                            picDelete1IV.setVisibility(View.VISIBLE);
+                            break;
+                        case 2:
+                            pic2Url = (String)object;
+                            picDelete2IV.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            pic3Url = (String)object;
+                            picDelete3IV.setVisibility(View.VISIBLE);
+                            break;
+                    }
+                }
+            });
+
 //            showIV.setImageBitmap(PictureUtil.getimage(selecPic));
         }
     }
 
-    private class PicItemSelInfo implements BaseInfoUpdate{
-        private int index;
-
-        public PicItemSelInfo(int index){
-            this.index = index;
-        }
-
-        @Override
-        public void update(Object object) {
-
-        }
-    }
-
-    private void exceptionAddDo(String sealId, String sealDestr, String sealPic){
-        ExceptionAddBean bean = new ExceptionAddBean(sealId, typeIndex, sealDestr, sealPic);
+    private void exceptionAddDo(String sealId, String sealDestr, String sealPic, String lngLat, String sealLoca){
+        ExceptionAddBean bean = new ExceptionAddBean(sealId, typeIndex, sealDestr, sealPic, lngLat, sealLoca);
         APIRetrofitUtil.getInstance().exceptionAddDo(UserInfo.getInstance().getToken(), bean)
                 .compose(new RxHelper<Response>("数据提交...").io_main(this))
                 .subscribe(new RxSubscriber<Response>() {

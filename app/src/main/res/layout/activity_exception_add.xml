@@ -99,6 +99,43 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingRight="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="申报地点"
+                        android:textSize="16sp"
+                        android:textColor="@color/darkLight"/>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <EditText
+                            android:id="@+id/location_tv"
+                            style="@style/info_item_et"
+                            android:hint="请设置地理位置"
+                            android:enabled="false"
+                            android:layout_marginRight="16dp"/>
+
+                        <ImageButton
+                            android:id="@+id/location_ib"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical|right"
+                            android:background="@null"
+                            android:src="@mipmap/icon_location" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/appBg"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="20dp"
                     android:paddingBottom="10dp"

@@ -52,6 +52,7 @@ public class ExceptionsActivity extends BaseActivity {
 
     private int pageIndex = 0;
     private int pageSize = 10;
+    private String dealStatus;
 
     @Override
     public int layoutView() {
@@ -97,21 +98,26 @@ public class ExceptionsActivity extends BaseActivity {
                 if(itemIndex==1)
                     return;
                 itemIndex = 1;
+                dealStatus = null;
                 setStatusItemV(1);
                 break;
             case R.id.item_status2_tv:
                 if(itemIndex==2)
                     return;
                 itemIndex = 2;
+                dealStatus = "0";
                 setStatusItemV(2);
                 break;
             case R.id.item_status3_tv:
                 if(itemIndex==3)
                     return;
                 itemIndex = 3;
+                dealStatus = "1";
                 setStatusItemV(3);
                 break;
         }
+        pageIndex = 0;
+        getProblemItemsData();
     }
 
     private void setStatusItemV(int index){
@@ -173,7 +179,7 @@ public class ExceptionsActivity extends BaseActivity {
     }
 
     private void getProblemItemsData(){
-        ExceptionItemsBean bean = new ExceptionItemsBean(pageIndex, pageSize);
+        ExceptionItemsBean bean = new ExceptionItemsBean(pageIndex, pageSize, dealStatus);
         APIRetrofitUtil.getInstance().getExceptionItemsData(UserInfo.getInstance().getToken(), bean)
                 .compose(new RxHelper<ExceptionItemsResponse>("加载数据中...").io_main(this))
                 .subscribe(new RxSubscriber<ExceptionItemsResponse>() {

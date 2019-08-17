@@ -36,6 +36,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/search_tv"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
@@ -119,7 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="巡检中"
+                android:text="已巡检"
                 android:textSize="16sp"
                 android:textColor="@color/grayDarkX"/>
             <View

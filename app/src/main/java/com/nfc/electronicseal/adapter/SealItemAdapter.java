@@ -58,6 +58,9 @@ public class SealItemAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.item_seal, null);
             viewHolder.sealIdTV = view.findViewById(R.id.box_seal_id_tv);
             viewHolder.sealStatusTV = view.findViewById(R.id.box_seal_status_tv);
+            viewHolder.titleSealTimeTV = view.findViewById(R.id.title_seal_time_tv);
+            viewHolder.titleSealPersonTV = view.findViewById(R.id.title_seal_person_tv);
+            viewHolder.titleSealAddrTV = view.findViewById(R.id.title_seal_addr_tv);
             viewHolder.sealTimeTV = view.findViewById(R.id.box_seal_time_tv);
             viewHolder.sealPersonTV = view.findViewById(R.id.box_seal_person_tv);
             viewHolder.sealAddrTV = view.findViewById(R.id.box_seal_addr_tv);
@@ -67,14 +70,29 @@ public class SealItemAdapter extends BaseAdapter {
         }
         viewHolder.sealIdTV.setText(node.getSealId());
 
-//        if(node.getDealStatus()==1){
-//            viewHolder.sealStatusTV.setText("已处理");
-//            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.green_light));
-//        }else {
-//            viewHolder.sealStatusTV.setText("待处理");
-//            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.redDark));
-//        }
-//
+        if(node.getSealStatus()==1){
+            //已施封
+            viewHolder.sealStatusTV.setText("已施封");
+            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.red));
+            viewHolder.titleSealTimeTV.setText("施封时间");
+            viewHolder.titleSealPersonTV.setText("施封员");
+            viewHolder.titleSealAddrTV.setText("施封地点");
+        }else if(node.getSealStatus()==2){
+            //已巡检
+            viewHolder.sealStatusTV.setText("已巡检");
+            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.yellow_light));
+            viewHolder.titleSealTimeTV.setText("巡检时间");
+            viewHolder.titleSealPersonTV.setText("巡检员");
+            viewHolder.titleSealAddrTV.setText("巡检地点");
+        }else {
+            //已完成
+            viewHolder.sealStatusTV.setText("已完成");
+            viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.green_light));
+            viewHolder.titleSealTimeTV.setText("拆封时间");
+            viewHolder.titleSealPersonTV.setText("拆封员");
+            viewHolder.titleSealAddrTV.setText("拆封地点");
+        }
+
         if(node.getSealDate()!=null)
             viewHolder.sealTimeTV.setText(DateUtil.timeStamp2Date(node.getSealDate()));
         else
@@ -86,6 +104,9 @@ public class SealItemAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
+        TextView titleSealTimeTV;
+        TextView titleSealPersonTV;
+        TextView titleSealAddrTV;
         TextView sealIdTV;
         TextView sealStatusTV;
         TextView sealTimeTV;

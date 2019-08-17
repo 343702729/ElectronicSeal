@@ -45,6 +45,8 @@ public class ExceptionInfoActivity extends BaseActivity {
     TextView exptPersonTV;
     @BindView(R.id.expt_pics_ll)
     LinearLayout exptPicsLL;
+    @BindView(R.id.expt_time_tv)
+    TextView exptTimeTV;
 
     @Override
     public int layoutView() {
@@ -98,6 +100,8 @@ public class ExceptionInfoActivity extends BaseActivity {
         exptDescTV.setText(infoNode.getSealDestr());
         if(!TextUtils.isEmpty(infoNode.getDealPersonName()))
             exptPersonTV.setText(infoNode.getDealPersonName());
+        if(infoNode.getUpdateTime()!=null)
+            exptTimeTV.setText(DateUtil.timeStamp2Date(infoNode.getUpdateTime()));
         if(!TextUtils.isEmpty(infoNode.getDealResult()))
             exptResultTV.setText(infoNode.getDealResult());
         String pics = infoNode.getSealPic();

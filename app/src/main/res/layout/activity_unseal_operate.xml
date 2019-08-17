@@ -59,11 +59,14 @@
                         android:layout_height="match_parent">
 
                         <EditText
+                            android:id="@+id/location_tv"
                             style="@style/info_item_et"
-                            android:hint="请输入地理位置"
+                            android:hint="请设置地理位置"
+                            android:enabled="false"
                             android:layout_marginRight="16dp"/>
 
                         <ImageButton
+                            android:id="@+id/location_ib"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|right"
@@ -84,9 +87,10 @@
                     <TextView
                         style="@style/info_title_tv"
                         android:layout_width="80dp"
-                        android:text="拆封状态" />
+                        android:text="拆封描述" />
 
                     <EditText
+                        android:id="@+id/unseal_desc_et"
                         style="@style/info_item_et"
                         android:hint="可不填" />
                 </LinearLayout>
@@ -105,12 +109,20 @@
                         android:text="上传照片" />
                 </LinearLayout>
 
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal">
+                        <include layout="@layout/item_pics_sel"/>
+                    </LinearLayout>
+                </HorizontalScrollView>
 
-                </LinearLayout>
             </LinearLayout>
 
             <Button

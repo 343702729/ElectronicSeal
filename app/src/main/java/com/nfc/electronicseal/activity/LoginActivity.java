@@ -43,6 +43,8 @@ public class LoginActivity extends BaseActivity {
     public void loginBtnClick(View view){
         String account = accountET.getText().toString();
         String password = passwordET.getText().toString();
+        account = "cs001";
+        password = "123456";
 
         if(TextUtils.isEmpty(account)||TextUtils.isEmpty(password)){
             AppToast.showShortText(this, "请输入正确账号密码！");

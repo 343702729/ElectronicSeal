@@ -58,6 +58,8 @@ public class SearchFragment extends BaseFragment {
     private List<SealItemNode> sealItemNodes = new ArrayList<>();
     private int pageIndex = 0;
     private int pageSize = 10;
+    private String sealStatus;
+    private String sealId;
 
     private int itemIndex = 1;
 
@@ -94,6 +96,12 @@ public class SearchFragment extends BaseFragment {
         }
     }
 
+    @OnClick(R.id.search_tv)
+    public void searchBtnClick(View view){
+        pageIndex = 0;
+        getRecordsData();
+    }
+
     @OnClick({R.id.item_status1_tv, R.id.item_status2_tv, R.id.item_status3_tv, R.id.item_status4_tv})
     public void itemStatusClick(View view){
 
@@ -102,27 +110,34 @@ public class SearchFragment extends BaseFragment {
                 if(itemIndex==1)
                     return;
                 itemIndex = 1;
+                sealStatus = null;
                 setStatusItemV(1);
                 break;
             case R.id.item_status2_tv:
                 if(itemIndex==2)
                     return;
                 itemIndex = 2;
+                sealStatus = "3";
                 setStatusItemV(2);
                 break;
             case R.id.item_status3_tv:
                 if(itemIndex==3)
                     return;
                 itemIndex = 3;
+                sealStatus = "1";
                 setStatusItemV(3);
                 break;
             case R.id.item_status4_tv:
                 if(itemIndex==4)
                     return;
                 itemIndex = 4;
+                sealStatus = "2";
                 setStatusItemV(4);
                 break;
         }
+
+        pageIndex = 0;
+        getRecordsData();
     }
 
     private void setStatusItemV(int index){
@@ -190,7 +205,8 @@ public class SearchFragment extends BaseFragment {
     }
 
     private void getRecordsData(){
-        SearchRecordBean bean = new SearchRecordBean(pageIndex, pageSize, 3);
+        sealId = searchET.getText().toString();
+        SearchRecordBean bean = new SearchRecordBean(pageIndex, pageSize, sealStatus, sealId);
         APIRetrofitUtil.getInstance().getSearchRecordsData(UserInfo.getInstance().getToken(), bean)
                 .compose(new RxHelper<SealItemResponse>("加载数据中...").io_main_fragment(this))
                 .subscribe(new RxSubscriber<SealItemResponse>() {

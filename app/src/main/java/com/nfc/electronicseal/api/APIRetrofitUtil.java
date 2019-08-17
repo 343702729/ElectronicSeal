@@ -5,12 +5,15 @@ import com.nfc.electronicseal.bean.ChipCheckBean;
 import com.nfc.electronicseal.bean.ExceptionAddBean;
 import com.nfc.electronicseal.bean.ExceptionInfoBean;
 import com.nfc.electronicseal.bean.HeadImgUpdateBean;
+import com.nfc.electronicseal.bean.InspectBean;
 import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
 import com.nfc.electronicseal.bean.PasswordUpdateBean;
 import com.nfc.electronicseal.bean.SealBean;
+import com.nfc.electronicseal.bean.SealDetailBean;
 import com.nfc.electronicseal.bean.SealInfoBean;
 import com.nfc.electronicseal.bean.SearchRecordBean;
+import com.nfc.electronicseal.bean.UnSealBean;
 import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
@@ -18,10 +21,9 @@ import com.nfc.electronicseal.response.ImageResponse;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.response.Response;
+import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
 import com.nfc.electronicseal.response.SealItemResponse;
-
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import rx.Observable;
@@ -109,13 +111,33 @@ public class APIRetrofitUtil extends RetrofitServiceUtil {
     }
 
     /**
-     * 异常图片上传接口
+     * 施封图片上传接口
      * @param authorization
      * @param part
      * @return
      */
     public Observable<ImageResponse> uploadImageSeal(String authorization, MultipartBody.Part part){
         return getAPIService().uploadImageSeal(authorization, part);
+    }
+
+    /**
+     * 巡检图片上传接口
+     * @param authorization
+     * @param part
+     * @return
+     */
+    public Observable<ImageResponse> uploadImageInspect(String authorization, MultipartBody.Part part){
+        return getAPIService().uploadImageInspect(authorization, part);
+    }
+
+    /**
+     * 拆封图片上传接口
+     * @param authorization
+     * @param part
+     * @return
+     */
+    public Observable<ImageResponse> uploadImageUnseal(String authorization, MultipartBody.Part part){
+        return getAPIService().uploadImageUnseal(authorization, part);
     }
 
     /**
@@ -177,5 +199,35 @@ public class APIRetrofitUtil extends RetrofitServiceUtil {
      */
     public Observable<SealInfoResponse> getSealInfoData(String authorization, SealInfoBean bean){
         return getAPIService().getSealInfoData(authorization, bean);
+    }
+
+    /**
+     * 查询施封详细信息
+     * @param authorization
+     * @param bean
+     * @return
+     */
+    public Observable<SealDetailResponse> getSealDetailData(String authorization, SealDetailBean bean){
+        return getAPIService().getSealDetailData(authorization, bean);
+    }
+
+    /**
+     * 巡检
+     * @param authorization
+     * @param bean
+     * @return
+     */
+    public Observable<Response> inspectSubmitDo(String authorization, InspectBean bean){
+        return getAPIService().inspectSubmitDo(authorization, bean);
+    }
+
+    /**
+     * 拆封
+     * @param authorization
+     * @param bean
+     * @return
+     */
+    public Observable<Response> unsealSubmitDo(String authorization, UnSealBean bean){
+        return getAPIService().unsealSubmitDo(authorization, bean);
     }
 }

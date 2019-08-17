@@ -70,17 +70,18 @@ public class ExceptionItemAdapter extends BaseAdapter {
         if(node.getDealStatus()==1){
             viewHolder.sealStatusTV.setText("已处理");
             viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.green_light));
+
         }else {
             viewHolder.sealStatusTV.setText("待处理");
             viewHolder.sealStatusTV.setTextColor(context.getResources().getColor(R.color.redDark));
-        }
 
-        if(node.getUpdateTime()!=null)
-            viewHolder.sealTimeTV.setText(DateUtil.timeStamp2Date(node.getUpdateTime()));
+        }
+        if(node.getCreateTime()!=null)
+            viewHolder.sealTimeTV.setText(DateUtil.timeStamp2Date(node.getCreateTime()));
         else
             viewHolder.sealTimeTV.setText("");
 
-        viewHolder.sealPersonTV.setText(node.getDealPersonName());
+        viewHolder.sealPersonTV.setText(node.getSealOperName());
         viewHolder.sealAddrTV.setText(node.getSealLoca());
         return view;
     }
