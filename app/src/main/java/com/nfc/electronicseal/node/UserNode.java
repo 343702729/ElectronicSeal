@@ -1,5 +1,7 @@
 package com.nfc.electronicseal.node;
 
+import java.util.List;
+
 public class UserNode {
     private int id;
     private String name;
@@ -199,4 +201,5 @@ public class UserNode {
     public void setInstmarkInfo(InstmarkInfoNode instmarkInfo) {
         this.instmarkInfo = instmarkInfo;
     }
+
 }

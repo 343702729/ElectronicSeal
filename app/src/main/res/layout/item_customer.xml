@@ -14,7 +14,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="客服一"
+            android:text=""
             android:textSize="16sp"
             android:textColor="@color/darkLight"/>
         <LinearLayout
@@ -25,7 +25,7 @@
                 android:id="@+id/telephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0551-68888888"
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="@color/grayDark"/>
             <ImageView

@@ -43,8 +43,8 @@ public class LoginActivity extends BaseActivity {
     public void loginBtnClick(View view){
         String account = accountET.getText().toString();
         String password = passwordET.getText().toString();
-        account = "cs001";
-        password = "123456";
+//        account = "cs001";
+//        password = "123456";
 
         if(TextUtils.isEmpty(account)||TextUtils.isEmpty(password)){
             AppToast.showShortText(this, "请输入正确账号密码！");
@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity {
                         if(response!=null&&response.isSuccess()){
                             UserInfo.getInstance().setToken(response.getToken());
                             UserInfo.getInstance().setUserNode(response.getData());
+                            UserInfo.getInstance().setCustomerPhoneList(response.getCustomerPhoneList());
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();

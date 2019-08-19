@@ -105,6 +105,8 @@ public class NFCUtil {
         if(!isSupportNFC)
             return;
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+//        NfcF nfcF = NfcF.get(tag);
+//        nfcF.connect();
         Ndef ndef = Ndef.get(tag);
         ndef.connect();
 //        NdefRecord ndefRecord = NdefRecord.createTextRecord(null, data);

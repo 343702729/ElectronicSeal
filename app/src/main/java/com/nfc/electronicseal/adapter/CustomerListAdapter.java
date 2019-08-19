@@ -6,13 +6,13 @@ import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.adapter.base.BaseListViewAdapter;
-import com.nfc.electronicseal.node.CustomerItemNode;
+import com.nfc.electronicseal.node.CustomerPhoneNode;
 import com.nfc.electronicseal.util.UiUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CustomerListAdapter extends BaseListViewAdapter<CustomerItemNode>{
+public class CustomerListAdapter extends BaseListViewAdapter<CustomerPhoneNode>{
 
     public CustomerListAdapter(){
         super(null);
@@ -21,7 +21,7 @@ public class CustomerListAdapter extends BaseListViewAdapter<CustomerItemNode>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        CustomerItemNode node = (CustomerItemNode)getItem(position);
+        CustomerPhoneNode node = (CustomerPhoneNode)getItem(position);
         if (convertView == null) {
             convertView = UiUtils.inflate(R.layout.item_customer);
             holder = new ViewHolder(convertView);
@@ -29,7 +29,8 @@ public class CustomerListAdapter extends BaseListViewAdapter<CustomerItemNode>{
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        holder.nameTV.setText(node.getName());
+        holder.telephoneTV.setText(node.getTelephone());
         return convertView;
     }
 

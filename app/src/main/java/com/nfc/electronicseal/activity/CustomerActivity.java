@@ -7,13 +7,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.liuguangqiang.ipicker.adapters.BaseAdapter;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.adapter.CustomerListAdapter;
 import com.nfc.electronicseal.base.BaseInfoUpdate;
+import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.dialog.JudgeDialog;
-import com.nfc.electronicseal.node.CustomerItemNode;
+import com.nfc.electronicseal.node.CustomerPhoneNode;
 import com.nfc.electronicseal.util.TLog;
 
 import java.util.ArrayList;
@@ -43,10 +43,7 @@ public class CustomerActivity extends BaseActivity {
         listView.setAdapter(customerListAdapter);
         listView.setOnItemClickListener(customerItemClick);
 
-        List<CustomerItemNode> nodes = new ArrayList<>();
-        nodes.add(new CustomerItemNode());
-        nodes.add(new CustomerItemNode());
-        nodes.add(new CustomerItemNode());
+        List<CustomerPhoneNode> nodes = UserInfo.getInstance().getCustomerPhoneList();
         customerListAdapter.setDataList(nodes);
     }
 
@@ -59,25 +56,18 @@ public class CustomerActivity extends BaseActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             TLog.log("The position:" + position);
-            CustomerItemNode itemNode = (CustomerItemNode)parent.getItemAtPosition(position);
-            JudgeDialog dialog = new JudgeDialog(CustomerActivity.this, customerCallInfo);
-            dialog.showView(view, "提示", "是否拨打 0551-68888888");
-        }
-
-        private BaseInfoUpdate customerCallInfo = new BaseInfoUpdate() {
-            @Override
-            public void update(Object object) {
-                if(object==null)
-                    return;
-                boolean flag = (boolean)object;
-                if(flag){
-                    String phone = "0551-68888888";
+            final CustomerPhoneNode itemNode = (CustomerPhoneNode)parent.getItemAtPosition(position);
+            JudgeDialog dialog = new JudgeDialog(CustomerActivity.this, new BaseInfoUpdate() {
+                @Override
+                public void update(Object object) {
+                    String phone = itemNode.getTelephone();
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.trim()));
                     startActivity(intent);
                 }
+            });
+            dialog.showView(view, "提示", "是否拨打 " + itemNode.getTelephone());
+        }
 
-            }
-        };
     };
 
 
