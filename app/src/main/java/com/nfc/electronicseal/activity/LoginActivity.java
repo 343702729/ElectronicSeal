@@ -55,6 +55,12 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.test_btn)
+    public void testBtnClick(View view){
+        Intent intent = new Intent(this, ExceptionActivity.class);
+        startActivity(intent);
+    }
+
     private void loginDo(String account, String password){
         LoginBean bean = new LoginBean(account, password);
         APIRetrofitUtil.getInstance().getLoginData(bean)

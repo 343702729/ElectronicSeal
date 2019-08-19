@@ -36,14 +36,14 @@
         android:theme="@style/Anim_fade">
 
         <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait" >
+
+        </activity>
+
+        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait" >
-
         </activity>
 
         <activity android:name=".MainActivity" android:screenOrientation="portrait" >
@@ -80,7 +80,14 @@
 
         </activity>
 
-        <activity android:name=".activity.ExceptionActivity" android:screenOrientation="portrait" ></activity>
+        <activity android:name=".activity.ExceptionActivity" android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED"></action>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"></action>
+            </intent-filter>
+            <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/tag_type" />
+        </activity>
 
         <activity android:name=".activity.my.SettingActivity" android:screenOrientation="portrait" ></activity>
 

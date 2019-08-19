@@ -14,6 +14,7 @@ import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.PictureShowActivity;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.activity.seal.SealOperateActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.PicUploadUtil;
 import com.nfc.electronicseal.api.util.RxHelper;
@@ -88,6 +89,7 @@ public class InspectOperateActivity extends BaseActivity {
 
     private boolean isWrite = false;
     private String writeContent;
+    private boolean reRead = false;
 
     @Override
     public int layoutView() {
@@ -109,12 +111,18 @@ public class InspectOperateActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
-        parseNFCContent();
+        parseNFCContent(content);
     }
 
     @OnClick(R.id.back_ib)
     public void backBtnClick(View view){
         finish();
+    }
+
+    @OnClick(R.id.re_read_tv)
+    public void reReadTVClick(View view){
+        reRead = true;
+        DialogHelper.showProgressDlg(InspectOperateActivity.this, "请靠近封条读取...");
     }
 
     @OnClick(R.id.location_ib)
@@ -157,7 +165,7 @@ public class InspectOperateActivity extends BaseActivity {
         inspectSubmitStart();
     }
 
-    private void parseNFCContent(){
+    private void parseNFCContent(String content){
         if(TextUtils.isEmpty(content))
             return;
         String[] items = content.split(",");
@@ -211,6 +219,7 @@ public class InspectOperateActivity extends BaseActivity {
 
         String pics = node.getSealPic();
         if(!TextUtils.isEmpty(pics)){
+            sealPicsLL.removeAllViews();
             String[] picItems = pics.split(",");
 
             for (int i=0; i<picItems.length; i++)
@@ -336,7 +345,7 @@ public class InspectOperateActivity extends BaseActivity {
 
         isWrite = true;
         writeContent = "SEALID:" + sealId + "," + "TAXNUMBER:" + taxNum + "," + "CONTAINERNO:" + containerNo + "," + "SEALSTATUS:" + 2;
-        DialogHelper.showProgressDlg(InspectOperateActivity.this, "请靠近芯片写入...");
+        DialogHelper.showProgressDlg(InspectOperateActivity.this, "请靠近封条写入...");
     }
 
     private void inspectSubmitDo(){
@@ -368,15 +377,74 @@ public class InspectOperateActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         try{
+            if(!NFCUtil.isNFCCard(intent))
+                AppToast.showShortText(this, "该封条不可用");
+
             String nfcSId = NFCUtil.readNFCId(intent);
-            if(!chipId.equals(nfcSId)){
-                DialogHelper.stopProgressDlg();
-                AppToast.showShortText(this, "芯片不对");
-                return;
-            }
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("Come into seal nfc:" + str);
+
+            if(reRead){
+                reRead = false;
+                DialogHelper.stopProgressDlg();
+                if(TextUtils.isEmpty(str)) {
+                    AppToast.showShortText(InspectOperateActivity.this, "该封条不符合当前操作");
+                    return;
+                }
+                String[] items = str.split(",");
+                String sealId = null, taxNum = null, containerNo = null, sealStatus = null;
+                for(String item:items) {
+                    if (TextUtils.isEmpty(item))
+                        continue;
+                    String[] strs = item.split(":");
+                    if (TextUtils.isEmpty(strs[0]))
+                        continue;
+                    if (strs[0].contains("SEALID")) {
+                        sealId = strs[1];
+                    } else if (strs[0].contains("TAXNUMBER")) {
+                        taxNum = strs[1];
+                    } else if (strs[0].contains("CONTAINERNO")) {
+                        containerNo = strs[1];
+                    } else if (strs[0].contains("SEALSTATUS")) {
+                        sealStatus = strs[1];
+                    }
+                }
+
+                if(TextUtils.isEmpty(str)||TextUtils.isEmpty(sealId)||TextUtils.isEmpty(taxNum)||TextUtils.isEmpty(containerNo)||TextUtils.isEmpty(sealStatus)){
+                    if("1".equals(sealStatus)||"1".equals(sealStatus)){
+
+                    }else {
+                        AppToast.showShortText(InspectOperateActivity.this, "该封条不符合当前操作");
+                        return;
+                    }
+                }
+                chipId = nfcSId;
+                this.sealId = sealId;
+                this.taxNum = taxNum;
+                this.containerNo = containerNo;
+                this.sealStatus = sealStatus;
+                sealIdTV.setText(sealId);
+                taxNumTV.setText(taxNum);
+                if("1".equals(sealStatus)){
+                    //已施封
+                    itemStatusTV.setText("已施封");
+                }else if("2".equals(sealStatus)){
+                    //已巡检
+                    itemStatusTV.setText("已巡检");
+                }else {
+                    //已完成
+                    itemStatusTV.setText("已完成");
+                }
+                getSealDetailData();
+
+            }
+
             if(isWrite){
+                if(!chipId.equals(nfcSId)){
+                    DialogHelper.stopProgressDlg();
+                    AppToast.showShortText(this, "封条不对");
+                    return;
+                }
                 TLog.log("The NFC seal come into write:" + writeContent);
                 NFCUtil.writeNFCToTag(writeContent, intent);
                 DialogHelper.stopProgressDlg();

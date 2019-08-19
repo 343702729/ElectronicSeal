@@ -63,12 +63,14 @@ public class UnSealSearchActivity extends BaseActivity{
         //当该Activity接收到NFC标签时，运行该方法
         //调用工具方法，读取NFC数据
         try {
+            if(!NFCUtil.isNFCCard(intent))
+                AppToast.showShortText(this, "该封条不可用");
             String nfcId = NFCUtil.readNFCId(intent);
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId);
             parseNFCContent(str);
             if(TextUtils.isEmpty(str)||TextUtils.isEmpty(sealId)||TextUtils.isEmpty(taxNum)||TextUtils.isEmpty(containerNo)||TextUtils.isEmpty(sealStatus)||!"2".equals(sealStatus)){
-                AppToast.showShortText(UnSealSearchActivity.this, "该芯片不符合当前操作");
+                AppToast.showShortText(UnSealSearchActivity.this, "该封条不符合当前操作");
                 return;
             }
 //            String str = NFCUtil.rendFromTag(intent);

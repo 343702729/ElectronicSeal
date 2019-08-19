@@ -80,6 +80,8 @@ public class InspectSearchActivity extends BaseActivity{
         //当该Activity接收到NFC标签时，运行该方法
         //调用工具方法，读取NFC数据
         try {
+            if(!NFCUtil.isNFCCard(intent))
+                AppToast.showShortText(this, "该封条不可用");
             String nfcId = NFCUtil.readNFCId(intent);
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId);
@@ -88,7 +90,7 @@ public class InspectSearchActivity extends BaseActivity{
                 if("1".equals(sealStatus)||"1".equals(sealStatus)){
 
                 }else {
-                    AppToast.showShortText(InspectSearchActivity.this, "该芯片不符合当前操作");
+                    AppToast.showShortText(InspectSearchActivity.this, "该封条不符合当前操作");
                     return;
                 }
 

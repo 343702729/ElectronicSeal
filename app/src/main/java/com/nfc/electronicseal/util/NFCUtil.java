@@ -10,6 +10,7 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
+import android.nfc.tech.NfcF;
 import android.os.Parcelable;
 import android.provider.Settings;
 
@@ -67,6 +68,15 @@ public class NFCUtil {
         }
         mIntentFilter = new IntentFilter[]{filter, filter2};
         mTechList = null;
+//        mTechList = new String[][]{new String[]{NfcF.class.getName()}};
+    }
+
+    public static boolean isNFCCard(Intent intent){
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        Ndef ndef = Ndef.get(tag);
+        if(ndef==null)
+            return false;
+        return true;
     }
 
     /**

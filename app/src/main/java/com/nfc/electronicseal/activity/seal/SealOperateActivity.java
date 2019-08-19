@@ -83,6 +83,7 @@ public class SealOperateActivity extends BaseActivity {
     private String pic1Url, pic2Url, pic3Url;
     private boolean isWrite = false;
     private String writeContent;
+    private boolean reRead = false;
 
     @Override
     public int layoutView() {
@@ -116,6 +117,12 @@ public class SealOperateActivity extends BaseActivity {
     public void onDestroy() {
         super.onDestroy();
         bdLocationUtil.stopLocation();
+    }
+
+    @OnClick(R.id.re_read_tv)
+    public void reReadTVClick(View view){
+        reRead = true;
+        DialogHelper.showProgressDlg(SealOperateActivity.this, "请靠近封条读取...");
     }
 
     @OnClick(R.id.location_ib)
@@ -308,7 +315,7 @@ public class SealOperateActivity extends BaseActivity {
                     public void onCompleted() {
                         super.onCompleted();
                         if(isWrite)
-                            DialogHelper.showProgressDlg(SealOperateActivity.this, "请靠近芯片写入...");
+                            DialogHelper.showProgressDlg(SealOperateActivity.this, "请靠近封条写入...");
                     }
                 });
 
@@ -319,15 +326,31 @@ public class SealOperateActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         try{
+            if(!NFCUtil.isNFCCard(intent))
+                AppToast.showShortText(this, "该封条不可用");
+
             String nfcSId = NFCUtil.readNFCId(intent);
-            if(!nfcId.equals(nfcSId)){
-                DialogHelper.stopProgressDlg();
-                AppToast.showShortText(this, "芯片不对");
-                return;
-            }
             String str = NFCUtil.readNFCFromTag(intent);
+            if(!TextUtils.isEmpty(str))
+                str = str.trim();
             TLog.log("Come into seal nfc:" + str);
-            if(isWrite){
+            if(reRead){
+                DialogHelper.stopProgressDlg();
+                reRead = false;
+                if(!TextUtils.isEmpty(str)&&!"zh".equals(str)) {
+                    AppToast.showShortText(this, "该封条已使用");
+                    return;
+                }
+                AppToast.showShortText(this, "读取成功");
+                nfcId = nfcSId;
+                chipIdTV.setText(nfcId);
+                return;
+            }else if(isWrite){
+                if(!nfcId.equals(nfcSId)){
+                    DialogHelper.stopProgressDlg();
+                    AppToast.showShortText(this, "封条不对");
+                    return;
+                }
                 TLog.log("The NFC seal come into write:" + writeContent);
                 NFCUtil.writeNFCToTag(writeContent, intent);
                 DialogHelper.stopProgressDlg();

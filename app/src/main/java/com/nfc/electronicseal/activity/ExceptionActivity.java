@@ -1,5 +1,6 @@
 package com.nfc.electronicseal.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,7 +9,9 @@ import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.adapter.SelectPicAdapter;
+import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.BDLocationUtil;
+import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
 
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class ExceptionActivity extends BaseActivity{
     public void initview() {
         super.initview();
 //        initPicSelect();
-        bdLocationUtil = new BDLocationUtil(this, null);
+//        bdLocationUtil = new BDLocationUtil(this, null);
     }
 
     /**
@@ -76,5 +79,25 @@ public class ExceptionActivity extends BaseActivity{
             TLog.log("The pic path is:" + selecPic);
 //            showIV.setImageBitmap(PictureUtil.getimage(selecPic));
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        TLog.log("Come into nfc read");
+        try {
+            if(!NFCUtil.isNFCCard(intent))
+                AppToast.showShortText(this, "该封条不可用");
+            String nfcId = NFCUtil.readNFCId(intent);
+            String str = NFCUtil.readNFCFromTag(intent);
+            TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
+
+            String writeStr = "SEALID:241520190519JD,TAXNUMBER:91341003MA2TJA5342,CONTAINERNO:1234562789,SEALSTATUS:2";
+            NFCUtil.writeNFCToTag(writeStr, intent);
+            TLog.log("Write success!!");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
