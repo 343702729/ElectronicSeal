@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.node.ProblemItemNode;
@@ -23,6 +24,13 @@ public class ProblemAdapter extends BaseAdapter {
         if(nodes!=null)
             this.nodes = nodes;
         layoutInflater = LayoutInflater.from(context);
+    }
+
+    public void updateViews(List<ProblemItemNode> nodes){
+        if(nodes==null)
+            nodes = new ArrayList<>();
+        this.nodes = nodes;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -47,14 +55,19 @@ public class ProblemAdapter extends BaseAdapter {
         if(view==null){
             viewHolder = new ViewHolder();
             view = layoutInflater.inflate(R.layout.item_problem, null);
+            viewHolder.titleTV = view.findViewById(R.id.title_tv);
+            viewHolder.descTV = view.findViewById(R.id.desc_tv);
             view.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)view.getTag();
         }
+        viewHolder.titleTV.setText(node.getTitle());
+        viewHolder.descTV.setText(node.getDescription());
         return view;
     }
 
     class ViewHolder {
-
+        TextView titleTV;
+        TextView descTV;
     }
 }

@@ -9,6 +9,8 @@ import com.nfc.electronicseal.bean.InspectBean;
 import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
 import com.nfc.electronicseal.bean.PasswordUpdateBean;
+import com.nfc.electronicseal.bean.ProblemInfoBean;
+import com.nfc.electronicseal.bean.ProblemItemsBean;
 import com.nfc.electronicseal.bean.SealBean;
 import com.nfc.electronicseal.bean.SealDetailBean;
 import com.nfc.electronicseal.bean.SealInfoBean;
@@ -20,6 +22,8 @@ import com.nfc.electronicseal.response.ExceptionItemsResponse;
 import com.nfc.electronicseal.response.ImageResponse;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
+import com.nfc.electronicseal.response.ProblemInfoResponse;
+import com.nfc.electronicseal.response.ProblemItemsResponse;
 import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
@@ -229,5 +233,25 @@ public class APIRetrofitUtil extends RetrofitServiceUtil {
      */
     public Observable<Response> unsealSubmitDo(String authorization, UnSealBean bean){
         return getAPIService().unsealSubmitDo(authorization, bean);
+    }
+
+    /**
+     * 查询常见问题列表
+     * @param authorization
+     * @param bean
+     * @return
+     */
+    public Observable<ProblemItemsResponse> getProblemsItemsData(String authorization, ProblemItemsBean bean){
+        return getAPIService().getProblemsItemsData(authorization, bean);
+    }
+
+    /**
+     * 查询常见问题详细信息
+     * @param authorization
+     * @param bean
+     * @return
+     */
+    public Observable<ProblemInfoResponse> getProblemInfoData(String authorization, ProblemInfoBean bean){
+        return getAPIService().getProblemInfoData(authorization, bean);
     }
 }

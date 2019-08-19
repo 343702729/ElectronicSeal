@@ -8,6 +8,8 @@ import com.nfc.electronicseal.bean.InspectBean;
 import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.bean.ExceptionItemsBean;
 import com.nfc.electronicseal.bean.PasswordUpdateBean;
+import com.nfc.electronicseal.bean.ProblemInfoBean;
+import com.nfc.electronicseal.bean.ProblemItemsBean;
 import com.nfc.electronicseal.bean.SealBean;
 import com.nfc.electronicseal.bean.SealDetailBean;
 import com.nfc.electronicseal.bean.SealInfoBean;
@@ -19,6 +21,8 @@ import com.nfc.electronicseal.response.ExceptionItemsResponse;
 import com.nfc.electronicseal.response.ImageResponse;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
+import com.nfc.electronicseal.response.ProblemInfoResponse;
+import com.nfc.electronicseal.response.ProblemItemsResponse;
 import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
@@ -90,6 +94,14 @@ public interface APIService {
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("nfc-feign/app/nfcUnSealApi/unSealElectronic")
     Observable<Response> unsealSubmitDo(@Header("Authorization") String authorization, @Body UnSealBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/generalQuestionApi/getGeneralQuestionList")
+    Observable<ProblemItemsResponse> getProblemsItemsData(@Header("Authorization") String authorization, @Body ProblemItemsBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/generalQuestionApi/getGeneralQuestionInfo")
+    Observable<ProblemInfoResponse> getProblemInfoData(@Header("Authorization") String authorization, @Body ProblemInfoBean bean);
 
     /*************************************************分割线*****************************************************/
 

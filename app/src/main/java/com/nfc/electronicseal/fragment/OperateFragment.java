@@ -18,6 +18,7 @@ import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.node.MenuNode;
 import com.nfc.electronicseal.response.MenusResponse;
+import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.UiUtils;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class OperateFragment extends BaseFragment{
         switch (view.getId()){
             case R.id.item_sf_ll:       //施封
                 if(!isSF){
+                    AppToast.showShortText(getContext(), "该账号无施封权限");
                     return;
                 }
                 intent = new Intent(UiUtils.getContext(), SealSearchActivity.class);
@@ -53,6 +55,7 @@ public class OperateFragment extends BaseFragment{
                 break;
             case R.id.item_xj_ll:       //巡检
                 if(!isXJ){
+                    AppToast.showShortText(getContext(), "该账号无巡检权限");
                     return;
                 }
                 intent = new Intent(UiUtils.getContext(), InspectSearchActivity.class);
@@ -60,6 +63,7 @@ public class OperateFragment extends BaseFragment{
                 break;
             case R.id.item_cf_ll:       //拆封
                 if(!isCF){
+                    AppToast.showShortText(getContext(), "该账号无巡拆封限");
                     return;
                 }
                 intent = new Intent(UiUtils.getContext(), UnSealSearchActivity.class);
@@ -67,6 +71,7 @@ public class OperateFragment extends BaseFragment{
                 break;
             case R.id.item_yc_ll:       //异常
                 if(!isYC){
+                    AppToast.showShortText(getContext(), "该账号无异常权限");
                     return;
                 }
                 intent = new Intent(UiUtils.getContext(), ExceptionsActivity.class);
