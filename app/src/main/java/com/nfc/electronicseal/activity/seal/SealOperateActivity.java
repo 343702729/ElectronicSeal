@@ -130,18 +130,18 @@ public class SealOperateActivity extends BaseActivity {
         bdLocationUtil.startLocation();
     }
 
-    @OnClick({R.id.pic1_add_iv, R.id.pic2_add_iv, R.id.pic3_add_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
+    @OnClick({R.id.pic1_show_iv, R.id.pic2_show_iv, R.id.pic3_show_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
     public void picAddOrDeleteClick(View view){
         switch (view.getId()){
-            case R.id.pic1_add_iv:
+            case R.id.pic1_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(1, picShow1IV));
                 IPicker.open(this, null);
                 break;
-            case R.id.pic2_add_iv:
+            case R.id.pic2_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(2, picShow2IV));
                 IPicker.open(this, null);
                 break;
-            case R.id.pic3_add_iv:
+            case R.id.pic3_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(3, picShow3IV));
                 IPicker.open(this, null);
                 break;
@@ -271,7 +271,7 @@ public class SealOperateActivity extends BaseActivity {
 //        }
 
         //地理位置
-        if(latitude==0|| longitude == 0){
+        if(latitude==0|| longitude == 0||TextUtils.isEmpty(sealLoca)){
             AppToast.showShortText(this, "地理位置不能为空");
             return;
         }
@@ -284,7 +284,7 @@ public class SealOperateActivity extends BaseActivity {
 //        }
 
         //pic1Url, pic2Url, pic3Url
-        if(TextUtils.isEmpty(pic1Url)||TextUtils.isEmpty(pic2Url)||TextUtils.isEmpty(pic3Url)){
+        if(TextUtils.isEmpty(pic1Url)&&TextUtils.isEmpty(pic2Url)&&TextUtils.isEmpty(pic3Url)){
             AppToast.showShortText(this, "请上传施封照片");
             return;
         }

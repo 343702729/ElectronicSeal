@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -60,6 +61,10 @@ public class UnSealOperateActivity extends BaseActivity{
     ImageView picDelete3IV;
     @BindView(R.id.unseal_desc_et)
     EditText unsealDescET;
+    @BindView(R.id.box_no_ll)
+    LinearLayout boxNoLL;
+    @BindView(R.id.box_no_tv)
+    TextView boxNoTV;
 
     private String chipId;
     private String content;
@@ -91,6 +96,7 @@ public class UnSealOperateActivity extends BaseActivity{
         content = getIntent().getStringExtra("NFCCONTENT");
 
         chipIdTV.setText(chipId);
+        boxNoLL.setVisibility(View.VISIBLE);
         bdLocationUtil = new BDLocationUtil(this, new LocationInfoCall());
     }
 
@@ -116,18 +122,18 @@ public class UnSealOperateActivity extends BaseActivity{
         bdLocationUtil.startLocation();
     }
 
-    @OnClick({R.id.pic1_add_iv, R.id.pic2_add_iv, R.id.pic3_add_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
+    @OnClick({R.id.pic1_show_iv, R.id.pic2_show_iv, R.id.pic3_show_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
     public void picAddOrDeleteClick(View view){
         switch (view.getId()){
-            case R.id.pic1_add_iv:
+            case R.id.pic1_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(1, picShow1IV));
                 IPicker.open(this, null);
                 break;
-            case R.id.pic2_add_iv:
+            case R.id.pic2_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(2, picShow2IV));
                 IPicker.open(this, null);
                 break;
-            case R.id.pic3_add_iv:
+            case R.id.pic3_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(3, picShow3IV));
                 IPicker.open(this, null);
                 break;
@@ -169,6 +175,7 @@ public class UnSealOperateActivity extends BaseActivity{
                 taxNumTV.setText(taxNum);
             }else if(strs[0].contains("CONTAINERNO")){
                 containerNo = strs[1];
+                boxNoTV.setText(containerNo);
             }else if(strs[0].contains("SEALSTATUS")){
                 sealStatus = strs[1];
             }
@@ -250,12 +257,12 @@ public class UnSealOperateActivity extends BaseActivity{
 
     public void unsealSubmitStart(){
         //地理位置
-        if(latitude==0|| longitude == 0){
+        if(latitude==0|| longitude == 0||TextUtils.isEmpty(unsealLoca)){
             AppToast.showShortText(this, "地理位置不能为空");
             return;
         }
 
-        if(TextUtils.isEmpty(pic1Url)||TextUtils.isEmpty(pic2Url)||TextUtils.isEmpty(pic3Url)){
+        if(TextUtils.isEmpty(pic1Url)&&TextUtils.isEmpty(pic2Url)&&TextUtils.isEmpty(pic3Url)){
             AppToast.showShortText(this, "请上传巡检照片");
             return;
         }
@@ -336,6 +343,7 @@ public class UnSealOperateActivity extends BaseActivity{
                 this.sealStatus = sealStatus;
                 sealIdTV.setText(sealId);
                 taxNumTV.setText(taxNum);
+                boxNoTV.setText(containerNo);
                 if("1".equals(sealStatus)){
                     //已施封
                     itemStatusTV.setText("已施封");

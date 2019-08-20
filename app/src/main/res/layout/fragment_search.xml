@@ -156,6 +156,14 @@
                 <include layout="@layout/item_pull_load_more" />
             </com.nfc.electronicseal.wiget.pullableview.PullToRefreshLayout>
         </LinearLayout>
+        <ImageView
+            android:id="@+id/no_data_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:visibility="visible"
+            android:layout_gravity="center_horizontal"
+            android:background="@mipmap/icon_no_data"/>
     </FrameLayout>
 
 </LinearLayout>

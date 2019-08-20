@@ -63,7 +63,7 @@ public class OperateFragment extends BaseFragment{
                 break;
             case R.id.item_cf_ll:       //拆封
                 if(!isCF){
-                    AppToast.showShortText(getContext(), "该账号无巡拆封限");
+                    AppToast.showShortText(getContext(), "该账号无拆封封限");
                     return;
                 }
                 intent = new Intent(UiUtils.getContext(), UnSealSearchActivity.class);

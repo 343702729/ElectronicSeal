@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
@@ -52,6 +53,8 @@ public class SearchFragment extends BaseFragment {
     PullToRefreshLayout pullRL;
     @BindView(R.id.listview)
     PullableListView listView;
+    @BindView(R.id.no_data_iv)
+    ImageView noDataIV;
 
     private PullRefreshListener pullRefreshListener;
     private SealItemAdapter sealItemAdapter;
@@ -231,6 +234,10 @@ public class SearchFragment extends BaseFragment {
                                 pullRL.isPullUp(false);
                             else
                                 pullRL.isPullUp(true);
+
+                            if(sealItemNodes!=null&&sealItemNodes.size()!=0){
+                                noDataIV.setVisibility(View.GONE);
+                            }
                         }
                     }
 

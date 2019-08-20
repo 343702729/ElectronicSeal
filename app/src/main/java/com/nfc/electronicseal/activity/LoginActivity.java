@@ -16,6 +16,7 @@ import com.nfc.electronicseal.bean.LoginBean;
 import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.util.AppToast;
+import com.nfc.electronicseal.util.SharePreferenceUtils;
 import com.nfc.electronicseal.util.TLog;
 
 import butterknife.BindView;
@@ -37,6 +38,12 @@ public class LoginActivity extends BaseActivity {
         super.initData();
         String mac = android.os.Build.SERIAL;
         TLog.log("The mac is:" + mac);
+        String account = SharePreferenceUtils.getUserAccount(this);
+        String password = SharePreferenceUtils.getUserPassword(this);
+        if(!TextUtils.isEmpty(account)&&!TextUtils.isEmpty(password)){
+            accountET.setText(account);
+            passwordET.setText(password);
+        }
     }
 
     @OnClick(R.id.login_btn)
@@ -61,7 +68,7 @@ public class LoginActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    private void loginDo(String account, String password){
+    private void loginDo(final String account, final String password){
         LoginBean bean = new LoginBean(account, password);
         APIRetrofitUtil.getInstance().getLoginData(bean)
                 .compose(new RxHelper<LoginResponse>("正在登录,请稍等...").io_main(this))
@@ -69,6 +76,8 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void _onNext(LoginResponse response) {
                         if(response!=null&&response.isSuccess()){
+                            SharePreferenceUtils.saveUserAccount(LoginActivity.this, account);
+                            SharePreferenceUtils.saveUserPassword(LoginActivity.this, password);
                             UserInfo.getInstance().setToken(response.getToken());
                             UserInfo.getInstance().setUserNode(response.getData());
                             UserInfo.getInstance().setCustomerPhoneList(response.getCustomerPhoneList());

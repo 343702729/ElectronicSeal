@@ -114,18 +114,18 @@ public class ExceptionAddActivity extends BaseActivity {
         bdLocationUtil.startLocation();
     }
 
-    @OnClick({R.id.pic1_add_iv, R.id.pic2_add_iv, R.id.pic3_add_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
+    @OnClick({R.id.pic1_show_iv, R.id.pic2_show_iv, R.id.pic3_show_iv, R.id.pic1_delete_iv, R.id.pic2_delete_iv, R.id.pic3_delete_iv})
     public void picAddOrDeleteClick(View view){
         switch (view.getId()){
-            case R.id.pic1_add_iv:
+            case R.id.pic1_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(1, picShow1IV));
                 IPicker.open(this, null);
                 break;
-            case R.id.pic2_add_iv:
+            case R.id.pic2_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(2, picShow2IV));
                 IPicker.open(this, null);
                 break;
-            case R.id.pic3_add_iv:
+            case R.id.pic3_show_iv:
                 IPicker.setOnSelectedListener(new PicItemSelectListener(3, picShow3IV));
                 IPicker.open(this, null);
                 break;
@@ -158,7 +158,7 @@ public class ExceptionAddActivity extends BaseActivity {
         }
 
         //地理位置
-        if(latitude==0|| longitude == 0){
+        if(latitude==0|| longitude == 0 ||TextUtils.isEmpty(sealLoca)){
             AppToast.showShortText(this, "地理位置不能为空");
             return;
         }
@@ -168,6 +168,12 @@ public class ExceptionAddActivity extends BaseActivity {
             AppToast.showShortText(this, "请输入详情描述");
             return;
         }
+
+        if(TextUtils.isEmpty(pic1Url)&&TextUtils.isEmpty(pic2Url)&&TextUtils.isEmpty(pic3Url)){
+            AppToast.showShortText(this, "请上传照片");
+            return;
+        }
+
         String lnglat = longitude + "," + latitude;
         String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
         exceptionAddDo(sealId, desc, sealPic, lnglat, sealLoca);
@@ -227,13 +233,14 @@ public class ExceptionAddActivity extends BaseActivity {
         public void onSelected(List<String> paths) {
             if(paths==null&&paths.size()<=0)
                 return;
-            String  selecPic = paths.get(0);
+            final String  selecPic = paths.get(0);
             TLog.log("The pic path is:" + selecPic);
-            Glide.with(ExceptionAddActivity.this).load(selecPic).into(imageView);
+
             PicUploadUtil picUploadUtil = new PicUploadUtil();
             picUploadUtil.uploadExceptionDo(UserInfo.getInstance().getToken(), typeIndex, ExceptionAddActivity.this, selecPic, new BaseInfoUpdate() {
                 @Override
                 public void update(Object object) {
+                    Glide.with(ExceptionAddActivity.this).load(selecPic).into(imageView);
                     switch (index){
                         case 1:
                             pic1Url = (String)object;

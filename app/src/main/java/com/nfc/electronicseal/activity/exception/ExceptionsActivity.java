@@ -3,6 +3,7 @@ package com.nfc.electronicseal.activity.exception;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
@@ -44,6 +45,8 @@ public class ExceptionsActivity extends BaseActivity {
     PullToRefreshLayout pullRL;
     @BindView(R.id.listview)
     PullableListView listView;
+    @BindView(R.id.no_data_iv)
+    ImageView noDataIV;
 
     private PullRefreshListener pullRefreshListener;
     private ExceptionItemAdapter sealItemAdapter;
@@ -204,6 +207,10 @@ public class ExceptionsActivity extends BaseActivity {
                                 pullRL.isPullUp(false);
                             else
                                 pullRL.isPullUp(true);
+
+                            if(sealItemNodes!=null&&sealItemNodes.size()!=0){
+                                noDataIV.setVisibility(View.GONE);
+                            }
                         }
                     }
 

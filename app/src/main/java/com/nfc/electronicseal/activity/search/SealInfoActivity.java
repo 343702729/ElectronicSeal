@@ -54,6 +54,8 @@ public class SealInfoActivity extends BaseActivity {
     TextView titleSealAddrTV;
     @BindView(R.id.title_seal_desc_tv)
     TextView titleSealDescTV;
+    @BindView(R.id.box_no_tv)
+    TextView boxNoTV;
 
     private int Id;
 
@@ -111,6 +113,7 @@ public class SealInfoActivity extends BaseActivity {
         chipIdTV.setText(node.getChipId());
         sealIdTV.setText(node.getSealId());
         taxNumTV.setText(node.getTaxNumber());
+        boxNoTV.setText(node.getContainerNo());
 
         sealTimeTV.setText(DateUtil.timeStamp2Date(node.getSealDate()));
         sealPerTV.setText(node.getSealOperName());

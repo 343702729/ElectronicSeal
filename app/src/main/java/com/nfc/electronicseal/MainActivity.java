@@ -1,7 +1,11 @@
 package com.nfc.electronicseal;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -41,6 +45,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(new SearchFragment());
         fragments.add(new UserFragment());
         changefragment(0);
+        verifyStoragePermissions(this);
     }
 
     @Override
@@ -131,5 +136,17 @@ public class MainActivity extends BaseActivity {
             }
         }
     };
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    123);
+        }
+    }
 
 }

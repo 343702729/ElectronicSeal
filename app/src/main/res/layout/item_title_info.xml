@@ -61,6 +61,31 @@
                 android:textColor="@color/grayDark"
                 android:textSize="16sp" />
         </LinearLayout>
+        <!-- 集装箱号 -->
+        <LinearLayout
+            android:id="@+id/box_no_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                style="@style/info_title_tv"
+                android:text="集装箱号" />
+
+            <TextView
+                android:id="@+id/box_no_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/grayDark"
+                android:textSize="16sp" />
+        </LinearLayout>
         <!-- 箱封制造企业号 -->
         <LinearLayout
             android:id="@+id/box_maker_ll"
