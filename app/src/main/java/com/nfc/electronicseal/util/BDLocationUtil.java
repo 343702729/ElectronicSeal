@@ -1,20 +1,26 @@
 package com.nfc.electronicseal.util;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
+import com.nfc.electronicseal.MainActivity;
 import com.nfc.electronicseal.base.BaseInfoUpdate;
 
 public class BDLocationUtil {
-    private Context context;
+    private Activity context;
     private LocationClient mLocationClient;
     private BaseInfoUpdate infoUpdate;
 
-    public BDLocationUtil(Context context, BaseInfoUpdate infoUpdate){
+    public BDLocationUtil(Activity context, BaseInfoUpdate infoUpdate){
         this.context = context;
         this.infoUpdate = infoUpdate;
         onCreate();
@@ -22,7 +28,15 @@ public class BDLocationUtil {
 
     public void startLocation(){
         mLocationClient.registerLocationListener(myListener);//注册监听函数
-        mLocationClient.start();//开始定位
+        if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            //未开启定位权限            //开启定位权限,200是标识码
+            ActivityCompat.requestPermissions(context,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},200);
+        }else{
+//            startLocaion();//开始定位            Toast.makeText(MainActivity.this,"已开启定位权限",Toast.LENGTH_LONG).show();        }
+            mLocationClient.start();//开始定位
+        }
+//        mLocationClient.start();//开始定位
     }
 
     public void stopLocation() {

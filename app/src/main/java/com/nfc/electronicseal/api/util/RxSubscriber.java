@@ -1,6 +1,7 @@
 package com.nfc.electronicseal.api.util;
 
 import com.nfc.electronicseal.dialog.DialogHelper;
+import com.nfc.electronicseal.util.TLog;
 
 import rx.Subscriber;
 
@@ -15,7 +16,6 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
     public void onError(Throwable e) {
         e.printStackTrace();
         _onError(e.toString());
-
     }
 
     @Override

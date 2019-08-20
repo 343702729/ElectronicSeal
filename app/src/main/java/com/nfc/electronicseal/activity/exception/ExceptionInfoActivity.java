@@ -114,7 +114,7 @@ public class ExceptionInfoActivity extends BaseActivity {
     }
 
     private void addPictureItem(LinearLayout linearLayout, String picUrl, final int position, final String[] picUrlList){
-        if(TextUtils.isEmpty(picUrl))
+        if(TextUtils.isEmpty(picUrl)||"null".equals(picUrl))
             return;
         View view = View.inflate(this, R.layout.item_picture_s, null);
         ImageView itemIV = view.findViewById(R.id.picture_iv);

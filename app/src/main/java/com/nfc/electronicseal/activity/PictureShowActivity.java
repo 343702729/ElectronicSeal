@@ -1,6 +1,7 @@
 package com.nfc.electronicseal.activity;
 
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,6 +55,8 @@ public class PictureShowActivity extends BaseActivity {
         View view = null;
         LayoutInflater inflater = getLayoutInflater();
         for(String item:picList){
+            if(TextUtils.isEmpty(item)||"null".equals(item))
+                continue;
             view = inflater.inflate(R.layout.adapter_picture_show, null);
             iv = view.findViewById(R.id.pic_iv);
             Glide.with(this).load(item).into(iv);
