@@ -87,8 +87,11 @@ public class SealSearchActivity extends BaseActivity {
                 str = str.trim();
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
             if(!TextUtils.isEmpty(str)&&!"zh".equals(str)){
-                AppToast.showShortText(SealSearchActivity.this, "该封条不符合当前操作");
-                return;
+                if(str.contains("SEALID")&&str.contains("TAXNUMBER")&&str.contains("CONTAINERNO")&&str.contains("SEALSTATUS")){
+                    AppToast.showShortText(SealSearchActivity.this, "该封条不符合当前操作");
+                    return;
+                }
+
             }
 
 //            String writeStr = "sealId:241520190519JD;taxNumber:91341003MA2TJA5342;containerNo:1234562789";

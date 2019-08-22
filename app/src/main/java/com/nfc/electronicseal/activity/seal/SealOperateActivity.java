@@ -277,11 +277,11 @@ public class SealOperateActivity extends BaseActivity {
         }
 
         //施封描述
-//        String desc = sealDescET.getText().toString();
-//        if(TextUtils.isEmpty(desc)){
-//            AppToast.showShortText(this, "施封描述不能为空");
-//            return;
-//        }
+        String desc = sealDescET.getText().toString();
+        if(TextUtils.isEmpty(desc)){
+            AppToast.showShortText(this, "施封描述不能为空");
+            return;
+        }
 
         //pic1Url, pic2Url, pic3Url
         if(TextUtils.isEmpty(pic1Url)&&TextUtils.isEmpty(pic2Url)&&TextUtils.isEmpty(pic3Url)){

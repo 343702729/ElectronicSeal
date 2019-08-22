@@ -60,6 +60,11 @@ public class CustomerActivity extends BaseActivity {
             JudgeDialog dialog = new JudgeDialog(CustomerActivity.this, new BaseInfoUpdate() {
                 @Override
                 public void update(Object object) {
+                    if(object==null)
+                        return;
+                    boolean flag = (boolean)object;
+                    if(!flag)
+                        return;
                     String phone = itemNode.getTelephone();
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.trim()));
                     startActivity(intent);

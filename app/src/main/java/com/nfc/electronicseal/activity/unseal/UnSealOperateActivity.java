@@ -262,6 +262,12 @@ public class UnSealOperateActivity extends BaseActivity{
             return;
         }
 
+        String desc = unsealDescET.getText().toString();
+        if(TextUtils.isEmpty(desc)){
+            AppToast.showShortText(this, "拆封描述不能为空");
+            return;
+        }
+
         if(TextUtils.isEmpty(pic1Url)&&TextUtils.isEmpty(pic2Url)&&TextUtils.isEmpty(pic3Url)){
             AppToast.showShortText(this, "请上传巡检照片");
             return;

@@ -92,7 +92,7 @@
                     <EditText
                         android:id="@+id/unseal_desc_et"
                         style="@style/info_item_et"
-                        android:hint="可不填" />
+                        android:hint="必填" />
                 </LinearLayout>
 
                 <View
