@@ -96,7 +96,14 @@ public class SearchFragment extends BaseFragment {
         if(hidden){
             searchET.clearFocus();
             searchET.setCursorVisible(false);
+        }else {
+
         }
+    }
+
+    @OnClick(R.id.search_et)
+    public void searchEtClick(View view){
+        searchET.setCursorVisible(true);
     }
 
     @OnClick(R.id.search_tv)
