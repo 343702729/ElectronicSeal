@@ -13,10 +13,18 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.api.APIRetrofitUtil;
+import com.nfc.electronicseal.api.util.RxHelper;
+import com.nfc.electronicseal.api.util.RxSubscriber;
+import com.nfc.electronicseal.bean.VersionBean;
+import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.fragment.OperateFragment;
 import com.nfc.electronicseal.fragment.SearchFragment;
 import com.nfc.electronicseal.fragment.UserFragment;
+import com.nfc.electronicseal.node.VersionNode;
+import com.nfc.electronicseal.response.VersionResponse;
 import com.nfc.electronicseal.util.NFCUtil;
+import com.nfc.electronicseal.version.VersionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +54,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(new UserFragment());
         changefragment(0);
         verifyStoragePermissions(this);
+        checkVersionData();
     }
 
     @Override
@@ -136,6 +145,36 @@ public class MainActivity extends BaseActivity {
             }
         }
     };
+
+    private void checkVersionData(){
+        VersionBean bean = new VersionBean(0);
+        APIRetrofitUtil.getInstance().getVersionData(UserInfo.getInstance().getToken(), bean)
+                .compose(new RxHelper<VersionResponse>("").io_no_main(this))
+                .subscribe(new RxSubscriber<VersionResponse>() {
+                    @Override
+                    public void _onNext(VersionResponse response) {
+                        if(response!=null&&response.isSuccess()){
+                            checkVersion(response.getData());
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
+    }
+
+    /**
+     * 版本更新检测
+     * @param node
+     */
+    private void checkVersion(VersionNode node){
+        if(node==null)
+            return;
+        VersionUtil versionUtil = new VersionUtil();
+        boolean flage = versionUtil.checkVersion(this, node);
+    }
 
     public static void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission

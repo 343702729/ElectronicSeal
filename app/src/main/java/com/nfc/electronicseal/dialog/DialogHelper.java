@@ -126,6 +126,11 @@ public class DialogHelper {
         }
     }
 
+    public static void updateDlgMsg(String msg){
+        if(progressDlg!=null)
+            progressDlg.setMessage(msg);
+    }
+
     private static Dialog dialog;
 
     public static void showDialogForLoading(Context context, String msg, boolean cancelable) {

@@ -15,9 +15,16 @@ import com.nfc.electronicseal.activity.my.InstructionActivity;
 import com.nfc.electronicseal.activity.my.ProblemsActivity;
 import com.nfc.electronicseal.activity.my.SettingActivity;
 import com.nfc.electronicseal.activity.my.UserInfoActivity;
+import com.nfc.electronicseal.api.APIRetrofitUtil;
+import com.nfc.electronicseal.api.util.RxHelper;
+import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.base.BaseInfoUpdate;
+import com.nfc.electronicseal.bean.VersionBean;
 import com.nfc.electronicseal.data.UserInfo;
+import com.nfc.electronicseal.node.VersionNode;
+import com.nfc.electronicseal.response.VersionResponse;
 import com.nfc.electronicseal.util.AppInfo;
+import com.nfc.electronicseal.version.VersionUtil;
 import com.nfc.electronicseal.wiget.GlideCircleTransform;
 
 import butterknife.BindDimen;
@@ -63,7 +70,7 @@ public class UserFragment extends BaseFragment {
         super.initData();
     }
 
-    @OnClick({R.id.setting_ll, R.id.user_info_ll, R.id.user_instruction_ll, R.id.user_problems_ll})
+    @OnClick({R.id.setting_ll, R.id.user_info_ll, R.id.user_instruction_ll, R.id.user_problems_ll, R.id.user_version_ll})
     public void lineItemClick(View view){
         Intent intent;
         switch (view.getId()){
@@ -83,6 +90,9 @@ public class UserFragment extends BaseFragment {
                 intent = new Intent(getContext(), ProblemsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.user_version_ll:
+                checkVersionData();
+                break;
         }
     }
 
@@ -96,4 +106,33 @@ public class UserFragment extends BaseFragment {
         }
     }
 
+    private void checkVersionData(){
+        VersionBean bean = new VersionBean(0);
+        APIRetrofitUtil.getInstance().getVersionData(UserInfo.getInstance().getToken(), bean)
+                .compose(new RxHelper<VersionResponse>("获取数据中...").io_main_fragment(this))
+                .subscribe(new RxSubscriber<VersionResponse>() {
+                    @Override
+                    public void _onNext(VersionResponse response) {
+                        if(response!=null&&response.isSuccess()){
+                            checkVersion(response.getData());
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
+    }
+
+    /**
+     * 版本更新检测
+     * @param node
+     */
+    private void checkVersion(VersionNode node){
+        if(node==null)
+            return;
+        VersionUtil versionUtil = new VersionUtil();
+        boolean flage = versionUtil.checkVersion(getActivity(), node);
+    }
 }

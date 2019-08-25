@@ -22,13 +22,17 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:gravity="center_vertical"/>
-            <ImageView
+            <Button
                 android:id="@+id/customer_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
+                android:background="@null"
+                android:text="客服"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:layout_gravity="right|center_vertical"
-                android:background="@mipmap/icon_customer"
+                android:drawableRight="@mipmap/icon_customer"
                 />
         </FrameLayout>
 

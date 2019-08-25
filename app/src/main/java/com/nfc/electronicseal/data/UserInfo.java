@@ -11,6 +11,7 @@ public class UserInfo {
     private UserNode userNode;
     private String token;
     private BaseInfoUpdate headImgUpdate;
+    private BaseInfoUpdate appDownloadUpdate;
     private List<CustomerPhoneNode> customerPhoneList;
 
     public static UserInfo getInstance(){
@@ -49,5 +50,13 @@ public class UserInfo {
 
     public void setCustomerPhoneList(List<CustomerPhoneNode> customerPhoneList) {
         this.customerPhoneList = customerPhoneList;
+    }
+
+    public BaseInfoUpdate getAppDownloadUpdate() {
+        return appDownloadUpdate;
+    }
+
+    public void setAppDownloadUpdate(BaseInfoUpdate appDownloadUpdate) {
+        this.appDownloadUpdate = appDownloadUpdate;
     }
 }

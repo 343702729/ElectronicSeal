@@ -15,6 +15,7 @@ import com.nfc.electronicseal.bean.SealDetailBean;
 import com.nfc.electronicseal.bean.SealInfoBean;
 import com.nfc.electronicseal.bean.SearchRecordBean;
 import com.nfc.electronicseal.bean.UnSealBean;
+import com.nfc.electronicseal.bean.VersionBean;
 import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
@@ -27,6 +28,7 @@ import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
 import com.nfc.electronicseal.response.SealItemResponse;
+import com.nfc.electronicseal.response.VersionResponse;
 
 import okhttp3.MultipartBody;
 import retrofit2.http.Body;
@@ -39,6 +41,10 @@ import retrofit2.http.Part;
 import rx.Observable;
 
 public interface APIService {
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @POST("nfc-feign/app/appVersionApi/getAppVersionInfo")
+    Observable<VersionResponse> getVersionData(@Header("Authorization") String authorization, @Body VersionBean bean);
+
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("nfc-feign/app/loginApi/login")
     Observable<LoginResponse> getLoginData(@Body LoginBean bean);

@@ -16,6 +16,7 @@ import com.nfc.electronicseal.bean.SealDetailBean;
 import com.nfc.electronicseal.bean.SealInfoBean;
 import com.nfc.electronicseal.bean.SearchRecordBean;
 import com.nfc.electronicseal.bean.UnSealBean;
+import com.nfc.electronicseal.bean.VersionBean;
 import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
@@ -28,6 +29,7 @@ import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
 import com.nfc.electronicseal.response.SealItemResponse;
+import com.nfc.electronicseal.response.VersionResponse;
 
 import okhttp3.MultipartBody;
 import rx.Observable;
@@ -44,6 +46,15 @@ public class APIRetrofitUtil extends RetrofitServiceUtil {
             mAPIWrapper = new APIRetrofitUtil();
         }
         return mAPIWrapper;
+    }
+
+    /**
+     * 获取更新信息
+     * @param bean
+     * @return
+     */
+    public Observable<VersionResponse> getVersionData(String authorization,VersionBean bean){
+        return getAPIService().getVersionData(authorization, bean);
     }
 
     /**

@@ -22,4 +22,9 @@
     <color name="yellow_light">#F3992F</color>
     <color name="green_light">#40C182</color>
 
+    <color name="gray_dark_text">#666666</color>
+    <color name="black_light">#535354</color>
+    <color name="lineIGray">#C2C2C2</color>
+    <color name="gray_text">#9FA6B5</color>
+    <color name="blue_light">#3EB4FE</color>
 </resources>

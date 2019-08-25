@@ -1,5 +1,6 @@
 package com.nfc.electronicseal.activity.my;
 
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -57,7 +58,7 @@ public class ProblemInfoActivity extends BaseActivity {
         pTitleTV.setText(node.getTitle());
         if(node.getCreated()!=null)
             timeTV.setText(DateUtil.timeStamp2Date(node.getCreated()));
-        descTV.setText(node.getDescription());
+        descTV.setText(Html.fromHtml(node.getDescription()));
     }
 
     private void getProblemInfoData(int id){

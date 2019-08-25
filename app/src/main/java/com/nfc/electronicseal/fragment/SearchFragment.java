@@ -178,6 +178,10 @@ public class SearchFragment extends BaseFragment {
             SealItemNode node = sealItemNodes.get(position);
             Intent intent = new Intent(getContext(), SealInfoActivity.class);
             intent.putExtra("Id", node.getId());
+            intent.putExtra("ChipId", node.getChipId());
+            intent.putExtra("SealId", node.getSealId());
+            intent.putExtra("TaxNumber", node.getTaxNumber());
+            intent.putExtra("ContainerNo", node.getContainerNo());
             startActivity(intent);
         }
     };

@@ -26,6 +26,9 @@
     <!-- SD卡读取权限，用户写入离线定位数据-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <application
         android:name=".activity.base.BaseApplication"
         android:allowBackup="true"
@@ -122,6 +125,18 @@
             android:enabled="true"
             android:process=":remote"></service>
 
+        <!-- apk 下载service -->
+        <service android:name=".version.ApplicationUpdateService" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.nfc.electronicseal.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

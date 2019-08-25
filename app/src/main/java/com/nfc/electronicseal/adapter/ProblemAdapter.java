@@ -1,6 +1,7 @@
 package com.nfc.electronicseal.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class ProblemAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)view.getTag();
         }
         viewHolder.titleTV.setText(node.getTitle());
-        viewHolder.descTV.setText(node.getDescription());
+        viewHolder.descTV.setText(Html.fromHtml(node.getDescription()));
         return view;
     }
 
