@@ -283,6 +283,7 @@ public class UnSealOperateActivity extends BaseActivity{
         String desc = unsealDescET.getText().toString();
         String lnglat = longitude + "," + latitude;
         String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
+        sealPic = sealPic.replaceAll(",null", "");
         UnSealBean bean = new UnSealBean(sealId, unsealLoca, lnglat, desc, sealPic);
         APIRetrofitUtil.getInstance().unsealSubmitDo(UserInfo.getInstance().getToken(), bean)
                 .compose(new RxHelper<Response>("提交信息...").io_main(UnSealOperateActivity.this))

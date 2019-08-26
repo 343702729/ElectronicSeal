@@ -365,6 +365,7 @@ public class InspectOperateActivity extends BaseActivity {
 
         String lnglat = longitude + "," + latitude;
         String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
+        sealPic = sealPic.replaceAll(",null", "");
         InspectBean bean = new InspectBean(sealId, inspectLoca, lnglat, desc, sealPic);
         APIRetrofitUtil.getInstance().inspectSubmitDo(UserInfo.getInstance().getToken(), bean)
                 .compose(new RxHelper<Response>("提交信息...").io_main(InspectOperateActivity.this))

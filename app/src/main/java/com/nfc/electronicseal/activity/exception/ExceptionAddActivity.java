@@ -176,6 +176,7 @@ public class ExceptionAddActivity extends BaseActivity {
 
         String lnglat = longitude + "," + latitude;
         String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
+        sealPic = sealPic.replaceAll(",null", "");
         exceptionAddDo(sealId, desc, sealPic, lnglat, sealLoca);
     }
 

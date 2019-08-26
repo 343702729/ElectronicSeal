@@ -228,6 +228,7 @@ public class SealOperateActivity extends BaseActivity {
     }
 
     private void sealSubmitStart(){
+//        String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
         //姓名
         String name = receiverNameET.getText().toString();
         if(TextUtils.isEmpty(name)){
@@ -375,6 +376,7 @@ public class SealOperateActivity extends BaseActivity {
 
         String lnglat = longitude + "," + latitude;
         String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
+        sealPic = sealPic.replaceAll(",null", "");
 
         SealBean bean = new SealBean(elcId, nfcId, name, tel, addr, boxNo, carrier, sealLoca, lnglat, desc, sealPic);
         APIRetrofitUtil.getInstance().sealSubmitDo(UserInfo.getInstance().getToken(), bean)
