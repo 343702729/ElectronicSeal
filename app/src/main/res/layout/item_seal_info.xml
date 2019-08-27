@@ -1,107 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@color/white"
-        android:paddingBottom="10dp"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
-        <!-- 施封时间 -->
-        <LinearLayout style="@style/item_line_ll_s">
-
-            <TextView
-                android:id="@+id/title_seal_time_tv"
-                style="@style/info_title_tv"
-                android:text="施封时间" />
-
-            <TextView
-                android:id="@+id/seal_time_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=""
-                android:textColor="@color/grayDark"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <!-- 施封员 -->
-        <LinearLayout style="@style/item_line_ll_s">
-
-            <TextView
-                android:id="@+id/title_seal_person_tv"
-                style="@style/info_title_tv"
-                android:text="施封员" />
-
-            <TextView
-                android:id="@+id/seal_person_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=""
-                android:textColor="@color/grayDark"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <!-- 巡检描述 -->
-        <LinearLayout style="@style/item_line_ll_s">
-
-            <TextView
-                android:id="@+id/title_seal_desc_tv"
-                style="@style/info_title_tv"
-                android:text="巡检描述" />
-
-            <TextView
-                android:id="@+id/seal_desc_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=""
-                android:textColor="@color/grayDark"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <!-- 施封地点 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:background="@color/white"
+            android:paddingBottom="10dp"
+            android:orientation="vertical">
+            <!-- 施封时间 -->
+            <LinearLayout style="@style/item_line_ll_s">
 
-            <TextView
-                android:id="@+id/title_seal_addr_tv"
-                style="@style/info_title_tv"
-                android:text="施封地点" />
+                <TextView
+                    android:id="@+id/title_seal_time_tv"
+                    style="@style/info_title_tv"
+                    android:textStyle="bold"
+                    android:text="" />
 
-            <TextView
-                android:id="@+id/seal_addr_tv"
+                <TextView
+                    android:id="@+id/seal_time_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/grayDark"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <!-- 施封员 -->
+            <LinearLayout style="@style/item_line_ll_s">
+
+                <TextView
+                    android:id="@+id/title_seal_person_tv"
+                    style="@style/info_title_tv"
+                    android:text="施封员" />
+
+                <TextView
+                    android:id="@+id/seal_person_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/grayDark"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <!-- 巡检描述 -->
+            <LinearLayout style="@style/item_line_ll_s">
+
+                <TextView
+                    android:id="@+id/title_seal_desc_tv"
+                    style="@style/info_title_tv"
+                    android:text="巡检描述" />
+
+                <TextView
+                    android:id="@+id/seal_desc_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/grayDark"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <!-- 施封地点 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="right"
-                android:text=""
-                android:textColor="@color/grayDark"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
 
-    <!-- 图片 -->
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:scrollbars="none">
-        <LinearLayout
-            android:id="@+id/seal_pics_ll"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/white"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:paddingBottom="15dp"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/title_seal_addr_tv"
+                    style="@style/info_title_tv"
+                    android:text="施封地点" />
+
+                <TextView
+                    android:id="@+id/seal_addr_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/grayDark"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </LinearLayout>
-    </HorizontalScrollView>
-</LinearLayout>
+
+        <!-- 图片 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/seal_pics_ll"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="15dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_search_info_1"/>
+        <LinearLayout
+            android:id="@+id/repeat_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/repeat_bg">
+
+        </LinearLayout>
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/repeat_bg"/>-->
+    </LinearLayout>
+</FrameLayout>
+

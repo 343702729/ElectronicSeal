@@ -28,6 +28,7 @@ public class ItemSealInfoView extends LinearLayout {
     private TextView sealAddrTV;
     private TextView sealDescTV;
     private LinearLayout sealPicsLL;
+    private LinearLayout repeatLL;
 
     public ItemSealInfoView(Context context, SealItemNode node){
         super(context);
@@ -50,7 +51,7 @@ public class ItemSealInfoView extends LinearLayout {
         sealAddrTV = findViewById(R.id.seal_addr_tv);
         sealDescTV = findViewById(R.id.seal_desc_tv);
         sealPicsLL = findViewById(R.id.seal_pics_ll);
-
+        repeatLL = findViewById(R.id.repeat_ll);
 
         initDatas(node);
     }
@@ -58,22 +59,23 @@ public class ItemSealInfoView extends LinearLayout {
     private void initDatas(SealItemNode node){
         if(node.getSealStatus()==1){
             //已施封
-            titleSealTimeTV.setText("施封时间");
+            titleSealTimeTV.setText("施封");
             titleSealPerTV.setText("施封员");
             titleSealAddrTV.setText("施封地点");
             titleSealDescTV.setText("施封描述");
         }else if(node.getSealStatus()==2){
             //已巡检
-            titleSealTimeTV.setText("巡检时间");
+            titleSealTimeTV.setText("巡检");
             titleSealPerTV.setText("巡检员");
             titleSealAddrTV.setText("巡检地点");
             titleSealDescTV.setText("巡检描述");
         }else if(node.getSealStatus()==3){
             //已完成
-            titleSealTimeTV.setText("拆封时间");
+            titleSealTimeTV.setText("拆封");
             titleSealPerTV.setText("拆封员");
             titleSealAddrTV.setText("拆封地点");
             titleSealDescTV.setText("拆封描述");
+            repeatLL.setVisibility(INVISIBLE);
         }
 
         sealTimeTV.setText(DateUtil.timeStamp2Date(node.getSealDate()));
