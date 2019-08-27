@@ -229,6 +229,7 @@ public class SealOperateActivity extends BaseActivity {
 
     private void sealSubmitStart(){
 //        String sealPic = pic1Url + "," + pic2Url + "," + pic3Url;
+
         //姓名
         String name = receiverNameET.getText().toString();
         if(TextUtils.isEmpty(name)){
@@ -261,6 +262,11 @@ public class SealOperateActivity extends BaseActivity {
         final String boxNo = sealBoxNoET.getText().toString();
         if(TextUtils.isEmpty(boxNo)){
             AppToast.showShortText(this, "集装箱号不能为空");
+            return;
+        }
+
+        if(!isLetterDigitOrChinese(boxNo)){
+            AppToast.showShortText(this, "集装箱号不符合规定");
             return;
         }
 
@@ -397,5 +403,10 @@ public class SealOperateActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    public static boolean isLetterDigitOrChinese(String str) {
+        String regex = "^[a-z0-9A-Z\u4e00-\u9fa5]+$";//其他需要，直接修改正则表达式就好
+        return str.matches(regex);
     }
 }

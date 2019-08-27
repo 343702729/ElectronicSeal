@@ -248,6 +248,8 @@ public class SearchFragment extends BaseFragment {
 
                             if(sealItemNodes!=null&&sealItemNodes.size()!=0){
                                 noDataIV.setVisibility(View.GONE);
+                            }else {
+                                noDataIV.setVisibility(View.VISIBLE);
                             }
                         }
                     }

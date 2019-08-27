@@ -132,6 +132,7 @@
                     <EditText
                         android:id="@+id/seal_box_no_et"
                         style="@style/info_item_et"
+                        android:maxLength="21"
                         android:hint="必填" />
                 </LinearLayout>
 
