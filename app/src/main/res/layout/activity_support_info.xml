@@ -5,4 +5,94 @@
     android:background="@color/appBg"
     android:orientation="vertical">
     <include layout="@layout/item_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <LinearLayout
+            style="@style/item_line_ll">
+            <TextView
+                style="@style/info_title_tv"
+                android:layout_width="80dp"
+                android:text="QQ" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="2881372045"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/appBg" />
+
+        <LinearLayout
+            style="@style/item_line_ll">
+            <TextView
+                style="@style/info_title_tv"
+                android:layout_width="80dp"
+                android:text="微信公众号" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="hs05595298855"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/appBg" />
+
+        <LinearLayout
+            style="@style/item_line_ll">
+            <TextView
+                style="@style/info_title_tv"
+                android:layout_width="80dp"
+                android:text="商务合作" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="sales@chnseal.cn"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/appBg" />
+
+        <LinearLayout
+            style="@style/item_line_ll">
+            <TextView
+                style="@style/info_title_tv"
+                android:layout_width="80dp"
+                android:text="技术支持" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="help@chnseal.cn"
+                android:textColor="@color/grayDark"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
