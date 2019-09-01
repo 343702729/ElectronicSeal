@@ -117,6 +117,20 @@ public class NFCUtil {
     }
 
     /**
+     * 往nfc写入数据
+     */
+    public static void writeNFCToTag(String data, Tag tag) throws IOException, FormatException {
+        if(!isSupportNFC)
+            return;
+        Ndef ndef = Ndef.get(tag);
+        ndef.connect();
+        NdefRecord ndefRecord = createTextRecord(data);
+        NdefRecord[] records = {ndefRecord};
+        NdefMessage ndefMessage = new NdefMessage(records);
+        ndef.writeNdefMessage(ndefMessage);
+    }
+
+    /**
      * 读取nfcID
      */
     public static String readNFCId(Intent intent) throws UnsupportedEncodingException {

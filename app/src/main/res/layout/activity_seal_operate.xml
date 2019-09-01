@@ -100,7 +100,6 @@
                     <EditText
                         android:id="@+id/receiver_addrinfo_et"
                         style="@style/info_item_et"
-                        android:inputType="phone"
                         android:hint="必填" />
                 </LinearLayout>
 

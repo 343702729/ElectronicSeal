@@ -2,9 +2,14 @@ package com.nfc.electronicseal.activity;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.nfc.FormatException;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
+import android.nfc.tech.Ndef;
+import android.nfc.tech.NfcA;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +19,8 @@ import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.adapter.SelectPicAdapter;
+import com.nfc.electronicseal.nfc.MyNFC;
+import com.nfc.electronicseal.nfc.NfcDataOrder;
 import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.BDLocationUtil;
 import com.nfc.electronicseal.util.NFCUtil;
@@ -36,6 +43,7 @@ public class ExceptionActivity extends BaseActivity{
 
     private NfcAdapter mNfcAdapter;
     private PendingIntent mPendingIntent;
+    private MyNFC myNFC;
 
 
     @Override
@@ -51,7 +59,7 @@ public class ExceptionActivity extends BaseActivity{
 //        mNfcAdapter = mNfcAdapter.getDefaultAdapter(this);
 //        mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
 //                getClass()), 0);
-
+        myNFC = MyNFC.getInstance(this);
     }
 
     /**
@@ -112,14 +120,66 @@ public class ExceptionActivity extends BaseActivity{
             String str = NFCUtil.readNFCFromTag(intent);
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
 
+
+            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            MyNFC.getInstance(this).setTag(tag);
+            MyNFC.getInstance(this).nfcA = NfcA.get(tag);
+
             String writeStr = "SEALID:241520190519JD,TAXNUMBER:91341003MA2TJA5342,CONTAINERNO:1234562789,SEALSTATUS:2";
-            NFCUtil.writeNFCToTag("", intent);
+            verificationData(writeStr, intent);
+//            NFCUtil.writeNFCToTag(writeStr, intent);
             TLog.log("Write success!!");
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
+
+    private void verificationData(String content, Intent intent) throws IOException {
+        //0xFF
+        myNFC.nfcA.connect();
+        byte[] data = new byte[]{(byte)0x1B,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
+        byte[] response = myNFC.nfcA.transceive(data);
+        System.out.println("The respons:" + response);
+        if(response!=null){
+            try {
+//                Ndef ndef;
+                NFCUtil.writeNFCToTag(content, myNFC.nfcA.getTag());
+                TLog.log("CSss写入成功，等待设备回复");
+                AppToast.showShortText(this, "CSss写入成功，等待设备回复");
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                myNFC.nfcA.close();
+            }
+        }
+    }
+
+    public void write(int page, List<byte[]> pagesTemp){
+        try{
+            try {
+                byte[] data = new byte[]{(byte)0xA2,(byte)page,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
+                for(int i=0; i< pagesTemp.size(); i++){
+                    data[2] = pagesTemp.get(i)[0];
+                    data[3] = pagesTemp.get(i)[1];
+                    data[4] = pagesTemp.get(i)[2];
+                    data[5] = pagesTemp.get(i)[3];
+                    myNFC.nfcA.transceive(data);
+                    data[1] ++;
+                }
+                TLog.log("Come into write success");
+//                Toasty.success(getContext(), "写入成功").show();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+
+        }
+    }
+
 
     public void writeTag(Tag tag) {
 
