@@ -92,4 +92,39 @@ public class MyNFC {
         };
         timerNFC.schedule(timerTaskNFC, 500);
     }
+
+    public void writeData(byte[] contents){
+        if(contents==null)
+            return;
+        try {
+            int page = 4;
+            byte[] item = new byte[contents.length + 4];
+            item[0] = (byte)0x03;
+            item[1] = (byte)contents.length;
+            item[2] = (byte)0xD1;
+            for (int i=0; i < contents.length; i++ ){
+                item[i+3] = contents[i];
+            }
+            item[contents.length + 3] = (byte)0xFE;
+            for (int i=0; i<item.length;){
+                byte[] data = new byte[]{(byte)0xA2,(byte)page,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
+                if(i++<item.length){
+                    data[2] = item[i];
+                }
+                if(i++<item.length){
+                    data[3] = item[i];
+                }
+                if(i++<item.length){
+                    data[4] = item[i];
+                }
+                if(i++<item.length){
+                    data[5] = item[i];
+                }
+                nfcA.transceive(data);
+                page++;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

@@ -130,6 +130,14 @@ public class NFCUtil {
         ndef.writeNdefMessage(ndefMessage);
     }
 
+    public static byte[] getNdefMsgs(String data){
+//        NdefRecord ndefRecord = createTextRecord(data);
+        NdefRecord ndefRecord = NdefRecord.createTextRecord(null, data);
+        NdefRecord[] records = {ndefRecord};
+        NdefMessage ndefMessage = new NdefMessage(records);
+        return ndefMessage.toByteArray();
+    }
+
     /**
      * 读取nfcID
      */

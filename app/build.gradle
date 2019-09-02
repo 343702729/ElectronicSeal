@@ -18,10 +18,10 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.nfc.electronicseal"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.0.2"
+        versionCode 10
+        versionName "1.0.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -65,4 +65,5 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
 
     implementation project(':picsellib')
+    implementation project(path: ':pickerview')
 }
