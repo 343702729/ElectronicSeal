@@ -125,6 +125,9 @@ public class ExceptionActivity extends BaseActivity{
             MyNFC.getInstance(this).setTag(tag);
             MyNFC.getInstance(this).nfcA = NfcA.get(tag);
 
+            myNFC.readData();
+
+
             String writeStr = "SEALID:241520190519JD,TAXNUMBER:91341003MA2TJA5342,CONTAINERNO:1234562789,SEALSTATUS:2";
             verificationData(writeStr, intent);
 //            NFCUtil.writeNFCToTag(writeStr, intent);
@@ -144,7 +147,9 @@ public class ExceptionActivity extends BaseActivity{
         if(response!=null){
             try {
 //                Ndef ndef;
-                NFCUtil.writeNFCToTag(content, myNFC.nfcA.getTag());
+//                NFCUtil.getNdefMsgs(content);
+//                NFCUtil.writeNFCToTag(content, myNFC.nfcA.getTag());
+                myNFC.writeData(NFCUtil.getNdefMsgs(content));
                 TLog.log("CSss写入成功，等待设备回复");
                 AppToast.showShortText(this, "CSss写入成功，等待设备回复");
             }catch (Exception e){
