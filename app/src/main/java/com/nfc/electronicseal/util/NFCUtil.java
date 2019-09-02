@@ -131,8 +131,8 @@ public class NFCUtil {
     }
 
     public static byte[] getNdefMsgs(String data){
-//        NdefRecord ndefRecord = createTextRecord(data);
-        NdefRecord ndefRecord = NdefRecord.createTextRecord(null, data);
+        NdefRecord ndefRecord = createTextRecord(data);
+//        NdefRecord ndefRecord = NdefRecord.createTextRecord(null, data);
         NdefRecord[] records = {ndefRecord};
         NdefMessage ndefMessage = new NdefMessage(records);
         return ndefMessage.toByteArray();

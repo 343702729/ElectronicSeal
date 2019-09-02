@@ -22,6 +22,7 @@ import com.nfc.electronicseal.base.BaseInfoUpdate;
 import com.nfc.electronicseal.bean.UnSealBean;
 import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.dialog.DialogHelper;
+import com.nfc.electronicseal.nfc.MyNFC;
 import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.BDLocationUtil;
@@ -371,7 +372,8 @@ public class UnSealOperateActivity extends BaseActivity{
                     return;
                 }
                 TLog.log("The NFC seal come into write:" + writeContent);
-                NFCUtil.writeNFCToTag("", intent);
+//                NFCUtil.writeNFCToTag("", intent);
+                MyNFC.getInstance(this).verificationData("", intent);
                 DialogHelper.stopProgressDlg();
                 isWrite = false;
                 unsealSubmitDo();

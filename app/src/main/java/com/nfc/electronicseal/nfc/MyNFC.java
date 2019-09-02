@@ -2,12 +2,16 @@ package com.nfc.electronicseal.nfc;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NfcA;
 import android.widget.Toast;
 
 import com.nfc.electronicseal.util.AppToast;
+import com.nfc.electronicseal.util.NFCUtil;
+import com.nfc.electronicseal.util.TLog;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,6 +97,26 @@ public class MyNFC {
         timerNFC.schedule(timerTaskNFC, 500);
     }
 
+    public void verificationData(String content, Intent intent) throws IOException {
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        this.tag = tag;
+        nfcA = NfcA.get(tag);
+        nfcA.connect();
+        byte[] data = new byte[]{(byte)0x1B,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
+        byte[] response = nfcA.transceive(data);
+        System.out.println("The respons:" + response);
+        if(response!=null){
+            try {
+                writeData(NFCUtil.getNdefMsgs(content));
+                TLog.log("CSss写入成功，等待设备回复");
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                nfcA.close();
+            }
+        }
+    }
+
     public void writeData(byte[] contents){
         if(contents==null)
             return;
@@ -101,24 +125,28 @@ public class MyNFC {
             byte[] item = new byte[contents.length + 4];
             item[0] = (byte)0x03;
             item[1] = (byte)contents.length;
-            item[2] = (byte)0xD1;
+//            item[2] = (byte)0xD1;
             for (int i=0; i < contents.length; i++ ){
-                item[i+3] = contents[i];
+                item[i+2] = contents[i];
             }
-            item[contents.length + 3] = (byte)0xFE;
+            item[contents.length + 2] = (byte)0xFE;
             for (int i=0; i<item.length;){
-                byte[] data = new byte[]{(byte)0xA2,(byte)page,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
-                if(i++<item.length){
+                byte[] data = new byte[]{(byte)0xA2,(byte)page,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00};
+                if(i<item.length){
                     data[2] = item[i];
+                    i++;
                 }
-                if(i++<item.length){
+                if(i<item.length){
                     data[3] = item[i];
+                    i++;
                 }
-                if(i++<item.length){
+                if(i<item.length){
                     data[4] = item[i];
+                    i++;
                 }
-                if(i++<item.length){
+                if(i<item.length){
                     data[5] = item[i];
+                    i++;
                 }
                 nfcA.transceive(data);
                 page++;

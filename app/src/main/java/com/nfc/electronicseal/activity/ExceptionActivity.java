@@ -109,11 +109,6 @@ public class ExceptionActivity extends BaseActivity{
         super.onNewIntent(intent);
         TLog.log("Come into nfc read");
         try {
-//            Tag tag = intent.getParcelableExtra(mNfcAdapter.EXTRA_TAG);
-//            readTag(tag);
-//            writeTag(tag);
-
-
             if(!NFCUtil.isNFCCard(intent))
                 AppToast.showShortText(this, "该封条不可用");
             String nfcId = NFCUtil.readNFCId(intent);
@@ -121,15 +116,10 @@ public class ExceptionActivity extends BaseActivity{
             TLog.log("The NFC content is:" + str + "   nfcId:" + nfcId + "  size:" + str.getBytes().length);
 
 
-            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            MyNFC.getInstance(this).setTag(tag);
-            MyNFC.getInstance(this).nfcA = NfcA.get(tag);
-
-            myNFC.readData();
-
-
-            String writeStr = "SEALID:241520190519JD,TAXNUMBER:91341003MA2TJA5342,CONTAINERNO:1234562789,SEALSTATUS:2";
-            verificationData(writeStr, intent);
+//            String writeStr = "SEALID:241520190519JD,TAXNUMBER:91341003MA2TJA5342,CONTAINERNO:1234562789,SEALSTATUS:2";
+            String writeStr = "";
+            MyNFC.getInstance(this).verificationData(writeStr, intent);
+//            verificationData(writeStr, intent);
 //            NFCUtil.writeNFCToTag(writeStr, intent);
             TLog.log("Write success!!");
         }catch (Exception e){
@@ -146,12 +136,8 @@ public class ExceptionActivity extends BaseActivity{
         System.out.println("The respons:" + response);
         if(response!=null){
             try {
-//                Ndef ndef;
-//                NFCUtil.getNdefMsgs(content);
-//                NFCUtil.writeNFCToTag(content, myNFC.nfcA.getTag());
                 myNFC.writeData(NFCUtil.getNdefMsgs(content));
                 TLog.log("CSss写入成功，等待设备回复");
-                AppToast.showShortText(this, "CSss写入成功，等待设备回复");
             }catch (Exception e){
                 e.printStackTrace();
             }finally {

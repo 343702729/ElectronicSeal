@@ -1,9 +1,11 @@
 package com.nfc.electronicseal.activity.seal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +31,7 @@ import com.nfc.electronicseal.bean.SealBean;
 import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.data.bean.JsonBean;
 import com.nfc.electronicseal.dialog.DialogHelper;
+import com.nfc.electronicseal.nfc.MyNFC;
 import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.util.AppToast;
@@ -36,6 +39,7 @@ import com.nfc.electronicseal.util.BDLocationUtil;
 import com.nfc.electronicseal.util.GetJsonDataUtil;
 import com.nfc.electronicseal.util.NFCUtil;
 import com.nfc.electronicseal.util.TLog;
+import com.nfc.electronicseal.util.UiUtils;
 
 import org.json.JSONArray;
 
@@ -146,6 +150,7 @@ public class SealOperateActivity extends BaseActivity {
     @OnClick(R.id.receiver_addr_et)
     public void addressSel(View view){
         TLog.log("Come into addr sel click");
+        UiUtils.hideSoftKeyboard(this);
         OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
@@ -416,7 +421,8 @@ public class SealOperateActivity extends BaseActivity {
                     return;
                 }
                 TLog.log("The NFC seal come into write:" + writeContent);
-                NFCUtil.writeNFCToTag(writeContent, intent);
+//                NFCUtil.writeNFCToTag(writeContent, intent);
+                MyNFC.getInstance(this).verificationData(writeContent, intent);
                 DialogHelper.stopProgressDlg();
                 isWrite = false;
                 sealSubmitDo();
@@ -533,4 +539,6 @@ public class SealOperateActivity extends BaseActivity {
         }
         return detail;
     }
+
+
 }
