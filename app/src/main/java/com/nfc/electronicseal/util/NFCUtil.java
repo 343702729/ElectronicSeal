@@ -10,6 +10,7 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
+import android.nfc.tech.NfcA;
 import android.nfc.tech.NfcF;
 import android.os.Parcelable;
 import android.provider.Settings;
@@ -75,6 +76,9 @@ public class NFCUtil {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         Ndef ndef = Ndef.get(tag);
         if(ndef==null)
+            return false;
+        NfcA nfcA = NfcA.get(tag);
+        if(nfcA==null)
             return false;
         return true;
     }

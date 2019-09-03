@@ -106,6 +106,8 @@ public class SealOperateActivity extends BaseActivity {
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
+    private String addrSel;
+
     @Override
     public int layoutView() {
         return R.layout.activity_seal_operate;
@@ -167,8 +169,9 @@ public class SealOperateActivity extends BaseActivity {
                         && options3Items.get(options1).get(options2).size() > 0 ?
                         options3Items.get(options1).get(options2).get(options3) : "";
 
-                String tx = opt1tx + opt2tx + opt3tx;
-                receiverAddrET.setText(tx);
+                addrSel = opt1tx + opt2tx + opt3tx;
+                receiverAddrET.setTextColor(getResources().getColor(R.color.grayDark));
+                receiverAddrET.setText(addrSel);
 //                AppToast.showShortText(SealOperateActivity.this, tx);
             }
         }).setTitleText("城市选择")
@@ -300,8 +303,8 @@ public class SealOperateActivity extends BaseActivity {
         }
 
         //收货地址
-        String addr = receiverAddrET.getText().toString();
-        if(TextUtils.isEmpty(addr)){
+//        String addr = receiverAddrET.getText().toString();
+        if(TextUtils.isEmpty(addrSel)){
             AppToast.showShortText(this, "收货人收货地址不能为空");
             return;
         }

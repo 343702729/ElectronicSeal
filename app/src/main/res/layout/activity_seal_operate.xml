@@ -81,7 +81,9 @@
 
                     <TextView
                         android:id="@+id/receiver_addr_et"
-                        style="@style/info_item_tv" />
+                        android:text="请选择省市区"
+                        style="@style/info_item_tv"
+                        android:textColor="@color/grayLight"/>
                 </LinearLayout>
 
                 <View
@@ -100,7 +102,7 @@
                     <EditText
                         android:id="@+id/receiver_addrinfo_et"
                         style="@style/info_item_et"
-                        android:hint="必填" />
+                        android:hint="请输入想想地址(必填)" />
                 </LinearLayout>
 
             </LinearLayout>
