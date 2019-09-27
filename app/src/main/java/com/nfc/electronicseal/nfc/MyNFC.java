@@ -102,8 +102,31 @@ public class MyNFC {
         this.tag = tag;
         nfcA = NfcA.get(tag);
         nfcA.connect();
-        byte[] data = new byte[]{(byte)0x1B,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
-        byte[] response = nfcA.transceive(data);
+
+//        byte[] data = new byte[]{(byte)0x1B,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
+//        byte[] response = nfcA.transceive(data);
+
+        byte[] response = null;
+        try {
+            byte[] data = new byte[]{(byte)0x1B,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0x5B};
+            response = nfcA.transceive(data);
+        }catch (Exception e){
+            e.printStackTrace();
+            nfcA.close();
+            nfcA.connect();
+            try {
+                byte[] dataY = new byte[]{(byte)0x1B,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0xFF};
+                byte[] responseY = nfcA.transceive(dataY);
+                if(responseY!=null){
+                    byte[] data = new byte[]{(byte)0xA2,(byte)0x2B,(byte)0xFF,(byte)0xFF,(byte)0xFF,(byte)0x5B};
+                    response = nfcA.transceive(data);
+                }
+            }catch (Exception exp){
+                exp.printStackTrace();
+            }
+        }
+
+
         System.out.println("The respons:" + response);
         if(response!=null){
             try {
@@ -114,6 +137,7 @@ public class MyNFC {
             }finally {
                 nfcA.close();
             }
+            AppToast.showShortText(context, "写入成功");
         }
     }
 

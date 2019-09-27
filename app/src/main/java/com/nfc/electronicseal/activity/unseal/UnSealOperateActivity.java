@@ -13,7 +13,9 @@ import com.bumptech.glide.Glide;
 import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.activity.base.SuccessActivity;
 import com.nfc.electronicseal.activity.inspect.InspectOperateActivity;
+import com.nfc.electronicseal.activity.seal.SealOperateActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.PicUploadUtil;
 import com.nfc.electronicseal.api.util.RxHelper;
@@ -293,6 +295,8 @@ public class UnSealOperateActivity extends BaseActivity{
                     public void _onNext(Response response) {
                         if(response!=null&&response.isSuccess()){
                             AppToast.showShortText(UnSealOperateActivity.this, "信息提交成功");
+                            Intent intent = new Intent(UnSealOperateActivity.this, SuccessActivity.class);
+                            startActivity(intent);
                             finish();
                         }else
                             AppToast.showShortText(UnSealOperateActivity.this, response.getMessage());

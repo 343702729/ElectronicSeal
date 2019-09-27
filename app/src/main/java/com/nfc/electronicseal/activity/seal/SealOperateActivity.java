@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.activity.base.SuccessActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.PicUploadUtil;
 import com.nfc.electronicseal.api.util.RxHelper;
@@ -426,6 +427,7 @@ public class SealOperateActivity extends BaseActivity {
                 TLog.log("The NFC seal come into write:" + writeContent);
 //                NFCUtil.writeNFCToTag(writeContent, intent);
                 MyNFC.getInstance(this).verificationData(writeContent, intent);
+
                 DialogHelper.stopProgressDlg();
                 isWrite = false;
                 sealSubmitDo();
@@ -459,6 +461,8 @@ public class SealOperateActivity extends BaseActivity {
                     public void _onNext(Response response) {
                         if(response!=null&&response.isSuccess()){
                             AppToast.showShortText(SealOperateActivity.this,"信息提交成功");
+                            Intent intent = new Intent(SealOperateActivity.this, SuccessActivity.class);
+                            startActivity(intent);
                             finish();
                         }else {
                             AppToast.showShortText(SealOperateActivity.this, response.getMessage());

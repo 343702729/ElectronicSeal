@@ -117,7 +117,7 @@ public class ExceptionActivity extends BaseActivity{
 
 
 //            String writeStr = "SEALID:241520190519JD,TAXNUMBER:91341003MA2TJA5342,CONTAINERNO:1234562789,SEALSTATUS:2";
-            String writeStr = "";
+            String writeStr = "456";
             MyNFC.getInstance(this).verificationData(writeStr, intent);
 //            verificationData(writeStr, intent);
 //            NFCUtil.writeNFCToTag(writeStr, intent);

@@ -58,7 +58,6 @@
 
         </activity>
 
-
         <activity android:name=".activity.seal.SealSearchActivity" android:screenOrientation="portrait" >
 
         </activity>
@@ -117,6 +116,8 @@
         <activity android:name=".activity.PictureShowActivity" android:screenOrientation="portrait" ></activity>
 
         <activity android:name=".activity.my.SupportInfoActivity" android:screenOrientation="portrait" ></activity>
+
+        <activity android:name=".activity.base.SuccessActivity" android:screenOrientation="portrait" ></activity>
 
         <!-- 百度定位 RK1qh7g9DOD9Rh1ZHSjLXgbRinxToxzO -->
         <meta-data

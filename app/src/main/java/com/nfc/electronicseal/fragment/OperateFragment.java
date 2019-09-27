@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.CustomerActivity;
@@ -12,23 +13,36 @@ import com.nfc.electronicseal.activity.inspect.InspectSearchActivity;
 import com.nfc.electronicseal.activity.seal.SealSearchActivity;
 import com.nfc.electronicseal.activity.base.BaseFragment;
 import com.nfc.electronicseal.activity.unseal.UnSealSearchActivity;
+import com.nfc.electronicseal.adapter.ImagePagerAdapter;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.RxHelper;
 import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.data.UserInfo;
+import com.nfc.electronicseal.node.BannerNode;
 import com.nfc.electronicseal.node.MenuNode;
 import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.UiUtils;
+import com.nfc.electronicseal.wiget.banner.MyViewFlow;
+import com.nfc.electronicseal.wiget.banner.PointView;
+import com.nfc.electronicseal.wiget.banner.ViewFlow;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 @SuppressLint("ValidFragment")
 public class OperateFragment extends BaseFragment{
+    @BindView(R.id.viewflow)
+    MyViewFlow viewFlow;
+    @BindView(R.id.points_ll)
+    LinearLayout pointsLL;
 
     private boolean isSF = false, isXJ = false, isCF = false, isYC = false;
+    private int imgSize = 0;
+    private PointView pointView;
 
     @Override
     public int layoutView() {
@@ -39,6 +53,7 @@ public class OperateFragment extends BaseFragment{
     public void initData() {
         super.initData();
         getMenusData();
+        setNewsBanner();
     }
 
     @OnClick({R.id.item_sf_ll, R.id.item_xj_ll, R.id.item_cf_ll, R.id.item_yc_ll})
@@ -114,4 +129,46 @@ public class OperateFragment extends BaseFragment{
                     }
                 });
     }
+
+    private void setNewsBanner(){
+        viewFlow.setOnViewSwitchListener(imageSwitchListener);
+        List<BannerNode> bannerNodes = new ArrayList<>();
+        bannerNodes.add(new BannerNode());
+        bannerNodes.add(new BannerNode());
+        if(bannerNodes==null||bannerNodes.size()==0)
+            return;
+        imgSize = bannerNodes.size();
+        initBanner(bannerNodes);
+    }
+
+    private void initBanner(List<BannerNode> bannerNodes){
+        if(bannerNodes==null)
+            return;
+        List<String> imgsList = new ArrayList<>();
+        List<String> urlList = new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
+
+//        for(BannerNode node:bannerNodes){
+//        }
+        imgsList.add("1");
+        imgsList.add("2");
+        viewFlow.setAdapter(new ImagePagerAdapter(UiUtils.getContext(), imgsList, urlList, titleList).setInfiniteLoop(true));
+        viewFlow.setmSideBuffer(bannerNodes.size());
+        viewFlow.setTimeSpan(4000);
+        viewFlow.setSelection(bannerNodes.size() * 1000);
+        viewFlow.startAutoFlowTimer();
+        pointView = new PointView(UiUtils.getContext());
+        pointView.addViews(pointsLL, bannerNodes.size());
+    }
+
+    private ViewFlow.ViewSwitchListener imageSwitchListener = new ViewFlow.ViewSwitchListener() {
+        @Override
+        public void onSwitched(View view, int position) {
+            if(imgSize == 0)
+                return;
+            int count = position%imgSize;
+            if(pointView!=null)
+                pointView.setPointSelect(count);
+        }
+    };
 }
