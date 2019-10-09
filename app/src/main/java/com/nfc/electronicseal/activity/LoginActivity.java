@@ -3,6 +3,7 @@ package com.nfc.electronicseal.activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.nfc.electronicseal.MainActivity;
@@ -27,6 +28,8 @@ public class LoginActivity extends BaseActivity {
     EditText accountET;
     @BindView(R.id.password_et)
     EditText passwordET;
+    @BindView(R.id.checkbox)
+    CheckBox checkBox;
 
     @Override
     public int layoutView() {
@@ -58,8 +61,20 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
+        boolean flag = checkBox.isChecked();
+        if(!flag){
+            AppToast.showShortText(this, "请勾选同意平台服务协议！");
+            return;
+        }
+
         loginDo(account, password);
 
+    }
+
+    @OnClick(R.id.xy_tv)
+    public void xyItemClick(View view){
+        Intent intent = new Intent(this, AgreementActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.test_btn)

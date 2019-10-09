@@ -2,69 +2,116 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
     android:orientation="vertical">
-    
-    <LinearLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:src="@mipmap/pic_login"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="亿利智能电子封锁管理系统"
-            android:textSize="20sp"
-            android:textColor="@color/grayDark"/>
-    </LinearLayout>
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@mipmap/login_title_bg"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:src="@mipmap/pic_login"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="亿利智能电子封锁管理系统"
+                android:textSize="20sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@drawable/frame_top_bg"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/account_et"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="请输入账号"
+                android:singleLine="true"
+                android:textColorHint="@color/grayDark"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:background="@null"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray"/>
+        </LinearLayout>
+    </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@drawable/frame_bottom_bg"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/account_et"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="请输入账号"
-            android:singleLine="true"
-            android:textColorHint="@color/grayDark"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:background="@null"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/lineGray"/>
+
         <EditText
             android:id="@+id/password_et"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="60dp"
             android:hint="请输入密码"
             android:singleLine="true"
             android:textColorHint="@color/grayDark"
             android:inputType="textPassword"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:background="@null"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/lineGray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 我已经同意"
+                android:textSize="15sp"
+                android:checked="true"
+                android:textColor="@color/grayDarkX"
+                android:button="@drawable/checkbox_item"/>
+            <TextView
+                android:id="@+id/xy_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《平台服务协议》"
+                android:textSize="15sp"
+                android:textColor="@color/yellow_light"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="30dp"
             android:textColor="@color/white"
             android:text="登录"
             android:textSize="16sp"
@@ -77,4 +124,34 @@
             android:visibility="gone"
             android:text="TestBtn"/>
     </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="80dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_gravity="bottom|center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkLight"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:text="Copyright©安徽省亿利智能科技有限公司"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkLight"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:text="合作单位 安徽信息工程学院"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 </LinearLayout>
