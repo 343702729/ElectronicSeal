@@ -11,7 +11,7 @@ android {
         debug {
             keyAlias 'keystore'
             keyPassword '123456'
-            storeFile file('D:/Android/KEY/keystore.keystore')
+            storeFile file('D:\\Workspace_Android\\ElectronicSeal\\keystore.keystore')
             storePassword '123456'
         }
     }
@@ -69,4 +69,6 @@ dependencies {
 
     implementation project(':picsellib')
     implementation project(':pickerview')
+
+    api 'com.blankj:utilcode:1.23.7'
 }

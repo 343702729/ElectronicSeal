@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.liuguangqiang.ipicker.IPicker;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
@@ -60,6 +61,7 @@ public class ExceptionActivity extends BaseActivity{
 //        mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
 //                getClass()), 0);
         myNFC = MyNFC.getInstance(this);
+		ToastUtils.showLong("This is test toast");
     }
 
     /**
