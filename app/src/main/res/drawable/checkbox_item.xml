@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@mipmap/xy_cb_fc" android:state_checked="true"/>
+    <item android:drawable="@mipmap/xy_cb_bg" android:state_checked="false"/>
+    <item android:drawable="@mipmap/xy_cb_bg"/>
+
+</selector>

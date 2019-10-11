@@ -11,7 +11,8 @@ android {
         debug {
             keyAlias 'keystore'
             keyPassword '123456'
-            storeFile file('D:\\Workspace_Android\\ElectronicSeal\\keystore.keystore')
+//            storeFile file('D:\\Workspace_Android\\ElectronicSeal\\keystore.keystore')
+            storeFile file('D:\\Android\\KEY\\keystore.keystore')
             storePassword '123456'
         }
     }
@@ -20,8 +21,8 @@ android {
         applicationId "com.nfc.electronicseal"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 12
-        versionName "1.0.12"
+        versionCode 13
+        versionName "1.0.13"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 //    lintOptions{

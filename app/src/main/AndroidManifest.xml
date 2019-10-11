@@ -119,6 +119,8 @@
 
         <activity android:name=".activity.base.SuccessActivity" android:screenOrientation="portrait" ></activity>
 
+        <activity android:name=".activity.AgreementActivity" android:screenOrientation="portrait" ></activity>
+
         <!-- 百度定位 RK1qh7g9DOD9Rh1ZHSjLXgbRinxToxzO -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
