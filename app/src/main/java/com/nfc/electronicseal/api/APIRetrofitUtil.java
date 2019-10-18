@@ -17,6 +17,7 @@ import com.nfc.electronicseal.bean.SealInfoBean;
 import com.nfc.electronicseal.bean.SearchRecordBean;
 import com.nfc.electronicseal.bean.UnSealBean;
 import com.nfc.electronicseal.bean.VersionBean;
+import com.nfc.electronicseal.response.BannerResponse;
 import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
@@ -25,6 +26,7 @@ import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.response.ProblemInfoResponse;
 import com.nfc.electronicseal.response.ProblemItemsResponse;
+import com.nfc.electronicseal.response.ProtocolInfoResponse;
 import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
@@ -49,6 +51,14 @@ public class APIRetrofitUtil extends RetrofitServiceUtil {
     }
 
     /**
+     * 协议
+     * @return
+     */
+    public Observable<ProtocolInfoResponse> getProtocolInfoData(){
+        return getAPIService().getProtocolInfoData();
+    }
+
+    /**
      * 获取更新信息
      * @param bean
      * @return
@@ -64,6 +74,14 @@ public class APIRetrofitUtil extends RetrofitServiceUtil {
      */
     public Observable<LoginResponse> getLoginData(LoginBean bean){
         return getAPIService().getLoginData(bean);
+    }
+
+    /**
+     * 轮播图
+     * @return
+     */
+    public Observable<BannerResponse> getBannerData(String authorization){
+        return getAPIService().getBannerData(authorization);
     }
 
     /**

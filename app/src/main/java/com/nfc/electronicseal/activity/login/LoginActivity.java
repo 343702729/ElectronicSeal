@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import com.nfc.electronicseal.main.MainActivity;
 import com.nfc.electronicseal.R;
-import com.nfc.electronicseal.activity.AgreementActivity;
 import com.nfc.electronicseal.activity.ExceptionActivity;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;

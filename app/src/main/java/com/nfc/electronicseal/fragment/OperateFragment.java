@@ -20,6 +20,7 @@ import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.data.UserInfo;
 import com.nfc.electronicseal.node.BannerNode;
 import com.nfc.electronicseal.node.MenuNode;
+import com.nfc.electronicseal.response.BannerResponse;
 import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.util.AppToast;
 import com.nfc.electronicseal.util.UiUtils;
@@ -50,10 +51,15 @@ public class OperateFragment extends BaseFragment{
     }
 
     @Override
+    public void initview(View view) {
+        super.initview(view);
+    }
+
+    @Override
     public void initData() {
         super.initData();
         getMenusData();
-        setNewsBanner();
+        getBannerData();
     }
 
     @OnClick({R.id.item_sf_ll, R.id.item_xj_ll, R.id.item_cf_ll, R.id.item_yc_ll})
@@ -101,6 +107,24 @@ public class OperateFragment extends BaseFragment{
         startActivity(intent);
     }
 
+    private void getBannerData(){
+        APIRetrofitUtil.getInstance().getBannerData(UserInfo.getInstance().getToken())
+                .compose(new RxHelper<BannerResponse>("").io_no_main_fragment(this))
+                .subscribe(new RxSubscriber<BannerResponse>() {
+                    @Override
+                    public void _onNext(BannerResponse response) {
+                        if(response!=null&&response.isSuccess()&&response.getData()!=null){
+                            setNewsBanner(response.getData());
+                        }
+                    }
+
+                    @Override
+                    public void _onError(String msg) {
+
+                    }
+                });
+    }
+
     private void getMenusData(){
         APIRetrofitUtil.getInstance().getMenusData(UserInfo.getInstance().getToken())
                 .compose(new RxHelper<MenusResponse>("").io_no_main_fragment(this))
@@ -130,15 +154,12 @@ public class OperateFragment extends BaseFragment{
                 });
     }
 
-    private void setNewsBanner(){
+    private void setNewsBanner(List<BannerNode> nodes){
         viewFlow.setOnViewSwitchListener(imageSwitchListener);
-        List<BannerNode> bannerNodes = new ArrayList<>();
-        bannerNodes.add(new BannerNode());
-        bannerNodes.add(new BannerNode());
-        if(bannerNodes==null||bannerNodes.size()==0)
+        if(nodes==null||nodes.size()==0)
             return;
-        imgSize = bannerNodes.size();
-        initBanner(bannerNodes);
+        imgSize = nodes.size();
+        initBanner(nodes);
     }
 
     private void initBanner(List<BannerNode> bannerNodes){
@@ -148,10 +169,9 @@ public class OperateFragment extends BaseFragment{
         List<String> urlList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
 
-//        for(BannerNode node:bannerNodes){
-//        }
-        imgsList.add("1");
-        imgsList.add("2");
+        for(BannerNode node:bannerNodes){
+            imgsList.add(node.getUrl());
+        }
         viewFlow.setAdapter(new ImagePagerAdapter(UiUtils.getContext(), imgsList, urlList, titleList).setInfiniteLoop(true));
         viewFlow.setmSideBuffer(bannerNodes.size());
         viewFlow.setTimeSpan(4000);

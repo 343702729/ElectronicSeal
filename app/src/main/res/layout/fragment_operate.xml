@@ -43,7 +43,7 @@
             <FrameLayout
                 android:id="@+id/banner_fl"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="170dp"
                 android:background="@color/white">
 
                 <com.nfc.electronicseal.wiget.banner.MyViewFlow

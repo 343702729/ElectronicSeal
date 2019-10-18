@@ -16,6 +16,7 @@ import com.nfc.electronicseal.bean.SealInfoBean;
 import com.nfc.electronicseal.bean.SearchRecordBean;
 import com.nfc.electronicseal.bean.UnSealBean;
 import com.nfc.electronicseal.bean.VersionBean;
+import com.nfc.electronicseal.response.BannerResponse;
 import com.nfc.electronicseal.response.ChipCheckResponse;
 import com.nfc.electronicseal.response.ExceptionInfoResponse;
 import com.nfc.electronicseal.response.ExceptionItemsResponse;
@@ -24,6 +25,7 @@ import com.nfc.electronicseal.response.LoginResponse;
 import com.nfc.electronicseal.response.MenusResponse;
 import com.nfc.electronicseal.response.ProblemInfoResponse;
 import com.nfc.electronicseal.response.ProblemItemsResponse;
+import com.nfc.electronicseal.response.ProtocolInfoResponse;
 import com.nfc.electronicseal.response.Response;
 import com.nfc.electronicseal.response.SealDetailResponse;
 import com.nfc.electronicseal.response.SealInfoResponse;
@@ -41,6 +43,11 @@ import retrofit2.http.Part;
 import rx.Observable;
 
 public interface APIService {
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @GET("nfc-feign/app/protocolInfoApi/getProtocolInfo")
+    Observable<ProtocolInfoResponse> getProtocolInfoData();
+
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("nfc-feign/app/appVersionApi/getAppVersionInfo")
     Observable<VersionResponse> getVersionData(@Header("Authorization") String authorization, @Body VersionBean bean);
@@ -48,6 +55,10 @@ public interface APIService {
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST("nfc-feign/app/loginApi/login")
     Observable<LoginResponse> getLoginData(@Body LoginBean bean);
+
+    @Headers({"Content-Type: application/json;charset=UTF-8"})
+    @GET("nfc-feign/app/advertInfoApi/getAdvertInfoList")
+    Observable<BannerResponse> getBannerData(@Header("Authorization") String authorization);
 
     @Headers({"Content-Type: application/json;charset=UTF-8"})
     @GET("nfc-feign/app/functionApi/getAppMenus")

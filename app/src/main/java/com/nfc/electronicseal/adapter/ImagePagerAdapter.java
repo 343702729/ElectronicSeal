@@ -85,11 +85,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 		}
 
 		String picUrl = (String) this.imageIdList.get(getPosition(position));
-		if("1".equals(picUrl))
-			Glide.with(context).load(R.mipmap.picture1_bg).into(holder.imageView);
-		else if("2".equals(picUrl))
-			Glide.with(context).load(R.mipmap.picture2_bg).into(holder.imageView);
-
+		Glide.with(context).load(picUrl).into(holder.imageView);
 
 //		holder.imageView.setOnClickListener(new OnClickListener() {
 //
