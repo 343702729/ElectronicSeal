@@ -1,4 +1,4 @@
-package com.nfc.electronicseal.activity.base;
+package com.nfc.electronicseal.main;
 
 import android.app.Application;
 import android.content.pm.PackageInfo;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.nfc.electronicseal.activity.base.BaseApplication;
+import com.nfc.electronicseal.main.BaseApplication;
 
 public class UiUtils {
 

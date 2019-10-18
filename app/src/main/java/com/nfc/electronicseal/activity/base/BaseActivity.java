@@ -3,7 +3,7 @@ package com.nfc.electronicseal.activity.base;
 import android.os.Bundle;
 import android.view.Window;
 
-import com.nfc.electronicseal.activity.LoginActivity;
+import com.nfc.electronicseal.activity.login.LoginActivity;
 import com.nfc.electronicseal.api.RxBus;
 import com.nfc.electronicseal.api.util.RxHelper;
 import com.nfc.electronicseal.api.util.RxSubscriber;

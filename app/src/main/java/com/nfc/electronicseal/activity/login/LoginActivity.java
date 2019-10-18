@@ -1,4 +1,4 @@
-package com.nfc.electronicseal.activity;
+package com.nfc.electronicseal.activity.login;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -6,11 +6,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.nfc.electronicseal.MainActivity;
+import com.nfc.electronicseal.main.MainActivity;
 import com.nfc.electronicseal.R;
+import com.nfc.electronicseal.activity.AgreementActivity;
+import com.nfc.electronicseal.activity.ExceptionActivity;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
-import com.nfc.electronicseal.api.util.RetrofitServiceUtil;
 import com.nfc.electronicseal.api.util.RxHelper;
 import com.nfc.electronicseal.api.util.RxSubscriber;
 import com.nfc.electronicseal.bean.LoginBean;

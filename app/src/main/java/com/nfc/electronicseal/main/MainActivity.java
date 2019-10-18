@@ -1,4 +1,4 @@
-package com.nfc.electronicseal;
+package com.nfc.electronicseal.main;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.RxHelper;

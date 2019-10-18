@@ -6,6 +6,7 @@ import android.os.Message;
 
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
+import com.nfc.electronicseal.activity.login.LoginActivity;
 
 public class SplashActivity extends BaseActivity{
     @Override

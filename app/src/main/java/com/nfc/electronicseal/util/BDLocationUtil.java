@@ -2,7 +2,6 @@ package com.nfc.electronicseal.util;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -12,7 +11,6 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
-import com.nfc.electronicseal.MainActivity;
 import com.nfc.electronicseal.base.BaseInfoUpdate;
 
 public class BDLocationUtil {

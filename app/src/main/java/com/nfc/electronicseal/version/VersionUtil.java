@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.nfc.electronicseal.activity.base.BaseApplication;
+import com.nfc.electronicseal.main.BaseApplication;
 import com.nfc.electronicseal.base.BaseInfoUpdate;
 import com.nfc.electronicseal.data.Constants;
 import com.nfc.electronicseal.data.UserInfo;

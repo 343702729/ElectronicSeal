@@ -1,8 +1,6 @@
 package com.nfc.electronicseal.activity.my;
 
-import android.content.Context;
 import android.net.Uri;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,8 +10,6 @@ import com.liuguangqiang.ipicker.IPicker;
 import com.liuguangqiang.ipicker.crop.CropUtil;
 import com.nfc.electronicseal.R;
 import com.nfc.electronicseal.activity.base.BaseActivity;
-import com.nfc.electronicseal.activity.base.BaseApplication;
-import com.nfc.electronicseal.activity.exception.ExceptionAddActivity;
 import com.nfc.electronicseal.api.APIRetrofitUtil;
 import com.nfc.electronicseal.api.util.PicUploadUtil;
 import com.nfc.electronicseal.api.util.RxHelper;

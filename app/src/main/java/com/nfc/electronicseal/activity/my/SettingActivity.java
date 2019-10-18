@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nfc.electronicseal.R;
-import com.nfc.electronicseal.activity.LoginActivity;
+import com.nfc.electronicseal.activity.login.LoginActivity;
 import com.nfc.electronicseal.activity.base.BaseActivity;
 import com.nfc.electronicseal.api.RxBus;
 import com.nfc.electronicseal.data.Constants;
