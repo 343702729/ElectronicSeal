@@ -21,8 +21,8 @@ android {
         applicationId "com.nfc.electronicseal"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 14
-        versionName "1.0.14"
+        versionCode 15
+        versionName "1.0.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 //    lintOptions{
